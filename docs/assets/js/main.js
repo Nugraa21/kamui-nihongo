@@ -1,7 +1,7 @@
 /**
  * KAMUI NIHONGO (神威日本語) — OFFICIAL WEBSITE
  * Interactive Features: Washi Aesthetics, Sakura Particles,
- * Gallery Switcher, Micro-Interactions, Scroll Reveals.
+ * Gallery Switcher, FAQ Accordion, Micro-Interactions, Scroll Reveals.
  * Author: Ludang Prasetyo Nugroho (nugra21)
  */
 
@@ -12,33 +12,34 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeaderScroll();
     initMobileNav();
     initSakuraParticles();
+    initFaqAccordion();
 });
 
 /* ====== 1. GALLERY TABS ====== */
 const GALLERY_ITEMS = {
     exam: {
-        title: 'Mode Ujian JLPT — Simulasi Resmi N5, N4, & N3',
-        img: 'assets/images/screenshots/screenshot-1.png'
+        title: 'Pusat Simulasi Resmi Ujian JLPT — Standar N5, N4, & N3',
+        img: 'assets/images/screenshots/app-ujian-jlpt-center.png'
     },
     hardcore: {
         title: 'Mode Hardcore — Boss Battle Sudden Death (死線モード)',
-        img: 'assets/images/screenshots/screenshot-2.png'
+        img: 'assets/images/screenshots/app-hardcore-boss.png'
     },
     stroke: {
-        title: 'Stroke Lab — 101 Aksara Panduan Kaligrafi Presisi',
-        img: 'assets/images/screenshots/screenshot-3.png'
+        title: 'Stroke Lab — 8 Prinsip Emas Kaligrafi & 101 Aksara',
+        img: 'assets/images/screenshots/app-stroke-lab.png'
     },
     kamus: {
-        title: 'Kamus Komprehensif — 506+ Kosakata & Audio Pelafalan',
-        img: 'assets/images/screenshots/screenshot-4.png'
+        title: 'Kamus Bahasa Jepang-Indonesia 506+ Kosakata & Audio',
+        img: 'assets/images/screenshots/app-kamus-lengkap.png'
     },
     tema: {
-        title: 'Koleksi 13 Tema — Light & Dark Glass Palette',
-        img: 'assets/images/screenshots/screenshot-5.png'
+        title: 'Pilihan 13 Tema — Mode Terang (Washi) & Mode Gelap (Liquid Glass)',
+        img: 'assets/images/screenshots/screenshot-2.png'
     },
     games: {
-        title: 'Mini Game Edukasi — Kotoba Arena & Memory Match',
-        img: 'assets/images/screenshots/screenshot-6.png'
+        title: 'Arena Mini-Game Edukasi — Kotoba Arena & Memory Match',
+        img: 'assets/images/screenshots/app-minigame-arena.png'
     }
 };
 
@@ -177,4 +178,32 @@ function createPetal(container) {
     petal.style.animationDelay = `${delay}s`;
 
     container.appendChild(petal);
+}
+
+/* ====== 7. FAQ ACCORDION TOGGLE ====== */
+function initFaqAccordion() {
+    const cards = document.querySelectorAll('.faq-card');
+    if (!cards.length) return;
+
+    cards.forEach(card => {
+        const btn = card.querySelector('.faq-question-btn');
+        if (!btn) return;
+
+        btn.addEventListener('click', () => {
+            const isCurrentlyActive = card.classList.contains('active');
+
+            // Close other cards for clean accordion feel
+            cards.forEach(c => {
+                c.classList.remove('active');
+                const b = c.querySelector('.faq-question-btn');
+                if (b) b.setAttribute('aria-expanded', 'false');
+            });
+
+            // If it wasn't active, activate it
+            if (!isCurrentlyActive) {
+                card.classList.add('active');
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
 }
