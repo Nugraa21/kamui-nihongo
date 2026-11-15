@@ -46,19 +46,22 @@ function renderMinigameSetup(container) {
             </div>
 
             <div class="repo-readme-card" style="border:1px solid var(--border-default)">
-                <div class="repo-readme-header">
+                <div class="repo-readme-header" style="background:rgba(88, 166, 255, 0.12)">
                     <div style="display:flex;align-items:center;gap:8px">
                         ${icon('puzzle', 18)}
                         <strong style="color:var(--text-primary)">Memory Match (記憶合わせ)</strong>
                     </div>
-                    <span class="gh-tab-badge">Klasik</span>
+                    <span class="gh-tab-badge" style="background:var(--accent-secondary);color:#fff">KLASIK & SERU</span>
                 </div>
                 <div class="repo-readme-body" style="padding:14px 18px">
                     <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">
                         Asah ingatan jangka pendek dengan mencocokkan kartu Hiragana/Katakana dengan romaji yang bersesuaian secepat mungkin.
                     </p>
+                    <button class="btn-primary" style="width:100%;margin-bottom:8px" onclick="startMemoryGame()">
+                        ${icon('play', 15)} Mainkan Memory Match Sekarang
+                    </button>
                     <button class="btn-secondary" style="width:100%" onclick="document.getElementById('memory-config-box').scrollIntoView({behavior:'smooth'})">
-                        ${icon('layers', 15)} Konfigurasi Memory Match
+                        ${icon('layers', 15)} Ubah Pilihan Huruf & Tingkat Kesulitan
                     </button>
                 </div>
             </div>

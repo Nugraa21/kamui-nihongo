@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="ios-liquid-glass">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kamui NihonGo (神威日本語) — Pro Japanese Mastery Suite (N5 • N4 • N3)</title>
+    <title>Kamui NihonGo — Belajar Bahasa Jepang</title>
     <link rel="stylesheet" href="styles/theme.css">
     <link rel="stylesheet" href="styles/components.css">
 </head>
 <body>
     <div id="app">
-        <!-- ===== 0. CUSTOM GITHUB DESKTOP WINDOW TITLEBAR ===== -->
+
+        <!-- ===== 0. CUSTOM WINDOW TITLEBAR ===== -->
         <div id="custom-titlebar" data-tauri-drag-region>
             <div class="titlebar-drag-region" data-tauri-drag-region>
                 <div class="titlebar-logo-icon" data-tauri-drag-region>神</div>
-                <span class="titlebar-title" data-tauri-drag-region>Kamui NihonGo — 神威 (Mastery Suite)</span>
-                <span class="titlebar-branch" data-tauri-drag-region>⑂ main: JLPT N5 • N4 • N3</span>
+                <span class="titlebar-title" data-tauri-drag-region>Kamui NihonGo — Belajar Bahasa Jepang</span>
             </div>
             <div class="titlebar-controls">
                 <button class="titlebar-btn" id="win-min-btn" onclick="windowMinimize()" title="Minimize">
@@ -29,149 +29,182 @@
             </div>
         </div>
 
-        <!-- ===== 1. GITHUB / GITLAB TOP APP HEADER ===== -->
-        <header id="gh-header">
-            <!-- Left: Repo Breadcrumbs & Branch -->
-            <div class="gh-header-left">
-                <div class="gh-repo-brand" onclick="navigateTo('home')" title="Kembali ke Beranda">
-                    <div class="gh-repo-logo">神</div>
-                    <div class="gh-repo-path">
-                        <span class="owner">nugra</span>
-                        <span class="sep">/</span>
-                        <span class="name">kamui-nihongo</span>
+        <!-- ===== 1. TOP APP BAR ===== -->
+        <header id="app-topbar">
+            <!-- Left: Hamburger + Logo -->
+            <div class="topbar-left">
+                <button class="hamburger-btn" id="sidebar-toggle-btn" onclick="toggleSidebar()" title="Buka / Tutup Menu">
+                    <span id="hamburger-icon"></span>
+                </button>
+                <div class="app-brand" onclick="navigateTo('home')" title="Beranda">
+                    <div class="app-brand-logo">神</div>
+                    <div class="app-brand-text">
+                        <span class="brand-name">Kamui NihonGo</span>
+                        <span class="brand-sub">Belajar Bahasa Jepang</span>
                     </div>
                 </div>
-
-                <div class="gh-branch-pill" title="Standar Kurikulum JLPT">
-                    <span class="icon" id="branch-icon-placeholder"></span>
-                    <span>main: JLPT N5 • N4 • N3</span>
-                </div>
-
-                <span class="gh-release-tag">v2.1.0-pro</span>
             </div>
 
-            <!-- Center: Fast Command Search Box -->
-            <div class="gh-header-center">
-                <button class="gh-search-btn" onclick="openSearchModal()" title="Cari Huruf, Kanji, Kosakata, atau Aturan Goresan">
-                    <div class="gh-search-btn-left">
-                        <span class="search-icon" id="search-icon-placeholder"></span>
-                        <span>Cari Kanji, Kana, Vocab (tekan /)...</span>
-                    </div>
-                    <kbd>/</kbd>
+            <!-- Center: Search -->
+            <div class="topbar-center">
+                <button class="topbar-search-btn" onclick="openSearchModal()" title="Cari kata, huruf, atau materi...">
+                    <span class="search-icon-slot" id="search-icon-placeholder"></span>
+                    <span class="topbar-search-placeholder">Cari materi, kata, atau huruf...</span>
+                    <kbd>Ctrl+K</kbd>
                 </button>
             </div>
 
-            <!-- Right: Streak, XP, Theme Picker & Author Profile -->
-            <div class="gh-header-right">
-                <div class="gh-metric-chip streak" title="Streak Belajar Harian Berturut-turut">
-                    <span class="flame-icon" id="flame-icon-placeholder"></span>
+            <!-- Right: User stats + profile -->
+            <div class="topbar-right">
+                <div class="topbar-stat-chip streak" title="Hari Belajar Berturut-turut">
+                    <span id="flame-icon-placeholder"></span>
                     <span id="top-streak-count">0 Hari</span>
                 </div>
-
-                <div class="gh-metric-chip xp" title="Level & Total XP Kamu">
-                    <span class="zap-icon" id="zap-icon-placeholder"></span>
-                    <span id="top-xp-count">Lv.1 • 0 XP</span>
+                <div class="topbar-stat-chip xp" title="Level & Total XP">
+                    <span id="zap-icon-placeholder"></span>
+                    <span id="top-xp-count">Lv.1</span>
                 </div>
-
-                <button class="gh-header-btn" onclick="openThemeModal()" title="Pilih Gaya & Warna Tema">
-                    <span class="palette-icon" id="palette-icon-placeholder"></span>
-                    <span>Tema</span>
+                <button class="topbar-theme-btn" id="topbar-sound-btn" onclick="toggleSoundFxQuick()" title="Efek Suara UI (Klik untuk On/Off)">
+                    <span id="sound-icon-placeholder"></span>
                 </button>
-
-                <button class="gh-user-badge" id="top-profile-btn" onclick="openProfileModal()" title="Profil & Pengaturan Akun">
-                    <span class="user-avatar-badge" id="top-user-avatar">N</span>
-                    <span id="top-profile-name">nugra</span>
+                <button class="topbar-theme-btn" onclick="openThemeModal()" title="Ganti Tema Warna">
+                    <span id="palette-icon-placeholder"></span>
+                </button>
+                <button class="topbar-profile-btn" id="top-profile-btn" onclick="openProfileModal()" title="Profil & Pengaturan">
+                    <span class="profile-avatar-sm" id="top-user-avatar">N</span>
+                    <span class="profile-name-sm" id="top-profile-name">nugra</span>
+                    <span id="topbar-chevron-icon"></span>
                 </button>
             </div>
         </header>
 
-        <!-- ===== 2. GITHUB REPOSITORY SUBNAV TABS ===== -->
-        <nav id="gh-nav-tabs">
-            <button class="gh-tab-btn active" data-page="home" title="Ringkasan & Beranda Belajar">
-                <span class="tab-icon" id="tab-home-icon"></span>
-                <span>Overview</span>
-            </button>
+        <!-- ===== 2. MAIN BODY: SIDEBAR + CONTENT ===== -->
+        <div id="main-body">
 
-            <button class="gh-tab-btn" data-page="grammar" title="Tata Bahasa Lengkap Buku Minna no Nihongo">
-                <span class="tab-icon" id="tab-grammar-icon"></span>
-                <span>Minna no Nihongo</span>
-                <span class="gh-tab-badge">Bab 1-25</span>
-            </button>
+            <!-- SIDEBAR OVERLAY (mobile/close click) -->
+            <div id="sidebar-overlay" onclick="closeSidebar()"></div>
 
-            <button class="gh-tab-btn" data-page="particles" title="Panduan Lengkap Partikel Bahasa Jepang (Joshi)">
-                <span class="tab-icon" id="tab-particle-icon"></span>
-                <span>Partikel (助詞)</span>
-                <span class="gh-tab-badge">12 Partikel</span>
-            </button>
+            <!-- SIDEBAR NAVIGATION -->
+            <nav id="app-sidebar" class="sidebar-open">
+                <div class="sidebar-inner">
 
-            <button class="gh-tab-btn" data-page="hiragana" title="Huruf Hiragana & Katakana">
-                <span class="tab-icon" id="tab-kana-icon"></span>
-                <span>Kana</span>
-                <span class="gh-tab-badge">142</span>
-            </button>
+                    <!-- Section: Utama -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-label">Utama</div>
+                        <button class="sidebar-nav-item active" data-page="home">
+                            <span class="snav-icon" id="snav-home-icon"></span>
+                            <span class="snav-label">Beranda</span>
+                        </button>
+                        <button class="sidebar-nav-item" data-page="progress">
+                            <span class="snav-icon" id="snav-progress-icon"></span>
+                            <span class="snav-label">Progres Belajar</span>
+                            <span class="snav-badge">Baru</span>
+                        </button>
+                    </div>
 
-            <button class="gh-tab-btn" data-page="katakana" title="Huruf Katakana Khusus Serapan">
-                <span class="tab-icon" id="tab-kata-icon"></span>
-                <span>Katakana</span>
-            </button>
+                    <!-- Section: Huruf & Aksara -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-label">Huruf & Aksara</div>
+                        <button class="sidebar-nav-item" data-page="hiragana">
+                            <span class="snav-icon" id="snav-hiragana-icon"></span>
+                            <span class="snav-label">Hiragana</span>
+                            <span class="snav-badge n5">N5</span>
+                        </button>
+                        <button class="sidebar-nav-item" data-page="katakana">
+                            <span class="snav-icon" id="snav-katakana-icon"></span>
+                            <span class="snav-label">Katakana</span>
+                            <span class="snav-badge n5">N5</span>
+                        </button>
+                        <button class="sidebar-nav-item" data-page="kanji">
+                            <span class="snav-icon" id="snav-kanji-icon"></span>
+                            <span class="snav-label">Kanji</span>
+                            <span class="snav-badge n4">N5-N3</span>
+                        </button>
+                        <button class="sidebar-nav-item" data-page="strokes">
+                            <span class="snav-icon" id="snav-stroke-icon"></span>
+                            <span class="snav-label">Cara Menulis</span>
+                        </button>
+                    </div>
 
-            <button class="gh-tab-btn" data-page="kanji" title="Database Kanji N5, N4, N3">
-                <span class="tab-icon" id="tab-kanji-icon"></span>
-                <span>Kanji</span>
-                <span class="gh-tab-badge">N5-N3</span>
-            </button>
+                    <!-- Section: Kosakata & Kamus -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-label">Kosakata & Kamus</div>
+                        <button class="sidebar-nav-item" data-page="vocabulary">
+                            <span class="snav-icon" id="snav-vocab-icon"></span>
+                            <span class="snav-label">Kosakata</span>
+                            <span class="snav-badge">120+</span>
+                        </button>
+                        <button class="sidebar-nav-item" data-page="dictionary">
+                            <span class="snav-icon" id="snav-dict-icon"></span>
+                            <span class="snav-label">Kamus Lengkap</span>
+                            <span class="snav-badge">450+</span>
+                        </button>
+                    </div>
 
-            <button class="gh-tab-btn" data-page="vocabulary" title="Kamus Kosakata Esensial">
-                <span class="tab-icon" id="tab-vocab-icon"></span>
-                <span>Vocabulary</span>
-                <span class="gh-tab-badge">120+</span>
-            </button>
+                    <!-- Section: Tata Bahasa -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-label">Tata Bahasa</div>
+                        <button class="sidebar-nav-item" data-page="grammar">
+                            <span class="snav-icon" id="snav-grammar-icon"></span>
+                            <span class="snav-label">Minna no Nihongo</span>
+                            <span class="snav-badge">Bab 1-25</span>
+                        </button>
+                        <button class="sidebar-nav-item" data-page="particles">
+                            <span class="snav-icon" id="snav-particle-icon"></span>
+                            <span class="snav-label">Partikel (は・を・に)</span>
+                            <span class="snav-badge">12</span>
+                        </button>
+                    </div>
 
-            <button class="gh-tab-btn" data-page="dictionary" title="Kamus Lengkap Bahasa Jepang Indonesia N5-N3">
-                <span class="tab-icon" id="tab-dict-icon"></span>
-                <span>Kamus Lengkap</span>
-                <span class="gh-tab-badge">N5-N3</span>
-            </button>
+                    <!-- Section: Latihan & Ujian -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-label">Latihan & Ujian</div>
+                        <button class="sidebar-nav-item" data-page="quiz">
+                            <span class="snav-icon" id="snav-quiz-icon"></span>
+                            <span class="snav-label">Ujian JLPT</span>
+                            <span class="snav-badge n4">N5•N4•N3</span>
+                        </button>
+                        <button class="sidebar-nav-item" data-page="hardcore">
+                            <span class="snav-icon" id="snav-hardcore-icon"></span>
+                            <span class="snav-label">Mode Hardcore</span>
+                            <span class="snav-badge" style="background:rgba(255,69,58,0.22);color:#ff453a;border-color:rgba(255,69,58,0.4)">Boss Battle</span>
+                        </button>
+                        <button class="sidebar-nav-item" data-page="duolingo">
+                            <span class="snav-icon" id="snav-duo-icon"></span>
+                            <span class="snav-label">Susun Kata</span>
+                        </button>
+                        <button class="sidebar-nav-item" data-page="minigame">
+                            <span class="snav-icon" id="snav-game-icon"></span>
+                            <span class="snav-label">Permainan Kartu</span>
+                        </button>
+                    </div>
 
-            <button class="gh-tab-btn" data-page="duolingo" title="Tantangan Susun Kata & Kalimat (言葉並べ)">
-                <span class="tab-icon" id="tab-duo-icon"></span>
-                <span>Kotoba Arena</span>
-                <span class="gh-tab-badge">Susun Kata</span>
-            </button>
+                    <!-- Section: Lainnya -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-label">Lainnya</div>
+                        <button class="sidebar-nav-item" data-page="settings">
+                            <span class="snav-icon" id="snav-settings-icon"></span>
+                            <span class="snav-label">Pengaturan</span>
+                        </button>
+                    </div>
+                </div>
 
-            <button class="gh-tab-btn" data-page="strokes" title="Tata Cara Penulisan & Papan Kaligrafi">
-                <span class="tab-icon" id="tab-stroke-icon"></span>
-                <span>Stroke Lab</span>
-                <span class="gh-tab-badge">8 Aturan</span>
-            </button>
+                <!-- Sidebar Footer -->
+                <div class="sidebar-footer">
+                    <div class="sidebar-footer-info">
+                        <span class="sf-version">v2.1.0</span>
+                        <span class="sf-sep">•</span>
+                        <span class="sf-author">nugra21.web.app</span>
+                    </div>
+                </div>
+            </nav>
 
-            <button class="gh-tab-btn" data-page="quiz" title="Simulasi Ujian & Kuis JLPT">
-                <span class="tab-icon" id="tab-quiz-icon"></span>
-                <span>Exam & Quiz</span>
-                <span class="gh-tab-badge">JLPT</span>
-            </button>
+            <!-- ===== 3. MAIN CONTENT AREA ===== -->
+            <main id="content">
+                <!-- Dynamic view rendered by app.js -->
+            </main>
+        </div>
 
-            <button class="gh-tab-btn" data-page="minigame" title="Mini-game Memory Match Arena">
-                <span class="tab-icon" id="tab-game-icon"></span>
-                <span>Memory Arena</span>
-            </button>
-
-            <button class="gh-tab-btn" data-page="progress" title="Kemajuan Belajar & Heatmap Commit">
-                <span class="tab-icon" id="tab-progress-icon"></span>
-                <span>Insights</span>
-                <span class="gh-tab-badge">Heatmap</span>
-            </button>
-
-            <button class="gh-tab-btn" data-page="settings" title="Pengaturan & Profil Pengembang">
-                <span class="tab-icon" id="tab-settings-icon"></span>
-                <span>Settings</span>
-            </button>
-        </nav>
-
-        <!-- ===== 3. MAIN WORKSPACE CONTENT AREA ===== -->
-        <main id="content">
-            <!-- Dynamic view rendered by app.js -->
-        </main>
     </div>
 
     <!-- ===== 4. AUTH OVERLAY (REGISTER / LOGIN) ===== -->
@@ -185,9 +218,9 @@
             <div class="modal-header">
                 <h3>
                     <span id="modal-profile-icon"></span>
-                    <span>Profil Pengguna & Setelan Sistem</span>
+                    <span>Profil & Pengaturan Akun</span>
                 </h3>
-                <button class="modal-close-btn" onclick="closeProfileModal()" title="Tutup (ESC)">
+                <button class="modal-close-btn" onclick="closeProfileModal()" title="Tutup">
                     <span id="modal-profile-close-icon"></span>
                 </button>
             </div>
@@ -197,7 +230,7 @@
         </div>
     </div>
 
-    <!-- ===== 6. CENTERED CONFIRMATION MODAL (REPLACES NATIVE ALERT) ===== -->
+    <!-- ===== 6. CENTERED CONFIRMATION MODAL ===== -->
     <div class="modal-backdrop" id="confirm-modal" style="display:none" onclick="closeConfirmModalOnBackdrop(event)">
         <div class="confirm-dialog">
             <div id="confirm-modal-icon" class="confirm-icon-center"></div>
@@ -210,7 +243,7 @@
         </div>
     </div>
 
-    <!-- ===== 7. PASSWORD PROMPT MODAL (FOR FACTORY RESET) ===== -->
+    <!-- ===== 7. PASSWORD PROMPT MODAL ===== -->
     <div class="modal-backdrop" id="password-prompt-modal" style="display:none" onclick="closePasswordPromptModalOnBackdrop(event)">
         <div class="confirm-dialog">
             <div class="confirm-icon-wrapper danger" id="pw-prompt-icon" style="margin:0 auto 14px"></div>
@@ -232,9 +265,9 @@
             <div class="modal-header">
                 <h3>
                     <span id="modal-theme-icon"></span>
-                    <span>Pilih Tema & Skema Warna Software</span>
+                    <span>Pilih Tema & Skema Warna</span>
                 </h3>
-                <button class="modal-close-btn" onclick="closeThemeModal()" title="Tutup (ESC)">
+                <button class="modal-close-btn" onclick="closeThemeModal()" title="Tutup">
                     <span id="modal-theme-close-icon"></span>
                 </button>
             </div>
@@ -246,7 +279,7 @@
         </div>
     </div>
 
-    <!-- ===== 9. QUICK SEARCH COMMAND PALETTE MODAL ===== -->
+    <!-- ===== 9. QUICK SEARCH PALETTE ===== -->
     <div class="modal-backdrop" id="search-modal" onclick="closeSearchModalOnBackdrop(event)">
         <div class="search-palette">
             <div class="search-palette-header">
@@ -269,6 +302,7 @@
     <script src="scripts/duolingo.js"></script>
     <script src="scripts/dictionary.js"></script>
     <script src="scripts/progress.js"></script>
+    <script src="data/hardcore_questions.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/quiz.js"></script>
     <script src="scripts/minigame.js"></script>

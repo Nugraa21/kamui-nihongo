@@ -71,7 +71,7 @@ function renderRegisterScreen() {
                 <div class="auth-field">
                     <label for="reg-email">Alamat Email</label>
                     <div class="auth-input-wrapper">
-                        <span class="auth-input-icon">${icon('folder', 16)}</span>
+                        <span class="auth-input-icon">${icon('mail', 16)}</span>
                         <input type="email" id="reg-email" placeholder="Contoh: nugra@web.app" value="nugra@web.app" required>
                     </div>
                 </div>
@@ -127,7 +127,7 @@ function renderLoginScreen() {
                 <div class="auth-field">
                     <label for="login-email">Alamat Email</label>
                     <div class="auth-input-wrapper">
-                        <span class="auth-input-icon">${icon('user', 16)}</span>
+                        <span class="auth-input-icon">${icon('mail', 16)}</span>
                         <input type="email" id="login-email" placeholder="nama@email.com" value="${savedUser.email || ''}" required autofocus>
                     </div>
                 </div>

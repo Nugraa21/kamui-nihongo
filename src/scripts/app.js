@@ -90,7 +90,7 @@ function setSoundEnabled(enabled) {
     const profileToggle = document.getElementById('profile-sound-toggle');
     if (profileToggle) profileToggle.checked = enabled;
     if (enabled) playClickSound();
-    showToast(enabled ? '🔊 Efek suara UI diaktifkan.' : '🔇 Efek suara UI dinonaktifkan.', 'info');
+    showToast(enabled ? 'Efek suara UI diaktifkan.' : 'Efek suara UI dinonaktifkan.', 'info');
 }
 
 function playClickSound() {
@@ -193,52 +193,95 @@ window.playErrorSound = playErrorSound;
 // =======================================================
 const THEMES = [
     {
-        id: 'github-dark',
-        name: 'GitHub Dark (Default)',
-        desc: 'Nuansa slate gelap ikonik GitHub dengan aksen hijau emerald dan biru primer',
-        colors: ['#0d1117', '#238636', '#58a6ff', '#30363d']
+        id: 'ios-liquid-glass',
+        name: 'Apple iOS Liquid Glass (Unggulan)',
+        desc: 'Estetika premium Apple iOS Glassmorphism: kaca frosted transparan, specular highlight, dan aksen biru kobalt',
+        colors: ['#0b101b', '#0a84ff', '#30d158', 'rgba(255,255,255,0.14)'],
+        mode: 'dark'
     },
     {
-        id: 'gitlab-dark',
-        name: 'GitLab Tanuki Dark',
-        desc: 'Nuansa arang pekat GitLab dengan aksen ungu Tanuki dan oranye terang',
-        colors: ['#18191c', '#7b58c3', '#fc6d26', '#3b3e45']
+        id: 'ios-light-glass',
+        name: 'Apple iOS Light Glass (Mode Terang)',
+        desc: 'Kaca frosted mutiara putih bersih ala Apple iOS, aksen biru langit dan abu-abu slate elegan',
+        colors: ['#f2f2f7', '#007aff', '#34c759', '#e5e5ea'],
+        mode: 'light'
     },
     {
-        id: 'github-dimmed',
-        name: 'GitHub Dimmed',
-        desc: 'Warna abu-abu lembut slate yang sejuk di mata untuk sesi belajar larut malam',
-        colors: ['#22272e', '#347d39', '#539bf5', '#444c56']
+        id: 'sakura-light',
+        name: 'Sakura Blossom Spring (Mode Terang)',
+        desc: 'Nuansa musim semi Jepang: putih salju lembut dengan sentuhan kelopak bunga sakura merah muda ceri',
+        colors: ['#fdf6f7', '#d63384', '#e83e8c', '#f8d7da'],
+        mode: 'light'
+    },
+    {
+        id: 'nordic-snow',
+        name: 'Nordic Snow Frost (Mode Terang)',
+        desc: 'Glasier kutub utara yang sejuk: putih es mutiara dengan aksen biru laut dingin dan cyan kristal',
+        colors: ['#f0f4f8', '#0284c7', '#06b6d4', '#cbd5e1'],
+        mode: 'light'
+    },
+    {
+        id: 'coffee-mocha',
+        name: 'Coffee & Mocha Barista (Mode Gelap)',
+        desc: 'Espresso hangat yang menenangkan mata: beludru cokelat tua pekat, karamel amber, dan emas hangat',
+        colors: ['#161210', '#d97706', '#f59e0b', '#382b26'],
+        mode: 'dark'
+    },
+    {
+        id: 'synthwave-80s',
+        name: 'Synthwave 80s Sunset (Mode Gelap)',
+        desc: 'Retro 80s arcade: ungu midnight neon, hot magenta bercahaya, dan aksen laser sunset gold',
+        colors: ['#120e24', '#ff2a85', '#00f0ff', '#2d2254'],
+        mode: 'dark'
     },
     {
         id: 'tokyo-night',
-        name: 'Tokyo Night Navy',
-        desc: 'Nuansa malam kota Tokyo dengan biru badai, magenta neon, dan cyan es',
-        colors: ['#1a1b26', '#7aa2f7', '#bb9af7', '#343b58']
-    },
-    {
-        id: 'sunset-tangerine',
-        name: 'Sunset Tangerine',
-        desc: 'Palet oranye hangat matahari terbenam Jepang dengan kontras gelap elegan',
-        colors: ['#131418', '#ff7849', '#ff9500', '#333845']
+        name: 'Tokyo Night Navy (Mode Gelap)',
+        desc: 'Nuansa malam kota Tokyo dengan biru badai, magenta neon, dan cyan es sejuk',
+        colors: ['#1a1b26', '#7aa2f7', '#bb9af7', '#343b58'],
+        mode: 'dark'
     },
     {
         id: 'cyberpunk-neon',
-        name: 'Cyberpunk Neon',
-        desc: 'Gaya futuristik synthwave dengan hot pink neon, electric cyan, dan laser yellow',
-        colors: ['#0c0d14', '#ff2a6d', '#05d9e8', '#2d3552']
+        name: 'Cyberpunk Neon 2077 (Mode Gelap)',
+        desc: 'Gaya futuristik synthwave dengan hot pink neon, electric cyan, dan laser yellow tajam',
+        colors: ['#0c0d14', '#ff2a6d', '#05d9e8', '#2d3552'],
+        mode: 'dark'
+    },
+    {
+        id: 'sunset-tangerine',
+        name: 'Sunset Tangerine (Mode Gelap)',
+        desc: 'Palet oranye hangat matahari terbenam Jepang dengan kontras gelap elegan',
+        colors: ['#131418', '#ff7849', '#ff9500', '#333845'],
+        mode: 'dark'
     },
     {
         id: 'dracula',
-        name: 'Dracula Pro',
+        name: 'Dracula Pro (Mode Gelap)',
         desc: 'Skema warna populer programmer: ungu vampir, merah muda, dan mint pastel',
-        colors: ['#282a36', '#bd93f9', '#ff79c6', '#4d5166']
+        colors: ['#282a36', '#bd93f9', '#ff79c6', '#4d5166'],
+        mode: 'dark'
     },
     {
         id: 'emerald-matrix',
-        name: 'Emerald Matrix',
+        name: 'Emerald Matrix (Mode Gelap)',
         desc: 'Tema hacker obsidian dengan aksen hijau zamrud cyber dan mint bercahaya',
-        colors: ['#0a0f0d', '#00ff87', '#60efff', '#253d30']
+        colors: ['#0a0f0d', '#00ff87', '#60efff', '#253d30'],
+        mode: 'dark'
+    },
+    {
+        id: 'github-dark',
+        name: 'GitHub Dark Primer (Mode Gelap)',
+        desc: 'Nuansa slate gelap ikonik GitHub dengan aksen hijau emerald dan biru primer',
+        colors: ['#0d1117', '#238636', '#58a6ff', '#30363d'],
+        mode: 'dark'
+    },
+    {
+        id: 'gitlab-dark',
+        name: 'GitLab Tanuki Dark (Mode Gelap)',
+        desc: 'Nuansa arang pekat GitLab dengan aksen ungu Tanuki dan oranye terang',
+        colors: ['#18191c', '#7b58c3', '#fc6d26', '#3b3e45'],
+        mode: 'dark'
     }
 ];
 
@@ -261,7 +304,7 @@ function applyTheme(themeId) {
 }
 
 function initTheme() {
-    const saved = localStorage.getItem('nihongo_theme') || 'github-dark';
+    const saved = localStorage.getItem('nihongo_theme') || 'ios-liquid-glass';
     applyTheme(saved);
 }
 
@@ -287,7 +330,7 @@ function closeThemeModalOnBackdrop(e) {
 function renderThemeGrid() {
     const grid = document.getElementById('theme-grid');
     if (!grid) return;
-    const currentTheme = localStorage.getItem('nihongo_theme') || 'github-dark';
+    const currentTheme = localStorage.getItem('nihongo_theme') || 'ios-liquid-glass';
 
     grid.innerHTML = THEMES.map(t => {
         const isActive = t.id === currentTheme;
@@ -380,6 +423,44 @@ document.addEventListener('DOMContentLoaded', () => {
     navigateTo('home');
 });
 
+// ---- Sidebar Toggle ----
+let _sidebarOpen = true;
+function toggleSidebar() {
+    const sidebar = document.getElementById('app-sidebar');
+    if (!sidebar) return;
+    _sidebarOpen = !_sidebarOpen;
+    if (_sidebarOpen) {
+        sidebar.classList.remove('sidebar-collapsed');
+    } else {
+        sidebar.classList.add('sidebar-collapsed');
+    }
+}
+function closeSidebar() {
+    const sidebar = document.getElementById('app-sidebar');
+    if (sidebar) sidebar.classList.add('sidebar-collapsed');
+    _sidebarOpen = false;
+}
+window.toggleSidebar = toggleSidebar;
+window.closeSidebar = closeSidebar;
+
+
+function toggleSoundFxQuick() {
+    const nextState = !isSoundEnabled();
+    setSoundEnabled(nextState);
+    updateSoundIconButton();
+}
+
+function updateSoundIconButton() {
+    const el = document.getElementById('sound-icon-placeholder');
+    if (!el) return;
+    const enabled = isSoundEnabled();
+    el.innerHTML = enabled ? icon('volume2', 17) : icon('volumeX', 17);
+    const btn = document.getElementById('topbar-sound-btn');
+    if (btn) btn.title = enabled ? 'Suara UI: Menyala (Klik untuk Mematikan)' : 'Suara UI: Mati (Klik untuk Menyalakan)';
+}
+window.toggleSoundFxQuick = toggleSoundFxQuick;
+window.updateSoundIconButton = updateSoundIconButton;
+
 function initIcons() {
     // Custom Titlebar Icons
     const safeSet = (id, html) => {
@@ -392,50 +473,51 @@ function initIcons() {
     safeSet('win-close-icon', icon('windowClose', 12));
 
     // Top Bar icons
-    safeSet('branch-icon-placeholder', icon('gitBranch', 13));
-    safeSet('search-icon-placeholder', icon('search', 14));
+    safeSet('hamburger-icon', icon('menu', 18));
+    safeSet('search-icon-placeholder', icon('search', 15));
     safeSet('flame-icon-placeholder', icon('flame', 15));
     safeSet('zap-icon-placeholder', icon('zap', 15));
-    safeSet('palette-icon-placeholder', icon('palette', 15));
-    safeSet('user-icon-placeholder', icon('user', 14));
+    safeSet('palette-icon-placeholder', icon('palette', 16));
+    safeSet('topbar-chevron-icon', icon('chevronDown', 12));
 
-    // Subnav Tab icons
-    safeSet('tab-home-icon', icon('code', 15));
-    safeSet('tab-grammar-icon', icon('bookOpen', 15));
-    safeSet('tab-particle-icon', icon('layers', 15));
-    safeSet('tab-kana-icon', icon('layers', 15));
-    safeSet('tab-kata-icon', icon('bookOpen', 15));
-    safeSet('tab-kanji-icon', icon('book', 15));
-    safeSet('tab-vocab-icon', icon('repo', 15));
-    safeSet('tab-dict-icon', icon('dictionary', 15));
-    safeSet('tab-duo-icon', icon('sparkles', 15));
-    safeSet('tab-stroke-icon', icon('penTool', 15));
-    safeSet('tab-quiz-icon', icon('target', 15));
-    safeSet('tab-game-icon', icon('gamepad', 15));
-    safeSet('tab-progress-icon', icon('barChart', 15));
-    safeSet('tab-settings-icon', icon('settings', 15));
+    // Sidebar nav icons
+    safeSet('snav-home-icon', icon('home', 16));
+    safeSet('snav-progress-icon', icon('barChart', 16));
+    safeSet('snav-hiragana-icon', icon('layers', 16));
+    safeSet('snav-katakana-icon', icon('layers', 16));
+    safeSet('snav-kanji-icon', icon('book', 16));
+    safeSet('snav-stroke-icon', icon('penTool', 16));
+    safeSet('snav-vocab-icon', icon('repo', 16));
+    safeSet('snav-dict-icon', icon('dictionary', 16));
+    safeSet('snav-grammar-icon', icon('bookOpen', 16));
+    safeSet('snav-particle-icon', icon('code', 16));
+    safeSet('snav-quiz-icon', icon('target', 16));
+    safeSet('snav-hardcore-icon', icon('skull', 16));
+    safeSet('snav-duo-icon', icon('sparkles', 16));
+    safeSet('snav-game-icon', icon('gamepad', 16));
+    safeSet('snav-settings-icon', icon('settings', 16));
 
-    // Status bar & modal icons
-    safeSet('sb-branch-icon', icon('gitBranch', 12));
+    // Modal icons
     safeSet('modal-theme-icon', icon('palette', 18));
     safeSet('modal-theme-close-icon', icon('x', 18));
     safeSet('palette-search-icon', icon('search', 18));
     safeSet('modal-profile-icon', icon('user', 18));
     safeSet('modal-profile-close-icon', icon('x', 18));
     safeSet('pw-prompt-icon', icon('alertTriangle', 26));
+
+    // Legacy status bar (kept for compat)
+    const safeGet = id => document.getElementById(id);
+    if (safeGet('sb-branch-icon')) safeSet('sb-branch-icon', icon('gitBranch', 12));
+    if (safeGet('branch-icon-placeholder')) safeSet('branch-icon-placeholder', icon('gitBranch', 13));
 }
 
 function setupNavigation() {
-    const navTabs = document.getElementById('gh-nav-tabs');
-    if (navTabs) {
-        navTabs.addEventListener('wheel', (e) => {
-            if (e.deltaY !== 0) {
-                e.preventDefault();
-                navTabs.scrollLeft += e.deltaY;
-            }
-        }, { passive: false });
-    }
+    // Sidebar nav items
+    document.querySelectorAll('.sidebar-nav-item[data-page]').forEach(btn => {
+        btn.addEventListener('click', () => navigateTo(btn.dataset.page));
+    });
 
+    // Legacy tab buttons (backward compat)
     document.querySelectorAll('.gh-tab-btn[data-page]').forEach(btn => {
         btn.addEventListener('click', () => navigateTo(btn.dataset.page));
     });
@@ -447,7 +529,7 @@ function setupKeyboardShortcuts() {
         if (window.isExamLockdownActive && window.isExamLockdownActive()) {
             if (e.key === '/' || (e.ctrlKey && e.key.toLowerCase() === 'k') || (e.key >= '1' && e.key <= '9' && document.activeElement.tagName !== 'INPUT')) {
                 e.preventDefault();
-                showToast('🔒 Ujian Sedang Berlangsung: Menu & pintasan dikunci demi integritas simulasi.', 'warning');
+                showToast('[LOCK] Ujian Sedang Berlangsung: Menu & pintasan dikunci demi integritas simulasi.', 'warning');
                 return;
             }
         }
@@ -481,13 +563,17 @@ function setupKeyboardShortcuts() {
 
 function navigateTo(page, param) {
     if (window.isExamLockdownActive && window.isExamLockdownActive() && page !== 'quiz') {
-        showToast('🔒 Mode Ujian Terkunci: Harap kumpulkan atau batalkan ujian terlebih dahulu sebelum membuka menu lain.', 'warning');
+        showToast('[LOCK] Mode Ujian Terkunci: Harap kumpulkan atau batalkan ujian terlebih dahulu sebelum membuka menu lain.', 'warning');
         return;
     }
 
     currentPage = page;
 
-    // Update active tab button
+    // Update active sidebar nav item
+    document.querySelectorAll('.sidebar-nav-item').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.page === page);
+    });
+    // Also update legacy tab buttons if present
     document.querySelectorAll('.gh-tab-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.page === page);
     });
@@ -513,6 +599,7 @@ function navigateTo(page, param) {
         case 'dictionary': renderDictionaryPage(content); break;
         case 'duolingo': renderDuolingoPage(content); break;
         case 'quiz': renderQuizSetup(content, param); break;
+        case 'hardcore': renderQuizSetup(content, 'hardcore'); break;
         case 'minigame': renderMinigameSetup(content); break;
         case 'progress': renderProgressPage(content); break;
         case 'settings': renderSettingsPage(content); break;
@@ -1241,7 +1328,7 @@ function speakWord(text) {
 // 8. SETTINGS & REPOSITORY ABOUT PAGE
 // =======================================================
 function renderSettingsPage(container) {
-    const currentTheme = localStorage.getItem('nihongo_theme') || 'github-dark';
+    const currentTheme = localStorage.getItem('nihongo_theme') || 'ios-liquid-glass';
 
     container.innerHTML = `
         <div class="page-header">

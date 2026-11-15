@@ -6,171 +6,2331 @@
 
 // Exact SVG stroke coordinates and start points for Hiragana, Katakana & Key Kanji
 const STROKE_VECTORS = {
-    // === Vowels ===
     "あ": [
-        { d: "M 22 36 Q 50 34 78 32", start: [22, 36], dir: "➔ Kiri ke Kanan", desc: "Garis horizontal mendatar agak naik" },
-        { d: "M 50 16 Q 48 45 44 84", start: [50, 16], dir: "⬇ Atas ke Bawah", desc: "Garis vertikal melengkung memotong di tengah" },
-        { d: "M 38 48 C 18 64 24 88 52 86 C 82 84 86 52 64 48 C 45 44 38 60 48 78", start: [38, 48], dir: "⤴ Melingkar Memutar", desc: "Garis melingkar memutar lebar ke kanan bawah" }
+        {
+            "d": "M 22 36 Q 50 34 78 32",
+            "start": [
+                22,
+                36
+            ],
+            "dir": "➔ Kiri ke Kanan",
+            "desc": "Garis mendatar agak naik"
+        },
+        {
+            "d": "M 50 16 Q 48 45 44 84",
+            "start": [
+                50,
+                16
+            ],
+            "dir": "⬇ Atas ke Bawah",
+            "desc": "Garis vertikal melengkung memotong di tengah"
+        },
+        {
+            "d": "M 38 48 C 18 64 24 88 52 86 C 82 84 86 52 64 48 C 45 44 38 60 48 78",
+            "start": [
+                38,
+                48
+            ],
+            "dir": "⤴ Melingkar Memutar",
+            "desc": "Garis melingkar memutar lebar ke kanan bawah"
+        }
     ],
     "い": [
-        { d: "M 32 24 C 28 50 30 72 38 78 Q 42 76 46 68", start: [32, 24], dir: "⬇ Lengkung Kait", desc: "Garis lengkung kiri berujung kait ke kanan atas" },
-        { d: "M 68 35 C 72 52 70 65 66 70", start: [68, 35], dir: "⬇ Pendek Kanan", desc: "Garis lengkung pendek sisi kanan" }
+        {
+            "d": "M 32 24 C 28 50 30 72 38 78 Q 42 76 46 68",
+            "start": [
+                32,
+                24
+            ],
+            "dir": "⬇ Lengkung Kait",
+            "desc": "Garis lengkung kiri berujung kait"
+        },
+        {
+            "d": "M 68 35 C 72 52 70 65 66 70",
+            "start": [
+                68,
+                35
+            ],
+            "dir": "⬇ Pendek Kanan",
+            "desc": "Garis lengkung pendek sisi kanan"
+        }
     ],
     "う": [
-        { d: "M 42 22 Q 52 26 58 30", start: [42, 22], dir: "● Titik Atas", desc: "Titik garis miring pendek di bagian atas" },
-        { d: "M 36 44 C 58 36 78 44 74 65 C 70 82 50 84 38 78", start: [36, 44], dir: "⤴ Lengkung Membulat", desc: "Garis lengkung besar membulat ke kanan bawah" }
+        {
+            "d": "M 42 22 Q 52 26 58 30",
+            "start": [
+                42,
+                22
+            ],
+            "dir": "● Titik Atas",
+            "desc": "Titik miring pendek di bagian atas"
+        },
+        {
+            "d": "M 36 44 C 58 36 78 44 74 65 C 70 82 50 84 38 78",
+            "start": [
+                36,
+                44
+            ],
+            "dir": "⤴ Lengkung Membulat",
+            "desc": "Garis lengkung besar membulat ke kanan"
+        }
     ],
     "え": [
-        { d: "M 44 20 Q 52 24 58 28", start: [44, 20], dir: "● Titik Atas", desc: "Titik pendek miring ke bawah di bagian atas" },
-        { d: "M 30 46 L 68 44 L 38 72 Q 56 62 76 78", start: [30, 46], dir: "⤵ Berkelok Zigzag", desc: "Garis kontinu datar, miring kiri bawah, lalu meliuk" }
+        {
+            "d": "M 44 20 Q 52 24 58 28",
+            "start": [
+                44,
+                20
+            ],
+            "dir": "● Titik Atas",
+            "desc": "Titik pendek di bagian atas"
+        },
+        {
+            "d": "M 30 46 L 68 44 L 38 72 Q 56 62 76 78",
+            "start": [
+                30,
+                46
+            ],
+            "dir": "⤵ Berkelok Zigzag",
+            "desc": "Garis mendatar lalu meliuk ke bawah"
+        }
     ],
     "お": [
-        { d: "M 22 38 L 58 36", start: [22, 38], dir: "➔ Kiri ke Kanan", desc: "Garis horizontal pendek" },
-        { d: "M 44 20 L 44 64 C 44 82 26 78 28 66 C 30 54 58 52 74 74", start: [44, 20], dir: "⬇ Vertikal & Simpul", desc: "Garis vertikal turun membentuk lingkaran bawah" },
-        { d: "M 68 30 Q 76 38 78 44", start: [68, 30], dir: "● Titik Kanan Atas", desc: "Titik miring di sebelah kanan atas" }
+        {
+            "d": "M 22 38 L 58 36",
+            "start": [
+                22,
+                38
+            ],
+            "dir": "➔ Kiri ke Kanan",
+            "desc": "Garis horizontal pendek"
+        },
+        {
+            "d": "M 44 20 L 44 64 C 44 82 26 78 28 66 C 30 54 58 52 74 74",
+            "start": [
+                44,
+                20
+            ],
+            "dir": "⬇ Vertikal & Simpul",
+            "desc": "Garis vertikal melingkar simpul bawah"
+        },
+        {
+            "d": "M 68 30 Q 76 38 78 44",
+            "start": [
+                68,
+                30
+            ],
+            "dir": "● Titik Kanan Atas",
+            "desc": "Titik miring di kanan atas"
+        }
     ],
-
-    // === K-row ===
     "か": [
-        { d: "M 30 36 C 58 34 68 40 64 62 Q 62 70 56 66", start: [30, 36], dir: "⤵ Siku Berkait", desc: "Garis siku melengkung berkait" },
-        { d: "M 46 22 C 40 46 32 70 25 82", start: [46, 22], dir: "↙ Serong Memotong", desc: "Garis miring melengkung di sisi kiri" },
-        { d: "M 70 28 Q 78 34 82 40", start: [70, 28], dir: "● Titik Aksen", desc: "Titik aksen di kanan atas" }
+        {
+            "d": "M 30 36 C 58 34 68 40 64 62 Q 62 70 56 66",
+            "start": [
+                30,
+                36
+            ],
+            "dir": "⤵ Siku Berkait",
+            "desc": "Garis siku melengkung berkait"
+        },
+        {
+            "d": "M 46 22 C 40 46 32 70 25 82",
+            "start": [
+                46,
+                22
+            ],
+            "dir": "↙ Serong Memotong",
+            "desc": "Garis miring kiri melengkung"
+        },
+        {
+            "d": "M 70 28 Q 78 34 82 40",
+            "start": [
+                70,
+                28
+            ],
+            "dir": "● Titik Aksen",
+            "desc": "Titik aksen kanan atas"
+        }
     ],
     "き": [
-        { d: "M 30 34 L 70 30", start: [30, 34], dir: "➔ Datar Atas", desc: "Garis horizontal atas agak naik" },
-        { d: "M 26 48 L 74 44", start: [26, 48], dir: "➔ Datar Bawah", desc: "Garis horizontal kedua sejajar" },
-        { d: "M 54 20 L 42 66 Q 38 70 34 66", start: [54, 20], dir: "↙ Miring Berkait", desc: "Garis miring memotong berujung kait" },
-        { d: "M 34 76 C 48 84 66 82 68 70", start: [34, 76], dir: "⤴ Lengkung Dasar", desc: "Lengkungan bawah melingkar dari kiri ke kanan" }
+        {
+            "d": "M 30 34 L 70 30",
+            "start": [
+                30,
+                34
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal atas"
+        },
+        {
+            "d": "M 26 48 L 74 44",
+            "start": [
+                26,
+                48
+            ],
+            "dir": "➔ Datar Bawah",
+            "desc": "Garis horizontal bawah"
+        },
+        {
+            "d": "M 54 20 L 42 66 Q 38 70 34 66",
+            "start": [
+                54,
+                20
+            ],
+            "dir": "↙ Miring Berkait",
+            "desc": "Garis miring berkait"
+        },
+        {
+            "d": "M 34 76 C 48 84 66 82 68 70",
+            "start": [
+                34,
+                76
+            ],
+            "dir": "⤴ Lengkung Dasar",
+            "desc": "Lengkungan bawah"
+        }
     ],
     "く": [
-        { d: "M 64 25 L 34 50 L 66 75", start: [64, 25], dir: "⤵ Sudut Lancip", desc: "Satu goresan siku lancip miring kiri lalu kanan" }
+        {
+            "d": "M 64 25 L 34 50 L 66 75",
+            "start": [
+                64,
+                25
+            ],
+            "dir": "⤵ Sudut Lancip",
+            "desc": "Satu goresan sudut lancip ke kiri"
+        }
     ],
     "け": [
-        { d: "M 30 22 C 26 50 28 72 32 80 Q 36 78 40 70", start: [30, 22], dir: "⬇ Vertikal Kait", desc: "Garis vertikal kiri melengkung berkait" },
-        { d: "M 52 38 L 80 34", start: [52, 38], dir: "➔ Datar Kanan", desc: "Garis horizontal pendek di kanan" },
-        { d: "M 68 22 C 68 48 66 72 64 84", start: [68, 22], dir: "⬇ Vertikal Lurus", desc: "Garis vertikal kanan menembus garis mendatar" }
+        {
+            "d": "M 30 22 C 26 50 28 72 32 80 Q 36 78 40 70",
+            "start": [
+                30,
+                22
+            ],
+            "dir": "⬇ Vertikal Kait",
+            "desc": "Garis vertikal kiri berkait"
+        },
+        {
+            "d": "M 52 38 L 80 34",
+            "start": [
+                52,
+                38
+            ],
+            "dir": "➔ Datar Kanan",
+            "desc": "Garis horizontal kanan"
+        },
+        {
+            "d": "M 68 22 C 68 48 66 72 64 84",
+            "start": [
+                68,
+                22
+            ],
+            "dir": "⬇ Vertikal Lurus",
+            "desc": "Garis vertikal kanan menembus"
+        }
     ],
     "こ": [
-        { d: "M 32 34 C 48 30 64 30 72 34 Q 70 40 64 38", start: [32, 34], dir: "➔ Garis Atas Kait", desc: "Garis horizontal atas berujung kaitan kecil" },
-        { d: "M 30 68 C 45 74 65 74 74 68", start: [30, 68], dir: "➔ Garis Bawah", desc: "Garis lengkung mendatar di bagian bawah" }
+        {
+            "d": "M 32 34 C 48 30 64 30 72 34 Q 70 40 64 38",
+            "start": [
+                32,
+                34
+            ],
+            "dir": "➔ Garis Atas Kait",
+            "desc": "Garis horizontal atas berkait kecil"
+        },
+        {
+            "d": "M 30 68 C 45 74 65 74 74 68",
+            "start": [
+                30,
+                68
+            ],
+            "dir": "➔ Garis Bawah",
+            "desc": "Garis lengkung mendatar bawah"
+        }
     ],
-
-    // === S-row ===
     "さ": [
-        { d: "M 28 38 L 72 34", start: [28, 38], dir: "➔ Datar Atas", desc: "Garis horizontal dari kiri ke kanan" },
-        { d: "M 56 22 L 44 68 Q 40 72 34 68", start: [56, 22], dir: "↙ Miring Kait", desc: "Garis miring memotong berujung kaitan" },
-        { d: "M 36 76 C 52 84 68 80 66 68", start: [36, 76], dir: "⤴ Lengkung Bawah", desc: "Lengkungan membulat di bagian bawah" }
+        {
+            "d": "M 28 38 L 72 34",
+            "start": [
+                28,
+                38
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal agak naik"
+        },
+        {
+            "d": "M 52 22 L 42 64 Q 38 68 34 64",
+            "start": [
+                52,
+                22
+            ],
+            "dir": "↙ Miring Berkait",
+            "desc": "Garis miring berkait ke kanan"
+        },
+        {
+            "d": "M 34 74 C 48 82 65 80 66 70",
+            "start": [
+                34,
+                74
+            ],
+            "dir": "⤴ Lengkung Bawah",
+            "desc": "Lengkungan bawah"
+        }
     ],
     "し": [
-        { d: "M 40 22 C 40 60 42 78 58 78 C 70 78 74 68 76 58", start: [40, 22], dir: "⬇ Kail Ikan", desc: "Garis vertikal melengkung membulat ke kanan atas" }
+        {
+            "d": "M 38 22 L 38 64 C 38 84 56 86 68 76 Q 74 70 76 64",
+            "start": [
+                38,
+                22
+            ],
+            "dir": "⬇ Kait Pancing",
+            "desc": "Satu garis turun melengkung naik seperti mata kail"
+        }
     ],
     "す": [
-        { d: "M 25 38 L 78 36", start: [25, 38], dir: "➔ Kiri ke Kanan", desc: "Garis horizontal dari kiri ke kanan" },
-        { d: "M 52 18 L 52 50 C 52 64 36 62 36 50 C 36 38 60 40 60 62 C 60 76 52 82 46 86", start: [52, 18], dir: "⬇ Simpul Lingkaran", desc: "Garis vertikal turun, membentuk simpul lingkaran" }
+        {
+            "d": "M 22 36 L 78 34",
+            "start": [
+                22,
+                36
+            ],
+            "dir": "➔ Datar Panjang",
+            "desc": "Garis horizontal dari kiri ke kanan"
+        },
+        {
+            "d": "M 54 18 L 54 48 C 54 62 40 64 40 52 C 40 42 54 42 54 52 L 48 84",
+            "start": [
+                54,
+                18
+            ],
+            "dir": "⬇ Vertikal & Lingkar",
+            "desc": "Garis vertikal turun melingkar lalu lurus ke bawah"
+        }
     ],
     "せ": [
-        { d: "M 24 42 L 76 38", start: [24, 42], dir: "➔ Datar Panjang", desc: "Garis mendatar memotong melintasi" },
-        { d: "M 64 24 L 64 68 C 64 78 58 78 52 76", start: [64, 24], dir: "⬇ Vertikal Kait Kanan", desc: "Garis vertikal kanan berujung kait ke kiri" },
-        { d: "M 38 28 L 38 72 L 68 72", start: [38, 28], dir: "⤵ Siku Bawah", desc: "Garis vertikal kiri berbelok mendatar ke kanan" }
+        {
+            "d": "M 22 40 L 78 36",
+            "start": [
+                22,
+                40
+            ],
+            "dir": "➔ Datar Panjang",
+            "desc": "Garis horizontal mendatar"
+        },
+        {
+            "d": "M 66 22 L 66 66 Q 66 72 60 70",
+            "start": [
+                66,
+                22
+            ],
+            "dir": "⬇ Vertikal Kait Kanan",
+            "desc": "Garis vertikal kanan berujung kait"
+        },
+        {
+            "d": "M 36 28 L 36 74 L 72 74",
+            "start": [
+                36,
+                28
+            ],
+            "dir": "⤵ Siku Kiri Bawah",
+            "desc": "Garis vertikal kiri menekuk ke kanan"
+        }
     ],
     "そ": [
-        { d: "M 35 28 L 65 28 L 35 52 C 55 46 75 52 72 70 C 68 84 48 84 38 78", start: [35, 28], dir: "⤵ Zigzag Lengkung", desc: "Satu goresan zigzag berlanjut lengkungan membulat" }
+        {
+            "d": "M 30 26 L 68 26 L 32 54 C 54 46 76 56 70 76 C 64 88 44 88 34 80",
+            "start": [
+                30,
+                26
+            ],
+            "dir": "⤵ Zigzag Berkelok",
+            "desc": "Satu goresan zigzag Z lalu melengkung di bawah"
+        }
     ],
-
-    // === T-row ===
     "た": [
-        { d: "M 25 36 L 52 34", start: [25, 36], dir: "➔ Datar Kiri", desc: "Garis horizontal mendatar" },
-        { d: "M 38 22 C 34 46 30 68 24 78", start: [38, 22], dir: "↙ Miring Kiri", desc: "Garis miring memotong ke kiri bawah" },
-        { d: "M 52 46 L 76 44", start: [52, 46], dir: "➔ Datar Kanan Atas", desc: "Garis horizontal kecil di kanan atas" },
-        { d: "M 50 64 C 60 68 72 68 76 62", start: [50, 64], dir: "➔ Lengkung Kanan Bawah", desc: "Garis lengkung kecil di kanan bawah" }
+        {
+            "d": "M 22 38 L 54 36",
+            "start": [
+                22,
+                38
+            ],
+            "dir": "➔ Datar Pendek",
+            "desc": "Garis horizontal kiri"
+        },
+        {
+            "d": "M 38 22 C 36 50 32 72 24 82",
+            "start": [
+                38,
+                22
+            ],
+            "dir": "↙ Serong Memotong",
+            "desc": "Garis miring memotong"
+        },
+        {
+            "d": "M 52 46 L 76 44",
+            "start": [
+                52,
+                46
+            ],
+            "dir": "➔ Datar Kanan Atas",
+            "desc": "Garis mendatar di kanan"
+        },
+        {
+            "d": "M 50 66 C 58 72 72 72 76 66",
+            "start": [
+                50,
+                66
+            ],
+            "dir": "➔ Lengkung Bawah",
+            "desc": "Lengkung mendatar di kanan bawah"
+        }
     ],
     "ち": [
-        { d: "M 35 28 L 68 24", start: [35, 28], dir: "➔ Datar Atas", desc: "Garis horizontal pendek agak naik" },
-        { d: "M 50 20 L 30 52 L 56 50 C 74 50 78 72 62 82 C 48 90 35 80 32 74", start: [50, 20], dir: "⤵ Miring & Membulat", desc: "Garis miring ke bawah lalu melingkar membentuk perut bulat" }
+        {
+            "d": "M 26 34 L 72 32",
+            "start": [
+                26,
+                34
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal atas"
+        },
+        {
+            "d": "M 48 20 L 44 48 C 30 46 22 62 32 78 C 44 90 74 86 70 60 C 66 46 48 48 42 54",
+            "start": [
+                48,
+                20
+            ],
+            "dir": "⤵ Vertikal & Membulat",
+            "desc": "Garis miring lalu melingkar besar ke kanan"
+        }
     ],
     "つ": [
-        { d: "M 30 38 C 55 30 78 35 74 58 C 70 78 50 82 35 82", start: [30, 38], dir: "⤴ Gelombang Melengkung", desc: "Satu goresan kurva besar melengkung menyerupai gelombang" }
+        {
+            "d": "M 24 38 C 56 26 82 36 78 62 C 74 84 48 86 32 78",
+            "start": [
+                24,
+                38
+            ],
+            "dir": "⤴ Lengkung Ombak",
+            "desc": "Satu goresan mendatar melengkung besar seperti ombak"
+        }
     ],
     "て": [
-        { d: "M 28 34 L 72 32 C 62 48 42 66 45 76 C 48 84 62 84 72 78", start: [28, 34], dir: "⤵ Datar & Lengkung", desc: "Garis mendatar lalu melipat melengkung membulat" }
+        {
+            "d": "M 26 34 L 72 32 C 48 54 46 74 68 76 Q 74 74 76 70",
+            "start": [
+                26,
+                34
+            ],
+            "dir": "⤵ Datar & Lengkung C",
+            "desc": "Garis mendatar lalu melengkung ke kanan seperti huruf C"
+        }
     ],
     "と": [
-        { d: "M 42 22 L 54 48", start: [42, 22], dir: "↘ Miring Pendek", desc: "Garis miring pendek ke kanan bawah" },
-        { d: "M 64 36 C 42 48 36 68 48 80 C 60 90 76 80 78 70", start: [64, 36], dir: "⤴ Kurva Membulat", desc: "Kurva besar melengkung dari atas ke bawah" }
+        {
+            "d": "M 44 20 L 40 50",
+            "start": [
+                44,
+                20
+            ],
+            "dir": "⬇ Miring Pendek",
+            "desc": "Garis miring pendek ke kanan bawah"
+        },
+        {
+            "d": "M 32 40 C 58 40 76 56 72 74 C 68 84 50 86 36 78",
+            "start": [
+                32,
+                40
+            ],
+            "dir": "⤴ Lengkung Membulat",
+            "desc": "Lengkungan besar menyentuh ujung goresan 1"
+        }
     ],
-
-    // === N-row & Others ===
     "な": [
-        { d: "M 26 38 L 48 36", start: [26, 38], dir: "➔ Datar Kiri", desc: "Garis horizontal pendek" },
-        { d: "M 38 24 C 36 46 34 68 28 78", start: [38, 24], dir: "↙ Miring Memotong", desc: "Garis miring memotong garis pertama" },
-        { d: "M 56 34 Q 62 40 66 44", start: [56, 34], dir: "● Titik Kanan", desc: "Titik aksen pendek di kanan atas" },
-        { d: "M 64 54 C 64 74 48 76 52 64 C 54 54 72 58 74 76", start: [64, 54], dir: "⬇ Simpul Bawah", desc: "Garis vertikal meliuk membentuk simpul bulat" }
+        {
+            "d": "M 24 38 L 48 36",
+            "start": [
+                24,
+                38
+            ],
+            "dir": "➔ Datar Kiri",
+            "desc": "Garis mendatar pendek kiri"
+        },
+        {
+            "d": "M 38 22 L 32 68",
+            "start": [
+                38,
+                22
+            ],
+            "dir": "↙ Miring Memotong",
+            "desc": "Garis miring memotong"
+        },
+        {
+            "d": "M 66 30 Q 72 36 74 42",
+            "start": [
+                66,
+                30
+            ],
+            "dir": "● Titik Atas",
+            "desc": "Titik di kanan atas"
+        },
+        {
+            "d": "M 56 46 L 56 68 C 56 78 44 78 46 68 C 48 60 62 62 70 76",
+            "start": [
+                56,
+                46
+            ],
+            "dir": "⬇ Simpul Bawah",
+            "desc": "Garis vertikal melingkar simpul"
+        }
     ],
     "に": [
-        { d: "M 30 22 C 28 50 30 74 34 82 Q 38 80 42 72", start: [30, 22], dir: "⬇ Vertikal Kait", desc: "Garis vertikal kiri melengkung berkait" },
-        { d: "M 52 38 L 78 36", start: [52, 38], dir: "➔ Datar Atas", desc: "Garis horizontal kanan atas" },
-        { d: "M 50 68 C 62 72 76 72 80 66", start: [50, 68], dir: "➔ Lengkung Bawah", desc: "Garis lengkung kanan bawah" }
+        {
+            "d": "M 30 22 C 26 48 26 70 30 80 Q 34 78 38 70",
+            "start": [
+                30,
+                22
+            ],
+            "dir": "⬇ Vertikal Kait",
+            "desc": "Garis vertikal kiri berkait"
+        },
+        {
+            "d": "M 52 38 L 78 36",
+            "start": [
+                52,
+                38
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal atas kanan"
+        },
+        {
+            "d": "M 50 68 C 60 74 72 74 78 68",
+            "start": [
+                50,
+                68
+            ],
+            "dir": "➔ Datar Bawah",
+            "desc": "Garis horizontal bawah kanan"
+        }
+    ],
+    "ぬ": [
+        {
+            "d": "M 38 24 L 32 74",
+            "start": [
+                38,
+                24
+            ],
+            "dir": "↙ Miring Kiri",
+            "desc": "Garis miring dari atas ke kiri bawah"
+        },
+        {
+            "d": "M 28 44 C 54 26 76 46 64 74 C 56 86 42 78 44 66 C 46 54 64 54 74 72 C 78 78 84 76 82 70 C 80 66 74 68 76 74",
+            "start": [
+                28,
+                44
+            ],
+            "dir": "⤴ Lengkung Simpul Ujung",
+            "desc": "Garis melengkung memutar membentuk simpul di ujung"
+        }
+    ],
+    "ね": [
+        {
+            "d": "M 34 22 L 34 82",
+            "start": [
+                34,
+                22
+            ],
+            "dir": "⬇ Vertikal Lurus",
+            "desc": "Garis vertikal lurus kiri"
+        },
+        {
+            "d": "M 22 40 L 58 40 L 32 72 Q 46 60 62 68 C 72 74 72 84 64 84 C 58 84 56 76 64 76",
+            "start": [
+                22,
+                40
+            ],
+            "dir": "⤵ Berkelok & Simpul",
+            "desc": "Garis meliuk berujung simpul kecil di kanan"
+        }
     ],
     "の": [
-        { d: "M 54 28 L 42 56 C 35 72 45 84 60 82 C 78 80 82 56 68 42 C 55 30 35 45 32 64", start: [54, 28], dir: "⤴ Spiral Memutar", desc: "Satu goresan spiral dari tengah memutar penuh ke luar" }
+        {
+            "d": "M 48 30 L 38 52 C 30 68 44 84 64 80 C 82 74 84 46 64 36 C 48 28 32 42 26 62",
+            "start": [
+                48,
+                30
+            ],
+            "dir": "⤴ Lingkaran Spiral",
+            "desc": "Satu goresan miring lalu melingkar besar menyerupai spiral"
+        }
     ],
     "は": [
-        { d: "M 28 22 C 26 50 28 74 32 82 Q 36 80 40 72", start: [28, 22], dir: "⬇ Vertikal Kait", desc: "Garis vertikal kiri melengkung berkait" },
-        { d: "M 48 38 L 76 36", start: [48, 38], dir: "➔ Datar Tengah", desc: "Garis mendatar di sisi kanan" },
-        { d: "M 64 22 L 64 64 C 64 80 48 80 50 68 C 52 56 72 60 76 74", start: [64, 22], dir: "⬇ Vertikal & Simpul", desc: "Garis vertikal melipat simpul di kanan bawah" }
+        {
+            "d": "M 28 22 C 24 50 24 72 28 80 Q 32 78 36 70",
+            "start": [
+                28,
+                22
+            ],
+            "dir": "⬇ Vertikal Kait",
+            "desc": "Garis vertikal kiri berkait"
+        },
+        {
+            "d": "M 46 38 L 76 36",
+            "start": [
+                46,
+                38
+            ],
+            "dir": "➔ Datar Kanan",
+            "desc": "Garis mendatar di kanan"
+        },
+        {
+            "d": "M 62 20 L 62 66 C 62 78 50 78 50 68 C 50 58 64 58 74 74",
+            "start": [
+                62,
+                20
+            ],
+            "dir": "⬇ Vertikal & Simpul",
+            "desc": "Garis vertikal menembus lalu membuat simpul"
+        }
+    ],
+    "ひ": [
+        {
+            "d": "M 26 38 L 44 34 L 38 64 C 36 82 66 84 68 62 L 66 38 L 78 44",
+            "start": [
+                26,
+                38
+            ],
+            "dir": "⤵ Lekukan U",
+            "desc": "Satu goresan mendatar, turun melengkung U, lalu kait kanan"
+        }
+    ],
+    "ふ": [
+        {
+            "d": "M 48 20 Q 56 26 60 30",
+            "start": [
+                48,
+                20
+            ],
+            "dir": "● Titik Atas",
+            "desc": "Titik miring atas"
+        },
+        {
+            "d": "M 48 36 C 42 54 44 70 48 76 Q 52 74 54 68",
+            "start": [
+                48,
+                36
+            ],
+            "dir": "⬇ Lengkung Tengah",
+            "desc": "Lengkungan tengah berkait kecil"
+        },
+        {
+            "d": "M 26 48 C 24 60 28 68 32 72",
+            "start": [
+                26,
+                48
+            ],
+            "dir": "↙ Titik Kiri",
+            "desc": "Titik gores kiri"
+        },
+        {
+            "d": "M 70 46 C 76 56 74 66 70 70",
+            "start": [
+                70,
+                46
+            ],
+            "dir": "↘ Titik Kanan",
+            "desc": "Titik gores kanan"
+        }
+    ],
+    "へ": [
+        {
+            "d": "M 24 66 L 46 32 L 78 68",
+            "start": [
+                24,
+                66
+            ],
+            "dir": "⤴ Naik lalu Turun",
+            "desc": "Satu goresan naik miring ke puncak lalu meluncur ke kanan bawah"
+        }
+    ],
+    "ほ": [
+        {
+            "d": "M 26 22 C 22 50 22 72 26 80 Q 30 78 34 70",
+            "start": [
+                26,
+                22
+            ],
+            "dir": "⬇ Vertikal Kait",
+            "desc": "Garis vertikal kiri berkait"
+        },
+        {
+            "d": "M 44 32 L 76 30",
+            "start": [
+                44,
+                32
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal atas"
+        },
+        {
+            "d": "M 46 48 L 74 46",
+            "start": [
+                46,
+                48
+            ],
+            "dir": "➔ Datar Bawah",
+            "desc": "Garis horizontal kedua"
+        },
+        {
+            "d": "M 60 22 L 60 66 C 60 78 48 78 48 68 C 48 58 62 58 72 74",
+            "start": [
+                60,
+                22
+            ],
+            "dir": "⬇ Vertikal & Simpul",
+            "desc": "Garis vertikal menembus lalu membuat simpul"
+        }
     ],
     "ま": [
-        { d: "M 28 34 L 72 32", start: [28, 34], dir: "➔ Datar Atas", desc: "Garis mendatar pertama" },
-        { d: "M 26 50 L 74 48", start: [26, 50], dir: "➔ Datar Kedua", desc: "Garis mendatar kedua sejajar" },
-        { d: "M 52 20 L 52 66 C 52 82 38 80 40 68 C 42 58 64 62 68 76", start: [52, 20], dir: "⬇ Simpul Bawah", desc: "Garis vertikal memotong lalu bersimpul bulat" }
+        {
+            "d": "M 28 34 L 72 32",
+            "start": [
+                28,
+                34
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal atas"
+        },
+        {
+            "d": "M 32 48 L 68 46",
+            "start": [
+                32,
+                48
+            ],
+            "dir": "➔ Datar Bawah",
+            "desc": "Garis horizontal kedua"
+        },
+        {
+            "d": "M 50 18 L 50 66 C 50 78 38 78 38 68 C 38 58 52 58 62 74",
+            "start": [
+                50,
+                18
+            ],
+            "dir": "⬇ Vertikal & Simpul",
+            "desc": "Garis vertikal memotong kedua garis dan bersimpul"
+        }
+    ],
+    "み": [
+        {
+            "d": "M 28 36 L 62 34 L 38 70 C 34 76 46 76 54 70 L 72 58",
+            "start": [
+                28,
+                36
+            ],
+            "dir": "⤵ Mendatar, Simpul & Naik",
+            "desc": "Garis mendatar lalu meliuk miring kanan"
+        },
+        {
+            "d": "M 64 26 C 62 50 56 70 48 84",
+            "start": [
+                64,
+                26
+            ],
+            "dir": "↙ Serong Kanan",
+            "desc": "Garis lengkung miring di kanan"
+        }
+    ],
+    "む": [
+        {
+            "d": "M 24 38 L 54 36",
+            "start": [
+                24,
+                38
+            ],
+            "dir": "➔ Datar Kiri",
+            "desc": "Garis horizontal pendek kiri"
+        },
+        {
+            "d": "M 42 22 L 42 66 C 42 78 30 76 34 66 C 38 56 56 56 66 70 C 72 78 78 78 78 72",
+            "start": [
+                42,
+                22
+            ],
+            "dir": "⬇ Vertikal, Simpul & Ekor",
+            "desc": "Garis vertikal turun bersimpul lalu melengkung naik"
+        },
+        {
+            "d": "M 68 30 Q 76 38 78 44",
+            "start": [
+                68,
+                30
+            ],
+            "dir": "● Titik Kanan Atas",
+            "desc": "Titik miring kanan atas"
+        }
+    ],
+    "め": [
+        {
+            "d": "M 46 24 L 34 72",
+            "start": [
+                46,
+                24
+            ],
+            "dir": "↙ Serong Kiri",
+            "desc": "Garis miring memotong"
+        },
+        {
+            "d": "M 32 40 C 60 26 80 46 70 74 C 60 88 44 86 42 74 C 40 58 64 54 76 72",
+            "start": [
+                32,
+                40
+            ],
+            "dir": "⤴ Lengkung Membulat",
+            "desc": "Lengkungan besar membulat ke kanan"
+        }
+    ],
+    "も": [
+        {
+            "d": "M 48 20 L 48 64 C 48 84 66 84 74 74",
+            "start": [
+                48,
+                20
+            ],
+            "dir": "⬇ Vertikal Kait Pancing",
+            "desc": "Garis vertikal turun melengkung kail ke kanan"
+        },
+        {
+            "d": "M 32 38 L 66 36",
+            "start": [
+                32,
+                38
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis mendatar atas memotong"
+        },
+        {
+            "d": "M 30 52 L 68 50",
+            "start": [
+                30,
+                52
+            ],
+            "dir": "➔ Datar Bawah",
+            "desc": "Garis mendatar bawah memotong"
+        }
+    ],
+    "や": [
+        {
+            "d": "M 28 42 C 54 30 68 40 64 62 Q 60 70 54 66",
+            "start": [
+                28,
+                42
+            ],
+            "dir": "⤵ Lengkung Berkait",
+            "desc": "Garis melengkung berkait"
+        },
+        {
+            "d": "M 46 22 L 40 36",
+            "start": [
+                46,
+                22
+            ],
+            "dir": "● Titik Kiri Atas",
+            "desc": "Titik pendek miring kiri"
+        },
+        {
+            "d": "M 66 22 C 60 48 52 70 42 82",
+            "start": [
+                66,
+                22
+            ],
+            "dir": "↙ Miring Memotong",
+            "desc": "Garis miring panjang kanan menembus ke bawah"
+        }
+    ],
+    "ゆ": [
+        {
+            "d": "M 36 24 L 36 60 C 36 78 52 78 62 66 C 70 54 70 42 58 42 C 48 42 42 54 44 64",
+            "start": [
+                36,
+                24
+            ],
+            "dir": "⬇ Vertikal & Balon",
+            "desc": "Garis vertikal turun lalu melengkung membulat"
+        },
+        {
+            "d": "M 56 20 L 56 82",
+            "start": [
+                56,
+                20
+            ],
+            "dir": "⬇ Vertikal Menembus",
+            "desc": "Garis vertikal tegak memotong dari atas ke bawah"
+        }
+    ],
+    "よ": [
+        {
+            "d": "M 32 36 L 62 34",
+            "start": [
+                32,
+                36
+            ],
+            "dir": "➔ Datar Pendek",
+            "desc": "Garis mendatar pendek"
+        },
+        {
+            "d": "M 52 20 L 52 64 C 52 78 38 78 38 68 C 38 56 52 56 68 72",
+            "start": [
+                52,
+                20
+            ],
+            "dir": "⬇ Vertikal & Simpul",
+            "desc": "Garis vertikal turun membuat simpul ke kiri lalu mendatar"
+        }
+    ],
+    "ら": [
+        {
+            "d": "M 44 22 Q 52 26 56 30",
+            "start": [
+                44,
+                22
+            ],
+            "dir": "● Titik Atas",
+            "desc": "Titik miring pendek atas"
+        },
+        {
+            "d": "M 38 40 L 38 52 C 56 46 72 56 68 72 C 64 84 48 86 36 80",
+            "start": [
+                38,
+                40
+            ],
+            "dir": "⤵ Vertikal & Membulat",
+            "desc": "Garis turun sedikit lalu melengkung setengah lingkaran"
+        }
+    ],
+    "り": [
+        {
+            "d": "M 36 26 C 34 46 36 58 40 62 Q 44 60 46 54",
+            "start": [
+                36,
+                26
+            ],
+            "dir": "⬇ Kiri Berkait",
+            "desc": "Garis vertikal kiri pendek berkait"
+        },
+        {
+            "d": "M 64 22 C 64 52 62 74 54 84",
+            "start": [
+                64,
+                22
+            ],
+            "dir": "⬇ Kanan Melengkung",
+            "desc": "Garis vertikal kanan panjang melengkung anggun"
+        }
+    ],
+    "る": [
+        {
+            "d": "M 30 28 L 68 28 L 36 58 C 58 50 78 62 70 78 C 66 84 56 84 56 76 C 56 70 66 70 68 76",
+            "start": [
+                30,
+                28
+            ],
+            "dir": "⤵ Berkelok & Simpul Bawah",
+            "desc": "Satu goresan mendatar, meliuk, lalu bersimpul lingkaran kecil di dasar"
+        }
+    ],
+    "れ": [
+        {
+            "d": "M 32 22 L 32 82",
+            "start": [
+                32,
+                22
+            ],
+            "dir": "⬇ Vertikal Lurus",
+            "desc": "Garis vertikal tegak kiri"
+        },
+        {
+            "d": "M 22 42 L 54 42 L 32 72 Q 48 60 64 68 L 76 56",
+            "start": [
+                22,
+                42
+            ],
+            "dir": "⤵ Berkelok Melengkung Luar",
+            "desc": "Garis meliuk lalu melengkung anggun keluar ke kanan atas"
+        }
+    ],
+    "ろ": [
+        {
+            "d": "M 30 28 L 68 28 L 36 58 C 58 50 78 62 70 80 C 64 88 44 88 34 80",
+            "start": [
+                30,
+                28
+            ],
+            "dir": "⤵ Berkelok Tanpa Simpul",
+            "desc": "Bentuk angka 3 terbuka di bawah tanpa simpul"
+        }
+    ],
+    "わ": [
+        {
+            "d": "M 32 22 L 32 82",
+            "start": [
+                32,
+                22
+            ],
+            "dir": "⬇ Vertikal Lurus",
+            "desc": "Garis vertikal tegak kiri"
+        },
+        {
+            "d": "M 22 42 L 54 42 L 32 72 C 54 58 76 66 70 82 C 64 88 48 88 38 82",
+            "start": [
+                22,
+                42
+            ],
+            "dir": "⤵ Berkelok Melingkar Besar",
+            "desc": "Garis meliuk lalu melengkung membulat bulat ke dasar"
+        }
+    ],
+    "を": [
+        {
+            "d": "M 26 34 L 72 32",
+            "start": [
+                26,
+                34
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal atas"
+        },
+        {
+            "d": "M 48 20 L 36 56 C 54 54 62 60 56 70 L 40 76",
+            "start": [
+                48,
+                20
+            ],
+            "dir": "↙ Miring & Sudut",
+            "desc": "Garis miring memotong lalu menyudut"
+        },
+        {
+            "d": "M 34 60 C 58 56 76 68 70 82 C 66 86 54 86 42 82",
+            "start": [
+                34,
+                60
+            ],
+            "dir": "⤴ Lengkung C Bawah",
+            "desc": "Lengkungan melingkar memotong di bagian bawah"
+        }
     ],
     "ん": [
-        { d: "M 38 24 L 28 72 C 38 52 55 50 62 64 C 70 78 76 80 80 76", start: [38, 24], dir: "⤵ Miring & Gelombang", desc: "Garis miring turun lalu meliuk naik ke kanan atas" }
+        {
+            "d": "M 34 26 L 30 76 Q 48 48 64 62 Q 74 74 78 68",
+            "start": [
+                34,
+                26
+            ],
+            "dir": "⤵ Miring lalu Gelombang",
+            "desc": "Satu goresan turun miring lalu meliuk naik dan melengkung ke kanan"
+        }
     ],
-
-    // === Basic Kanji ===
+    "ア": [
+        {
+            "d": "M 28 32 L 68 32 L 64 54 Q 60 58 54 54",
+            "start": [
+                28,
+                32
+            ],
+            "dir": "⤵ Datar Menekuk",
+            "desc": "Garis mendatar lalu menekuk berkait"
+        },
+        {
+            "d": "M 52 44 C 44 60 34 76 22 84",
+            "start": [
+                52,
+                44
+            ],
+            "dir": "↙ Serong Melengkung",
+            "desc": "Garis miring melengkung ke kiri bawah"
+        }
+    ],
+    "イ": [
+        {
+            "d": "M 48 22 C 40 42 32 60 22 72",
+            "start": [
+                48,
+                22
+            ],
+            "dir": "↙ Miring Kiri",
+            "desc": "Garis miring dari atas ke kiri bawah"
+        },
+        {
+            "d": "M 48 46 L 48 84",
+            "start": [
+                48,
+                46
+            ],
+            "dir": "⬇ Vertikal Lurus",
+            "desc": "Garis vertikal lurus ke bawah"
+        }
+    ],
+    "ウ": [
+        {
+            "d": "M 50 20 L 50 32",
+            "start": [
+                50,
+                20
+            ],
+            "dir": "⬇ Titik Vertikal",
+            "desc": "Titik tegak pendek di atas"
+        },
+        {
+            "d": "M 28 38 L 28 54",
+            "start": [
+                28,
+                38
+            ],
+            "dir": "⬇ Garis Kiri Pendek",
+            "desc": "Garis vertikal pendek di sisi kiri"
+        },
+        {
+            "d": "M 28 38 L 72 38 L 68 62 C 60 74 46 82 32 86",
+            "start": [
+                28,
+                38
+            ],
+            "dir": "⤵ Siku Menekuk Kiri",
+            "desc": "Garis mendatar lalu menekuk melengkung ke kiri bawah"
+        }
+    ],
+    "エ": [
+        {
+            "d": "M 32 26 L 68 26",
+            "start": [
+                32,
+                26
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal atas"
+        },
+        {
+            "d": "M 50 26 L 50 74",
+            "start": [
+                50,
+                26
+            ],
+            "dir": "⬇ Tiang Vertikal",
+            "desc": "Garis vertikal di tengah menghubungkan kedua garis"
+        },
+        {
+            "d": "M 22 74 L 78 74",
+            "start": [
+                22,
+                74
+            ],
+            "dir": "➔ Datar Bawah Panjang",
+            "desc": "Garis horizontal bawah lebih panjang"
+        }
+    ],
+    "オ": [
+        {
+            "d": "M 24 36 L 76 36",
+            "start": [
+                24,
+                36
+            ],
+            "dir": "➔ Datar Panjang",
+            "desc": "Garis horizontal mendatar"
+        },
+        {
+            "d": "M 52 20 L 52 74 Q 52 82 44 78",
+            "start": [
+                52,
+                20
+            ],
+            "dir": "⬇ Vertikal Berkait",
+            "desc": "Garis vertikal tegak berujung kait ke kiri"
+        },
+        {
+            "d": "M 48 46 C 40 60 32 72 20 80",
+            "start": [
+                48,
+                46
+            ],
+            "dir": "↙ Miring Kiri",
+            "desc": "Garis miring dari pertemuan ke kiri bawah"
+        }
+    ],
+    "カ": [
+        {
+            "d": "M 28 34 L 68 34 L 64 64 Q 60 72 54 66",
+            "start": [
+                28,
+                34
+            ],
+            "dir": "⤵ Siku Berkait",
+            "desc": "Garis horizontal menekuk berkait"
+        },
+        {
+            "d": "M 48 20 C 42 46 32 70 22 82",
+            "start": [
+                48,
+                20
+            ],
+            "dir": "↙ Serong Memotong",
+            "desc": "Garis miring melengkung di sisi kiri"
+        }
+    ],
+    "キ": [
+        {
+            "d": "M 30 32 L 70 30",
+            "start": [
+                30,
+                32
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal atas"
+        },
+        {
+            "d": "M 26 48 L 74 46",
+            "start": [
+                26,
+                48
+            ],
+            "dir": "➔ Datar Bawah",
+            "desc": "Garis horizontal kedua"
+        },
+        {
+            "d": "M 56 18 C 48 48 38 72 26 84",
+            "start": [
+                56,
+                18
+            ],
+            "dir": "↙ Serong Memotong",
+            "desc": "Garis miring melengkung memotong kedua garis"
+        }
+    ],
+    "ク": [
+        {
+            "d": "M 46 22 C 38 40 30 56 22 66",
+            "start": [
+                46,
+                22
+            ],
+            "dir": "↙ Miring Atas",
+            "desc": "Garis miring pendek atas"
+        },
+        {
+            "d": "M 34 38 L 72 38 C 64 62 48 78 30 86",
+            "start": [
+                34,
+                38
+            ],
+            "dir": "⤵ Siku Melengkung",
+            "desc": "Garis horizontal lalu melengkung ke kiri bawah"
+        }
+    ],
+    "ケ": [
+        {
+            "d": "M 46 20 C 38 38 28 54 18 64",
+            "start": [
+                46,
+                20
+            ],
+            "dir": "↙ Miring Kiri Atas",
+            "desc": "Garis miring pendek kiri"
+        },
+        {
+            "d": "M 30 46 L 76 46",
+            "start": [
+                30,
+                46
+            ],
+            "dir": "➔ Datar Memotong",
+            "desc": "Garis horizontal memotong"
+        },
+        {
+            "d": "M 56 32 C 54 54 48 72 36 84",
+            "start": [
+                56,
+                32
+            ],
+            "dir": "↙ Miring Tengah",
+            "desc": "Garis miring melengkung dari atas ke bawah"
+        }
+    ],
+    "コ": [
+        {
+            "d": "M 30 32 L 70 32 L 70 68",
+            "start": [
+                30,
+                32
+            ],
+            "dir": "⤵ Siku Atas-Kanan",
+            "desc": "Garis mendatar lalu menekuk ke bawah"
+        },
+        {
+            "d": "M 30 68 L 70 68",
+            "start": [
+                30,
+                68
+            ],
+            "dir": "➔ Datar Penutup Bawah",
+            "desc": "Garis horizontal bawah menutup"
+        }
+    ],
+    "サ": [
+        {
+            "d": "M 24 38 L 76 36",
+            "start": [
+                24,
+                38
+            ],
+            "dir": "➔ Datar Panjang",
+            "desc": "Garis horizontal mendatar"
+        },
+        {
+            "d": "M 40 24 L 40 68",
+            "start": [
+                40,
+                24
+            ],
+            "dir": "⬇ Vertikal Kiri",
+            "desc": "Garis vertikal kiri menembus"
+        },
+        {
+            "d": "M 62 24 C 62 48 58 64 52 74",
+            "start": [
+                62,
+                24
+            ],
+            "dir": "↙ Vertikal Kanan Lengkung",
+            "desc": "Garis vertikal kanan melengkung ke kiri"
+        }
+    ],
+    "シ": [
+        {
+            "d": "M 32 30 Q 40 34 44 38",
+            "start": [
+                32,
+                30
+            ],
+            "dir": "● Titik Kiri Atas",
+            "desc": "Titik miring atas"
+        },
+        {
+            "d": "M 28 50 Q 36 54 40 58",
+            "start": [
+                28,
+                50
+            ],
+            "dir": "● Titik Kiri Bawah",
+            "desc": "Titik miring kedua di bawahnya"
+        },
+        {
+            "d": "M 24 78 C 42 68 62 48 76 32",
+            "start": [
+                24,
+                78
+            ],
+            "dir": "↗ Sapuan Naik",
+            "desc": "Sapuan garis panjang dari bawah meluncur ke kanan atas"
+        }
+    ],
+    "ス": [
+        {
+            "d": "M 28 34 L 72 34 L 56 62",
+            "start": [
+                28,
+                34
+            ],
+            "dir": "⤵ Siku Miring",
+            "desc": "Garis mendatar lalu menyudut ke tengah bawah"
+        },
+        {
+            "d": "M 48 52 C 56 62 68 74 80 82",
+            "start": [
+                48,
+                52
+            ],
+            "dir": "↘ Miring Kanan",
+            "desc": "Garis miring dari pertemuan ke kanan bawah"
+        }
+    ],
+    "セ": [
+        {
+            "d": "M 26 38 L 72 34 L 72 66 Q 72 74 64 72",
+            "start": [
+                26,
+                38
+            ],
+            "dir": "⤵ Siku Berkait Kanan",
+            "desc": "Garis mendatar lalu vertikal berkait"
+        },
+        {
+            "d": "M 44 22 L 44 74 L 76 74",
+            "start": [
+                44,
+                22
+            ],
+            "dir": "⤵ Vertikal Siku Bawah",
+            "desc": "Garis vertikal kiri menekuk ke kanan bawah"
+        }
+    ],
+    "ソ": [
+        {
+            "d": "M 34 32 Q 44 40 48 46",
+            "start": [
+                34,
+                32
+            ],
+            "dir": "● Titik Kiri Atas",
+            "desc": "Titik miring pendek"
+        },
+        {
+            "d": "M 68 24 C 54 48 40 68 26 82",
+            "start": [
+                68,
+                24
+            ],
+            "dir": "↙ Sapuan Turun Kiri",
+            "desc": "Garis sapuan panjang dari kanan atas ke kiri bawah"
+        }
+    ],
+    "タ": [
+        {
+            "d": "M 44 24 C 36 40 28 56 18 68",
+            "start": [
+                44,
+                24
+            ],
+            "dir": "↙ Miring Atas",
+            "desc": "Garis miring pendek kiri"
+        },
+        {
+            "d": "M 32 38 L 72 38 L 56 78",
+            "start": [
+                32,
+                38
+            ],
+            "dir": "⤵ Siku Menekuk",
+            "desc": "Garis mendatar lalu serong ke kiri bawah"
+        },
+        {
+            "d": "M 42 54 C 52 64 64 74 76 82",
+            "start": [
+                42,
+                54
+            ],
+            "dir": "↘ Miring Kanan",
+            "desc": "Garis miring memotong di dalam"
+        }
+    ],
+    "チ": [
+        {
+            "d": "M 66 22 L 28 32",
+            "start": [
+                66,
+                22
+            ],
+            "dir": "↙ Datar Miring Atas",
+            "desc": "Garis mendatar agak miring ke kiri"
+        },
+        {
+            "d": "M 24 46 L 76 46",
+            "start": [
+                24,
+                46
+            ],
+            "dir": "➔ Datar Panjang",
+            "desc": "Garis horizontal panjang tengah"
+        },
+        {
+            "d": "M 52 32 C 48 54 38 72 26 84",
+            "start": [
+                52,
+                32
+            ],
+            "dir": "↙ Lengkung Menembus",
+            "desc": "Garis melengkung memotong kedua garis"
+        }
+    ],
+    "ツ": [
+        {
+            "d": "M 30 28 Q 36 36 38 42",
+            "start": [
+                30,
+                28
+            ],
+            "dir": "● Titik Kiri 1",
+            "desc": "Titik miring pertama di atas"
+        },
+        {
+            "d": "M 48 34 Q 54 42 56 48",
+            "start": [
+                48,
+                34
+            ],
+            "dir": "● Titik Tengah 2",
+            "desc": "Titik miring kedua sejajar"
+        },
+        {
+            "d": "M 74 24 C 60 50 44 70 28 84",
+            "start": [
+                74,
+                24
+            ],
+            "dir": "↙ Sapuan Panjang",
+            "desc": "Sapuan panjang dari kanan atas ke kiri bawah"
+        }
+    ],
+    "テ": [
+        {
+            "d": "M 34 30 L 66 30",
+            "start": [
+                34,
+                30
+            ],
+            "dir": "➔ Datar Pendek Atas",
+            "desc": "Garis horizontal pendek atas"
+        },
+        {
+            "d": "M 22 48 L 78 48",
+            "start": [
+                22,
+                48
+            ],
+            "dir": "➔ Datar Panjang Tengah",
+            "desc": "Garis horizontal tengah lebih panjang"
+        },
+        {
+            "d": "M 50 48 C 46 64 36 78 22 86",
+            "start": [
+                50,
+                48
+            ],
+            "dir": "↙ Miring Melengkung",
+            "desc": "Garis melengkung dari tengah ke kiri bawah"
+        }
+    ],
+    "ト": [
+        {
+            "d": "M 42 20 L 42 82",
+            "start": [
+                42,
+                20
+            ],
+            "dir": "⬇ Tiang Vertikal",
+            "desc": "Garis vertikal lurus tegak"
+        },
+        {
+            "d": "M 42 44 L 72 58",
+            "start": [
+                42,
+                44
+            ],
+            "dir": "↘ Cabang Serong Kanan",
+            "desc": "Garis miring ke kanan bawah mencuat dari tiang"
+        }
+    ],
+    "ナ": [
+        {
+            "d": "M 24 38 L 76 38",
+            "start": [
+                24,
+                38
+            ],
+            "dir": "➔ Datar Panjang",
+            "desc": "Garis horizontal mendatar"
+        },
+        {
+            "d": "M 52 22 C 46 48 36 70 22 84",
+            "start": [
+                52,
+                22
+            ],
+            "dir": "↙ Miring Menembus",
+            "desc": "Garis miring memotong ke kiri bawah"
+        }
+    ],
+    "ニ": [
+        {
+            "d": "M 32 36 L 68 36",
+            "start": [
+                32,
+                36
+            ],
+            "dir": "➔ Datar Atas Pendek",
+            "desc": "Garis horizontal atas"
+        },
+        {
+            "d": "M 24 66 L 76 66",
+            "start": [
+                24,
+                66
+            ],
+            "dir": "➔ Datar Bawah Panjang",
+            "desc": "Garis horizontal bawah lebih panjang"
+        }
+    ],
+    "ヌ": [
+        {
+            "d": "M 30 36 L 72 36 L 46 66",
+            "start": [
+                30,
+                36
+            ],
+            "dir": "⤵ Siku Menekuk",
+            "desc": "Garis mendatar lalu miring ke kiri tengah"
+        },
+        {
+            "d": "M 36 50 C 48 62 64 74 78 82",
+            "start": [
+                36,
+                50
+            ],
+            "dir": "↘ Miring Memotong",
+            "desc": "Garis miring memotong ke kanan bawah"
+        }
+    ],
+    "ネ": [
+        {
+            "d": "M 50 18 L 50 30",
+            "start": [
+                50,
+                18
+            ],
+            "dir": "● Titik Atas",
+            "desc": "Titik pendek di bagian atas"
+        },
+        {
+            "d": "M 30 38 L 70 38 L 44 64",
+            "start": [
+                30,
+                38
+            ],
+            "dir": "⤵ Siku Menekuk",
+            "desc": "Garis mendatar lalu serong ke kiri"
+        },
+        {
+            "d": "M 46 54 L 46 84",
+            "start": [
+                46,
+                54
+            ],
+            "dir": "⬇ Vertikal Tiang",
+            "desc": "Garis vertikal lurus ke bawah"
+        },
+        {
+            "d": "M 60 58 Q 68 66 74 72",
+            "start": [
+                60,
+                58
+            ],
+            "dir": "● Titik Kanan",
+            "desc": "Titik miring di kanan bawah"
+        }
+    ],
+    "ノ": [
+        {
+            "d": "M 68 22 C 54 48 38 68 22 82",
+            "start": [
+                68,
+                22
+            ],
+            "dir": "↙ Sapuan Anggun",
+            "desc": "Satu goresan tunggal miring melengkung ke kiri bawah"
+        }
+    ],
+    "ハ": [
+        {
+            "d": "M 40 32 C 34 50 28 66 18 78",
+            "start": [
+                40,
+                32
+            ],
+            "dir": "↙ Kiri Turun",
+            "desc": "Garis miring melengkung di sisi kiri"
+        },
+        {
+            "d": "M 60 32 C 66 50 72 66 82 78",
+            "start": [
+                60,
+                32
+            ],
+            "dir": "↘ Kanan Turun",
+            "desc": "Garis miring melengkung di sisi kanan"
+        }
+    ],
+    "ヒ": [
+        {
+            "d": "M 30 32 L 64 32",
+            "start": [
+                30,
+                32
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal atas"
+        },
+        {
+            "d": "M 30 24 L 30 72 L 74 72",
+            "start": [
+                30,
+                24
+            ],
+            "dir": "⤵ Vertikal Siku Bawah",
+            "desc": "Garis vertikal kiri menekuk ke kanan bawah"
+        }
+    ],
+    "フ": [
+        {
+            "d": "M 28 34 L 72 34 C 62 56 46 72 26 84",
+            "start": [
+                28,
+                34
+            ],
+            "dir": "⤵ Datar lalu Miring Kiri",
+            "desc": "Satu goresan mendatar lalu melengkung ke kiri bawah"
+        }
+    ],
+    "ヘ": [
+        {
+            "d": "M 24 66 L 46 32 L 78 68",
+            "start": [
+                24,
+                66
+            ],
+            "dir": "⤴ Naik lalu Turun",
+            "desc": "Satu goresan naik miring ke puncak lalu meluncur ke kanan bawah"
+        }
+    ],
+    "ホ": [
+        {
+            "d": "M 26 34 L 74 34",
+            "start": [
+                26,
+                34
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal mendatar"
+        },
+        {
+            "d": "M 50 20 L 50 74 Q 50 82 44 78",
+            "start": [
+                50,
+                20
+            ],
+            "dir": "⬇ Tiang Berkait",
+            "desc": "Garis vertikal tengah berujung kait"
+        },
+        {
+            "d": "M 36 46 C 30 58 24 68 18 76",
+            "start": [
+                36,
+                46
+            ],
+            "dir": "↙ Sayap Kiri",
+            "desc": "Garis miring sayap kiri"
+        },
+        {
+            "d": "M 64 46 C 70 58 76 68 82 76",
+            "start": [
+                64,
+                46
+            ],
+            "dir": "↘ Sayap Kanan",
+            "desc": "Garis miring sayap kanan"
+        }
+    ],
+    "マ": [
+        {
+            "d": "M 30 34 L 70 34 L 46 58",
+            "start": [
+                30,
+                34
+            ],
+            "dir": "⤵ Siku Menekuk",
+            "desc": "Garis mendatar lalu serong ke tengah"
+        },
+        {
+            "d": "M 54 48 C 60 58 66 68 76 76",
+            "start": [
+                54,
+                48
+            ],
+            "dir": "↘ Titik Miring",
+            "desc": "Titik miring di kanan bawah"
+        }
+    ],
+    "ミ": [
+        {
+            "d": "M 32 30 L 68 26",
+            "start": [
+                32,
+                30
+            ],
+            "dir": "➔ Datar 1 Atas",
+            "desc": "Garis miring pertama"
+        },
+        {
+            "d": "M 28 50 L 66 46",
+            "start": [
+                28,
+                50
+            ],
+            "dir": "➔ Datar 2 Tengah",
+            "desc": "Garis miring kedua sejajar"
+        },
+        {
+            "d": "M 24 72 L 72 66",
+            "start": [
+                24,
+                72
+            ],
+            "dir": "➔ Datar 3 Bawah",
+            "desc": "Garis miring ketiga lebih panjang"
+        }
+    ],
+    "ム": [
+        {
+            "d": "M 48 24 L 26 68 L 68 68",
+            "start": [
+                48,
+                24
+            ],
+            "dir": "⤵ Segitiga Sudut",
+            "desc": "Garis miring ke kiri bawah lalu mendatar ke kanan"
+        },
+        {
+            "d": "M 62 52 Q 70 60 74 66",
+            "start": [
+                62,
+                52
+            ],
+            "dir": "● Titik Kanan",
+            "desc": "Titik miring di kanan atas sudut"
+        }
+    ],
+    "メ": [
+        {
+            "d": "M 66 26 C 52 48 38 68 22 82",
+            "start": [
+                66,
+                26
+            ],
+            "dir": "↙ Sapuan Kiri",
+            "desc": "Garis miring dari kanan atas ke kiri bawah"
+        },
+        {
+            "d": "M 34 40 C 48 54 62 68 78 80",
+            "start": [
+                34,
+                40
+            ],
+            "dir": "↘ Sapuan Kanan",
+            "desc": "Garis miring memotong dari kiri atas ke kanan bawah"
+        }
+    ],
+    "モ": [
+        {
+            "d": "M 28 34 L 72 34",
+            "start": [
+                28,
+                34
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal atas"
+        },
+        {
+            "d": "M 26 50 L 74 50",
+            "start": [
+                26,
+                50
+            ],
+            "dir": "➔ Datar Bawah",
+            "desc": "Garis horizontal kedua"
+        },
+        {
+            "d": "M 50 20 L 50 68 L 74 68",
+            "start": [
+                50,
+                20
+            ],
+            "dir": "⤵ Vertikal Siku Kanan",
+            "desc": "Garis vertikal menembus lalu menekuk ke kanan"
+        }
+    ],
+    "ヤ": [
+        {
+            "d": "M 26 38 L 70 34 L 64 64",
+            "start": [
+                26,
+                38
+            ],
+            "dir": "⤵ Siku Menekuk",
+            "desc": "Garis mendatar lalu menekuk ke bawah"
+        },
+        {
+            "d": "M 52 20 C 46 48 38 70 24 84",
+            "start": [
+                52,
+                20
+            ],
+            "dir": "↙ Miring Memotong",
+            "desc": "Garis miring menembus ke kiri bawah"
+        }
+    ],
+    "ユ": [
+        {
+            "d": "M 32 30 L 68 30 L 68 56 L 36 56",
+            "start": [
+                32,
+                30
+            ],
+            "dir": "⤵ Siku Berbalik",
+            "desc": "Garis mendatar lalu turun dan berbelok kiri"
+        },
+        {
+            "d": "M 50 20 L 50 78",
+            "start": [
+                50,
+                20
+            ],
+            "dir": "⬇ Vertikal Lurus",
+            "desc": "Garis vertikal tegak memotong dari atas ke bawah"
+        }
+    ],
+    "ヨ": [
+        {
+            "d": "M 30 28 L 70 28 L 70 72 L 30 72",
+            "start": [
+                30,
+                28
+            ],
+            "dir": "⤵ Kotak Terbuka Kiri",
+            "desc": "Garis mendatar, turun, lalu mendatar ke kiri"
+        },
+        {
+            "d": "M 32 50 L 68 50",
+            "start": [
+                32,
+                50
+            ],
+            "dir": "➔ Datar Tengah",
+            "desc": "Garis horizontal tengah membelah"
+        }
+    ],
+    "ラ": [
+        {
+            "d": "M 32 28 L 68 28",
+            "start": [
+                32,
+                28
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal pendek atas"
+        },
+        {
+            "d": "M 34 46 L 70 46 C 62 66 48 78 30 84",
+            "start": [
+                34,
+                46
+            ],
+            "dir": "⤵ Siku Melengkung",
+            "desc": "Garis mendatar lalu melengkung ke kiri bawah"
+        }
+    ],
+    "リ": [
+        {
+            "d": "M 38 28 L 38 58",
+            "start": [
+                38,
+                28
+            ],
+            "dir": "⬇ Vertikal Kiri",
+            "desc": "Garis vertikal kiri pendek"
+        },
+        {
+            "d": "M 62 22 C 62 50 60 70 52 82",
+            "start": [
+                62,
+                22
+            ],
+            "dir": "⬇ Vertikal Kanan",
+            "desc": "Garis vertikal kanan panjang melengkung"
+        }
+    ],
+    "ル": [
+        {
+            "d": "M 42 26 C 36 48 30 68 20 80",
+            "start": [
+                42,
+                26
+            ],
+            "dir": "↙ Miring Kiri",
+            "desc": "Garis miring melengkung kiri"
+        },
+        {
+            "d": "M 58 24 L 58 68 Q 58 78 72 74",
+            "start": [
+                58,
+                24
+            ],
+            "dir": "⬇ Vertikal Kait Kanan",
+            "desc": "Garis vertikal kanan berujung kait ke atas"
+        }
+    ],
+    "レ": [
+        {
+            "d": "M 36 24 L 36 74 Q 36 80 50 74 L 76 56",
+            "start": [
+                36,
+                24
+            ],
+            "dir": "⤵ Vertikal Kait Naik",
+            "desc": "Satu goresan vertikal turun lalu meluncur naik ke kanan atas"
+        }
+    ],
+    "ロ": [
+        {
+            "d": "M 30 30 L 30 74",
+            "start": [
+                30,
+                30
+            ],
+            "dir": "⬇ Vertikal Kiri",
+            "desc": "Garis vertikal kiri kotak"
+        },
+        {
+            "d": "M 30 30 L 70 30 L 70 74",
+            "start": [
+                30,
+                30
+            ],
+            "dir": "⤵ Siku Kotak",
+            "desc": "Garis mendatar lalu vertikal kanan"
+        },
+        {
+            "d": "M 30 74 L 70 74",
+            "start": [
+                30,
+                74
+            ],
+            "dir": "➔ Datar Penutup",
+            "desc": "Garis horizontal bawah menutup kotak"
+        }
+    ],
+    "ワ": [
+        {
+            "d": "M 32 32 L 32 58",
+            "start": [
+                32,
+                32
+            ],
+            "dir": "⬇ Vertikal Kiri Pendek",
+            "desc": "Garis vertikal kiri pendek"
+        },
+        {
+            "d": "M 32 34 L 72 34 C 62 56 46 74 26 84",
+            "start": [
+                32,
+                34
+            ],
+            "dir": "⤵ Siku Melengkung Kiri",
+            "desc": "Garis mendatar lalu melengkung ke kiri bawah"
+        }
+    ],
+    "ヲ": [
+        {
+            "d": "M 30 30 L 70 30",
+            "start": [
+                30,
+                30
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal atas"
+        },
+        {
+            "d": "M 24 50 L 74 50",
+            "start": [
+                24,
+                50
+            ],
+            "dir": "➔ Datar Tengah",
+            "desc": "Garis horizontal kedua"
+        },
+        {
+            "d": "M 48 30 C 44 54 36 72 24 84",
+            "start": [
+                48,
+                30
+            ],
+            "dir": "↙ Miring Memotong",
+            "desc": "Garis miring memotong dari atas ke kiri bawah"
+        }
+    ],
+    "ン": [
+        {
+            "d": "M 30 38 Q 40 44 44 50",
+            "start": [
+                30,
+                38
+            ],
+            "dir": "● Titik Kiri Bawah",
+            "desc": "Titik miring pendek"
+        },
+        {
+            "d": "M 24 74 C 42 66 62 48 76 30",
+            "start": [
+                24,
+                74
+            ],
+            "dir": "↗ Sapuan Naik Tajam",
+            "desc": "Sapuan garis panjang dari kiri bawah meluncur tajam ke kanan atas"
+        }
+    ],
     "一": [
-        { d: "M 20 50 L 80 50", start: [20, 50], dir: "➔ Kiri ke Kanan", desc: "Garis horizontal mendatar seimbang" }
+        {
+            "d": "M 20 50 L 80 50",
+            "start": [
+                20,
+                50
+            ],
+            "dir": "➔ Kiri ke Kanan",
+            "desc": "Satu garis horizontal mendatar"
+        }
     ],
     "二": [
-        { d: "M 28 38 L 72 38", start: [28, 38], dir: "➔ Datar Atas", desc: "Garis horizontal atas lebih pendek" },
-        { d: "M 18 64 L 82 64", start: [18, 64], dir: "➔ Datar Bawah", desc: "Garis horizontal bawah lebih panjang" }
+        {
+            "d": "M 30 38 L 70 38",
+            "start": [
+                30,
+                38
+            ],
+            "dir": "➔ Datar Atas Pendek",
+            "desc": "Garis horizontal atas"
+        },
+        {
+            "d": "M 20 64 L 80 64",
+            "start": [
+                20,
+                64
+            ],
+            "dir": "➔ Datar Bawah Panjang",
+            "desc": "Garis horizontal bawah lebih panjang"
+        }
     ],
     "三": [
-        { d: "M 26 30 L 74 30", start: [26, 30], dir: "➔ Datar Atas", desc: "Garis horizontal atas sedang" },
-        { d: "M 32 50 L 68 50", start: [32, 50], dir: "➔ Datar Tengah", desc: "Garis horizontal tengah paling pendek" },
-        { d: "M 18 72 L 82 72", start: [18, 72], dir: "➔ Datar Dasar", desc: "Garis horizontal penopang paling panjang" }
+        {
+            "d": "M 28 32 L 72 32",
+            "start": [
+                28,
+                32
+            ],
+            "dir": "➔ Datar Atas",
+            "desc": "Garis horizontal atas"
+        },
+        {
+            "d": "M 34 50 L 66 50",
+            "start": [
+                34,
+                50
+            ],
+            "dir": "➔ Datar Tengah Pendek",
+            "desc": "Garis horizontal tengah paling pendek"
+        },
+        {
+            "d": "M 20 68 L 80 68",
+            "start": [
+                20,
+                68
+            ],
+            "dir": "➔ Datar Bawah Panjang",
+            "desc": "Garis horizontal bawah paling panjang"
+        }
     ],
     "十": [
-        { d: "M 20 48 L 80 48", start: [20, 48], dir: "➔ Datar Dahulu", desc: "Garis mendatar ditarik pertama" },
-        { d: "M 50 18 L 50 82", start: [50, 18], dir: "⬇ Vertikal Memotong", desc: "Garis vertikal memotong tepat di tengah" }
+        {
+            "d": "M 20 50 L 80 50",
+            "start": [
+                20,
+                50
+            ],
+            "dir": "➔ Mendatar Dahulu",
+            "desc": "Garis horizontal dari kiri ke kanan"
+        },
+        {
+            "d": "M 50 18 L 50 82",
+            "start": [
+                50,
+                18
+            ],
+            "dir": "⬇ Menegak Kemudian",
+            "desc": "Garis vertikal lurus memotong di tengah"
+        }
     ],
     "日": [
-        { d: "M 28 22 L 28 80", start: [28, 22], dir: "⬇ Sisi Kiri", desc: "Tarik garis vertikal sisi kiri" },
-        { d: "M 28 22 L 72 22 L 72 80", start: [28, 22], dir: "⤵ Bingkai Atas & Kanan", desc: "Garis mendatar lalu menekuk turun ke bawah" },
-        { d: "M 28 50 L 72 50", start: [28, 50], dir: "➔ Penyekat Tengah", desc: "Garis horizontal membagi ruang di dalam kotak" },
-        { d: "M 28 80 L 72 80", start: [28, 80], dir: "➔ Penutup Bawah", desc: "Tutup garis dasar kotak paling terakhir" }
+        {
+            "d": "M 30 22 L 30 78",
+            "start": [
+                30,
+                22
+            ],
+            "dir": "⬇ Garis Kiri",
+            "desc": "Garis vertikal kiri bingkai"
+        },
+        {
+            "d": "M 30 22 L 70 22 L 70 78",
+            "start": [
+                30,
+                22
+            ],
+            "dir": "⤵ Siku Kanan",
+            "desc": "Garis atas mendatar lalu vertikal kanan"
+        },
+        {
+            "d": "M 30 50 L 70 50",
+            "start": [
+                30,
+                50
+            ],
+            "dir": "➔ Pembagi Tengah",
+            "desc": "Garis horizontal membelah tengah"
+        },
+        {
+            "d": "M 30 78 L 70 78",
+            "start": [
+                30,
+                78
+            ],
+            "dir": "➔ Penutup Bawah",
+            "desc": "Garis horizontal penutup bawah"
+        }
     ],
     "月": [
-        { d: "M 30 20 L 26 84", start: [30, 20], dir: "⬇ Vertikal Kiri", desc: "Garis vertikal melengkung sisi kiri" },
-        { d: "M 30 20 L 72 20 L 72 84 Q 68 84 62 80", start: [30, 20], dir: "⤵ Bingkai Siku Berkait", desc: "Garis mendatar lalu turun berujung kait ke dalam" },
-        { d: "M 30 42 L 72 42", start: [30, 42], dir: "➔ Garis Dalam Atas", desc: "Garis horizontal bagian dalam atas" },
-        { d: "M 29 62 L 72 62", start: [29, 62], dir: "➔ Garis Dalam Bawah", desc: "Garis horizontal bagian dalam bawah" }
+        {
+            "d": "M 32 20 C 30 48 26 72 20 84",
+            "start": [
+                32,
+                20
+            ],
+            "dir": "↙ Kiri Melengkung",
+            "desc": "Garis vertikal kiri melengkung sedikit"
+        },
+        {
+            "d": "M 32 20 L 68 20 L 68 76 Q 68 84 60 80",
+            "start": [
+                32,
+                20
+            ],
+            "dir": "⤵ Kanan Berkait",
+            "desc": "Garis atas mendatar lalu vertikal kanan berkait"
+        },
+        {
+            "d": "M 32 40 L 68 40",
+            "start": [
+                32,
+                40
+            ],
+            "dir": "➔ Sekat Atas",
+            "desc": "Garis horizontal sekat pertama"
+        },
+        {
+            "d": "M 32 58 L 68 58",
+            "start": [
+                32,
+                58
+            ],
+            "dir": "➔ Sekat Bawah",
+            "desc": "Garis horizontal sekat kedua"
+        }
     ],
     "木": [
-        { d: "M 20 42 L 80 42", start: [20, 42], dir: "➔ Garis Datar", desc: "Garis horizontal ditarik melintang" },
-        { d: "M 50 18 L 50 82", start: [50, 18], dir: "⬇ Batang Utama", desc: "Garis vertikal menembus garis mendatar" },
-        { d: "M 50 42 L 22 78", start: [50, 42], dir: "↙ Cabang Kiri", desc: "Garis miring diagonal ke kiri bawah" },
-        { d: "M 50 42 L 78 78", start: [50, 42], dir: "↘ Cabang Kanan", desc: "Garis miring diagonal ke kanan bawah" }
+        {
+            "d": "M 20 40 L 80 40",
+            "start": [
+                20,
+                40
+            ],
+            "dir": "➔ Datar Mendatar",
+            "desc": "Garis horizontal dahan"
+        },
+        {
+            "d": "M 50 18 L 50 84",
+            "start": [
+                50,
+                18
+            ],
+            "dir": "⬇ Batang Utama",
+            "desc": "Garis vertikal tegak lurus batang pohon"
+        },
+        {
+            "d": "M 50 40 C 40 58 30 72 18 80",
+            "start": [
+                50,
+                40
+            ],
+            "dir": "↙ Akar Kiri",
+            "desc": "Garis miring melengkung ke kiri bawah"
+        },
+        {
+            "d": "M 50 40 C 60 58 70 72 82 80",
+            "start": [
+                50,
+                40
+            ],
+            "dir": "↘ Akar Kanan",
+            "desc": "Garis miring melengkung ke kanan bawah"
+        }
     ],
     "人": [
-        { d: "M 50 20 C 44 48 34 72 20 84", start: [50, 20], dir: "↙ Kaki Kiri", desc: "Garis miring melengkung menyapu ke kiri bawah" },
-        { d: "M 44 45 C 56 64 68 76 82 84", start: [44, 45], dir: "↘ Kaki Kanan", desc: "Garis miring bertumpu menyapu ke kanan bawah" }
+        {
+            "d": "M 50 20 C 44 45 34 66 18 82",
+            "start": [
+                50,
+                20
+            ],
+            "dir": "↙ Kaki Kiri Dahulu",
+            "desc": "Garis miring melengkung ke kiri bawah"
+        },
+        {
+            "d": "M 42 45 C 54 60 68 72 82 82",
+            "start": [
+                42,
+                45
+            ],
+            "dir": "↘ Kaki Kanan Menopang",
+            "desc": "Garis miring menopang ke kanan bawah"
+        }
     ],
     "山": [
-        { d: "M 50 20 L 50 78", start: [50, 20], dir: "⬇ Tiang Tengah", desc: "Tiang tengah simetris ditarik pertama" },
-        { d: "M 24 45 L 24 78 L 76 78", start: [24, 45], dir: "⤵ Sisi Kiri & Dasar", desc: "Garis vertikal kiri berbelok mendatar menyambung dasar" },
-        { d: "M 76 45 L 76 78", start: [76, 45], dir: "⬇ Sisi Kanan", desc: "Garis vertikal sisi kanan menutup bentuk gunung" }
+        {
+            "d": "M 50 18 L 50 82",
+            "start": [
+                50,
+                18
+            ],
+            "dir": "⬇ Puncak Tengah Dahulu",
+            "desc": "Garis vertikal tengah paling tinggi"
+        },
+        {
+            "d": "M 26 44 L 26 80 L 74 80",
+            "start": [
+                26,
+                44
+            ],
+            "dir": "⤵ Sayap Kiri & Dasar",
+            "desc": "Garis vertikal kiri menekuk ke dasar mendatar"
+        },
+        {
+            "d": "M 74 44 L 74 80",
+            "start": [
+                74,
+                44
+            ],
+            "dir": "⬇ Sayap Kanan",
+            "desc": "Garis vertikal kanan menutup"
+        }
     ]
 };
 
@@ -245,6 +2405,8 @@ function generateVisualStrokeGalleryHtml(character, strokeCount, strokeSteps) {
         <svg viewBox="0 0 100 100" class="stroke-box-svg">
             <line x1="50" y1="6" x2="50" y2="94" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3"/>
             <line x1="6" y1="50" x2="94" y2="50" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3"/>
+            <!-- Authentic Japanese Glyph Guide Watermark -->
+            <text x="50" y="73" font-size="64" font-weight="900" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" text-anchor="middle" fill="rgba(255,255,255,0.16)" pointer-events="none">${character}</text>
             ${strokes.map(s => `
                 <path d="${s.d}" fill="none" stroke="#e6edf3" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
             `).join('')}
@@ -271,6 +2433,8 @@ function generateVisualStrokeGalleryHtml(character, strokeCount, strokeSteps) {
                 </defs>
                 <line x1="50" y1="6" x2="50" y2="94" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3"/>
                 <line x1="6" y1="50" x2="94" y2="50" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3"/>
+                <!-- Authentic Japanese Glyph Guide Watermark -->
+                <text x="50" y="73" font-size="64" font-weight="900" font-family="'Noto Sans JP', 'Yu Gothic', sans-serif" text-anchor="middle" fill="rgba(255,255,255,0.10)" pointer-events="none">${character}</text>
                 
                 <!-- Ghosted Completed Prior Strokes -->
                 ${strokes.slice(0, idx).map(prior => `

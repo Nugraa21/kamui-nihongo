@@ -401,7 +401,7 @@ html, body {
 }
 
 /* =======================================================
-   MAIN DESKTOP LAYOUT (FULL SCREEN)
+   MAIN DESKTOP LAYOUT — SIDEBAR DESIGN
    ======================================================= */
 #app {
     display: flex;
@@ -413,281 +413,383 @@ html, body {
     overflow: hidden;
 }
 
+/* #main-body: horizontal flex row (sidebar + content) */
+#main-body {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+}
+
 /* =======================================================
-   1. GITHUB / GITLAB TOP HEADER (#gh-header)
+   TOP APP BAR (#app-topbar)
    ======================================================= */
-#gh-header {
-    height: 52px;
-    min-height: 52px;
+#app-topbar {
+    height: 54px;
+    min-height: 54px;
     background: var(--bg-subtle);
     border-bottom: 1px solid var(--border-default);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 18px;
-    gap: 16px;
-    z-index: 100;
-}
-
-.gh-header-left {
-    display: flex;
-    align-items: center;
+    padding: 0 14px;
     gap: 12px;
+    z-index: 200;
     flex-shrink: 0;
 }
 
-/* Repository Brand Breadcrumb */
-.gh-repo-brand {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-}
-.gh-repo-logo {
-    width: 28px;
-    height: 28px;
-    background: var(--bg-surface);
+/* Hamburger Toggle */
+.hamburger-btn {
+    width: 36px;
+    height: 36px;
+    background: none;
     border: 1px solid var(--border-default);
     border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--accent-primary);
-    font-weight: 800;
-    font-family: var(--font-jp);
-    font-size: 15px;
-    box-shadow: var(--shadow-sm);
-}
-.gh-repo-path {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-.gh-repo-path .owner {
-    color: var(--text-muted);
-}
-.gh-repo-path .owner:hover {
-    color: var(--text-link);
-    text-decoration: underline;
-}
-.gh-repo-path .sep {
-    color: var(--border-default);
-}
-.gh-repo-path .name {
-    color: var(--text-primary);
-    font-weight: 700;
-}
-
-/* Branch Pill */
-.gh-branch-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-default);
-    padding: 2px 10px;
-    border-radius: var(--radius-pill);
-    font-size: 11px;
-    font-family: var(--font-mono);
-    color: var(--text-secondary);
-}
-.gh-branch-pill .icon {
-    color: var(--accent-secondary);
-}
-
-/* Release Version Badge */
-.gh-release-tag {
-    display: inline-flex;
-    align-items: center;
-    background: var(--accent-badge-bg);
-    border: 1px solid var(--border-subtle);
-    color: var(--accent-badge-text);
-    padding: 2px 8px;
-    border-radius: var(--radius-sm);
-    font-size: 11px;
-    font-family: var(--font-mono);
-    font-weight: 600;
-}
-
-/* Quick Search Box (GitHub Style) */
-.gh-header-center {
-    flex: 1;
-    max-width: 440px;
-}
-.gh-search-btn {
-    width: 100%;
-    height: 32px;
-    background: var(--bg-canvas);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 12px;
-    color: var(--text-muted);
-    font-size: 13px;
-    cursor: pointer;
     transition: all 0.15s ease;
+    flex-shrink: 0;
 }
-.gh-search-btn:hover {
-    border-color: var(--border-active);
-    color: var(--text-secondary);
+.hamburger-btn:hover {
     background: var(--bg-surface);
-}
-.gh-search-btn-left {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.gh-search-btn kbd {
-    background: var(--bg-subtle);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-xs);
-    padding: 1px 6px;
-    font-size: 11px;
-    font-family: var(--font-mono);
-    color: var(--text-muted);
+    color: var(--text-primary);
+    border-color: var(--border-active);
 }
 
-/* Header Right Actions */
-.gh-header-right {
+/* App Brand */
+.topbar-left {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
 }
-
-.gh-metric-chip {
-    display: inline-flex;
+.app-brand {
+    display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-sm);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-secondary);
-}
-.gh-metric-chip.streak {
-    color: #ff9500;
-}
-.gh-metric-chip.xp {
-    color: var(--accent-secondary);
-}
-
-.gh-header-btn {
-    height: 32px;
-    padding: 0 10px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-sm);
-    color: var(--text-secondary);
-    font-size: 12px;
-    font-weight: 600;
+    gap: 10px;
     cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.15s ease;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s ease;
 }
-.gh-header-btn:hover {
-    background: var(--bg-elevated);
-    border-color: var(--border-active);
+.app-brand:hover { background: var(--bg-surface); }
+.app-brand-logo {
+    width: auto;
+    height: auto;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-primary) !important;
+    font-weight: 900;
+    font-family: var(--font-jp);
+    font-size: 26px;
+    line-height: 1;
+    flex-shrink: 0;
+    padding: 0 4px;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+.app-brand:hover .app-brand-logo {
+    transform: scale(1.08);
+}
+.app-brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+.brand-name {
+    font-size: 14px;
+    font-weight: 700;
     color: var(--text-primary);
 }
+.brand-sub {
+    font-size: 10.5px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
 
-.gh-user-badge {
+/* Center Search Bar */
+.topbar-center {
+    flex: 1;
+    max-width: 480px;
+    margin: 0 auto;
+}
+.topbar-search-btn {
+    width: 100%;
+    height: 36px;
+    background: var(--bg-canvas);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: left;
+}
+.topbar-search-btn:hover {
+    border-color: var(--border-active);
+    background: var(--bg-surface);
+}
+.topbar-search-placeholder { flex: 1; }
+.topbar-search-btn kbd {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 10px;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+/* Right section */
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+.topbar-stat-chip {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     padding: 4px 10px;
     background: var(--bg-surface);
     border: 1px solid var(--border-default);
     border-radius: var(--radius-pill);
     font-size: 12px;
     font-weight: 600;
-    color: var(--text-primary);
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.15s ease;
+    color: var(--text-secondary);
+    white-space: nowrap;
 }
-.gh-user-badge:hover {
-    border-color: var(--accent-primary);
-    background: var(--bg-elevated);
-}
+.topbar-stat-chip.streak { color: #ff9500; }
+.topbar-stat-chip.xp { color: var(--accent-secondary); }
 
-/* =======================================================
-   2. GITHUB REPOSITORY SUBNAV TABS (#gh-nav-tabs)
-   ======================================================= */
-#gh-nav-tabs {
-    height: 48px;
-    min-height: 48px;
-    background: var(--bg-subtle);
-    border-bottom: 1px solid var(--border-default);
+.topbar-theme-btn {
+    width: 34px;
+    height: 34px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
     display: flex;
     align-items: center;
-    padding: 0 18px;
-    gap: 6px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    z-index: 90;
+    justify-content: center;
+    transition: all 0.15s ease;
+}
+.topbar-theme-btn:hover {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    border-color: var(--border-active);
 }
 
-#gh-nav-tabs::-webkit-scrollbar {
-    display: none;
-}
-
-.gh-tab-btn {
-    height: 47px;
-    padding: 0 14px;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid transparent;
-    color: var(--text-muted);
-    font-size: 13.5px;
-    font-weight: 600;
-    cursor: pointer;
+.topbar-profile-btn {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    white-space: nowrap;
+    padding: 5px 12px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-pill);
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
     transition: all 0.15s ease;
 }
-
-.gh-tab-btn:hover {
-    color: var(--text-primary);
-    border-bottom-color: var(--border-default);
-}
-
-.gh-tab-btn.active {
-    color: var(--text-primary);
-    font-weight: 700;
-    border-bottom-color: var(--accent-primary);
-}
-
-.gh-tab-badge {
+.topbar-profile-btn:hover {
+    border-color: var(--accent-primary);
     background: var(--bg-elevated);
-    border: 1px solid var(--border-default);
-    color: var(--text-secondary);
-    font-size: 11px;
-    font-weight: 600;
-    padding: 1px 7px;
-    border-radius: var(--radius-pill);
-    min-width: 20px;
-    text-align: center;
 }
-
-.gh-tab-btn.active .gh-tab-badge {
-    background: var(--accent-badge-bg);
-    color: var(--accent-badge-text);
-    border-color: var(--border-subtle);
+.profile-avatar-sm {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.profile-name-sm {
+    font-size: 13px;
+    font-weight: 600;
 }
 
 /* =======================================================
-   3. MAIN CONTENT WORKSPACE (#content)
+   SIDEBAR NAVIGATION (#app-sidebar)
+   ======================================================= */
+#app-sidebar {
+    width: 240px;
+    min-width: 240px;
+    max-width: 240px;
+    height: 100%;
+    background: var(--bg-subtle);
+    border-right: 1px solid var(--border-default);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                min-width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 150;
+}
+#app-sidebar.sidebar-collapsed {
+    width: 0;
+    min-width: 0;
+    overflow: hidden;
+    border-right: none;
+}
+
+/* Sidebar Overlay (for small screens) */
+#sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 140;
+    backdrop-filter: blur(2px);
+}
+
+.sidebar-inner {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px 8px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+.sidebar-inner::-webkit-scrollbar { width: 4px; }
+.sidebar-inner::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+/* Sidebar Sections */
+.sidebar-section {
+    margin-bottom: 6px;
+}
+.sidebar-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 10px 10px 4px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Sidebar Nav Items */
+.sidebar-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 10px;
+    background: none;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.12s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+}
+.sidebar-nav-item:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+.sidebar-nav-item.active {
+    background: var(--accent-badge-bg) !important;
+    color: var(--accent-primary) !important;
+    font-weight: 700;
+}
+.sidebar-nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15%;
+    bottom: 15%;
+    width: 3px;
+    background: var(--accent-primary) !important;
+    border-radius: 0 2px 2px 0;
+}
+.sidebar-nav-item.active .snav-icon {
+    color: var(--accent-primary) !important;
+    opacity: 1 !important;
+}
+.sidebar-nav-item.active .snav-badge,
+.sidebar-nav-item.active .snav-badge.n5,
+.sidebar-nav-item.active .snav-badge.n4,
+.sidebar-nav-item.active .nav-badge {
+    background: var(--accent-primary) !important;
+    color: #ffffff !important;
+    border-color: var(--accent-primary) !important;
+}
+
+.snav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    opacity: 0.75;
+}
+.sidebar-nav-item.active .snav-icon,
+.sidebar-nav-item:hover .snav-icon { opacity: 1; }
+
+.snav-label { flex: 1; }
+
+.snav-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
+    color: var(--text-muted);
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+.snav-badge.n5 { background: rgba(63,185,80,0.15); color: var(--level-n5); border-color: rgba(63,185,80,0.3); }
+.snav-badge.n4 { background: rgba(88,166,255,0.15); color: var(--level-n4); border-color: rgba(88,166,255,0.3); }
+
+/* Sidebar Footer */
+.sidebar-footer {
+    padding: 10px 14px;
+    border-top: 1px solid var(--border-default);
+    flex-shrink: 0;
+}
+.sidebar-footer-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10.5px;
+    color: var(--text-dim);
+    white-space: nowrap;
+}
+.sf-sep { opacity: 0.4; }
+
+/* =======================================================
+   MAIN CONTENT (#content)
    ======================================================= */
 #content {
     flex: 1;
@@ -697,65 +799,11 @@ html, body {
     background: var(--bg-canvas);
     position: relative;
     z-index: 10;
+    min-width: 0;
 }
 
 /* =======================================================
-   4. DEVELOPER BOTTOM STATUS BAR (#vscode-status-bar)
-   ======================================================= */
-#vscode-status-bar {
-    height: 28px;
-    min-height: 28px;
-    background: var(--bg-subtle);
-    border-top: 1px solid var(--border-default);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 12px;
-    font-size: 11.5px;
-    font-family: var(--font-mono);
-    color: var(--text-muted);
-    z-index: 100;
-    user-select: none;
-}
-
-.status-bar-section {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.status-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    padding: 2px 6px;
-    border-radius: var(--radius-xs);
-    transition: background 0.1s ease;
-}
-.status-item:hover {
-    background: var(--bg-surface);
-    color: var(--text-primary);
-}
-
-.status-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #3fb950;
-    display: inline-block;
-}
-
-.status-link {
-    color: var(--text-link);
-    text-decoration: none;
-}
-.status-link:hover {
-    text-decoration: underline;
-}
-
-/* =======================================================
-   5. TOAST NOTIFICATIONS
+   TOAST NOTIFICATIONS
    ======================================================= */
 #toast-container {
     position: fixed;
@@ -1022,4 +1070,373 @@ html, body {
     background: var(--bg-surface);
     border: 1px solid var(--border-default);
     color: var(--text-secondary);
+}
+
+
+/* =======================================================
+   PREMIER PALETTE: APPLE iOS LIQUID GLASS (GLASSMORPHISM)
+   ======================================================= */
+[data-theme="ios-liquid-glass"] {
+    --theme-id: 'ios-liquid-glass';
+    --theme-name: 'Apple iOS Liquid Glass';
+
+    /* Glass Surfaces */
+    --bg-canvas: #090d16;
+    --bg-subtle: rgba(18, 24, 38, 0.72);
+    --bg-surface: rgba(26, 35, 54, 0.65);
+    --bg-elevated: rgba(35, 47, 72, 0.75);
+    --bg-overlay: rgba(9, 13, 22, 0.82);
+    --bg-code: rgba(12, 17, 28, 0.85);
+
+    /* Apple Specular Borders */
+    --border-default: rgba(255, 255, 255, 0.12);
+    --border-muted: rgba(255, 255, 255, 0.07);
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    --border-active: #0a84ff;
+
+    /* Apple Typography */
+    --text-primary: #f5f5f7;
+    --text-secondary: #d1d1d6;
+    --text-muted: #8e8e93;
+    --text-dim: #636366;
+    --text-link: #0a84ff;
+
+    /* Accents & Highlights */
+    --accent-primary: #0a84ff;
+    --accent-hover: #0071e3;
+    --accent-secondary: #5e5ce6;
+    --accent-purple: #bf5af2;
+    --accent-glow: rgba(10, 132, 255, 0.35);
+    --accent-badge-bg: rgba(10, 132, 255, 0.16);
+    --accent-badge-text: #64d2ff;
+}
+
+/* Global Apple iOS Liquid Glass Treatment */
+#app-topbar {
+    background: rgba(13, 17, 23, 0.78) !important;
+    backdrop-filter: blur(24px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="ios-liquid-glass"] #app-topbar {
+    background: rgba(9, 13, 22, 0.7) !important;
+    backdrop-filter: blur(28px) saturate(200%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+#app-sidebar {
+    background: rgba(13, 17, 23, 0.82) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="ios-liquid-glass"] #app-sidebar {
+    background: rgba(9, 13, 22, 0.75) !important;
+    backdrop-filter: blur(28px) saturate(200%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.modal-dialog {
+    background: rgba(22, 27, 34, 0.88) !important;
+    backdrop-filter: blur(32px) saturate(200%) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.auth-card {
+    background: rgba(22, 27, 34, 0.88) !important;
+    backdrop-filter: blur(32px) saturate(200%) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+.exam-hero-card,
+.quiz-card,
+.dict-card,
+.char-card,
+.kanji-grid-card,
+.stroke-demo-card {
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.exam-hero-card:hover,
+.dict-card:hover,
+.char-card:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+
+/* =======================================================
+   LIGHT THEME 1: APPLE iOS LIGHT GLASS
+   ======================================================= */
+[data-theme="ios-light-glass"] {
+    --theme-id: 'ios-light-glass';
+    --theme-name: 'Apple iOS Light Glass';
+
+    --bg-canvas: #f2f2f7;
+    --bg-subtle: rgba(255, 255, 255, 0.82);
+    --bg-surface: rgba(255, 255, 255, 0.94);
+    --bg-elevated: #ffffff;
+    --bg-overlay: rgba(242, 242, 247, 0.85);
+    --bg-code: #e5e5ea;
+
+    --border-default: rgba(0, 0, 0, 0.1);
+    --border-muted: rgba(0, 0, 0, 0.06);
+    --border-subtle: rgba(0, 0, 0, 0.04);
+    --border-active: #007aff;
+
+    --text-primary: #1c1c1e;
+    --text-secondary: #3a3a3c;
+    --text-muted: #6c6c70;
+    --text-dim: #8e8e93;
+    --text-link: #007aff;
+
+    --accent-primary: #007aff;
+    --accent-hover: #0056b3;
+    --accent-secondary: #34c759;
+    --accent-purple: #af52de;
+    --accent-glow: rgba(0, 122, 255, 0.25);
+    --accent-badge-bg: rgba(0, 122, 255, 0.12);
+    --accent-badge-text: #007aff;
+}
+
+/* =======================================================
+   LIGHT THEME 2: SAKURA BLOSSOM SPRING LIGHT
+   ======================================================= */
+[data-theme="sakura-light"] {
+    --theme-id: 'sakura-light';
+    --theme-name: 'Sakura Blossom Spring';
+
+    --bg-canvas: #fff5f7;
+    --bg-subtle: rgba(255, 255, 255, 0.84);
+    --bg-surface: rgba(255, 255, 255, 0.95);
+    --bg-elevated: #ffffff;
+    --bg-overlay: rgba(255, 245, 247, 0.85);
+    --bg-code: #fce4ec;
+
+    --border-default: rgba(214, 51, 132, 0.15);
+    --border-muted: rgba(214, 51, 132, 0.08);
+    --border-subtle: rgba(214, 51, 132, 0.05);
+    --border-active: #d63384;
+
+    --text-primary: #2b1b22;
+    --text-secondary: #4a343e;
+    --text-muted: #805b6a;
+    --text-dim: #a68593;
+    --text-link: #d63384;
+
+    --accent-primary: #d63384;
+    --accent-hover: #b02a6b;
+    --accent-secondary: #e83e8c;
+    --accent-purple: #9c27b0;
+    --accent-glow: rgba(214, 51, 132, 0.25);
+    --accent-badge-bg: rgba(214, 51, 132, 0.12);
+    --accent-badge-text: #d63384;
+}
+
+/* =======================================================
+   LIGHT THEME 3: NORDIC SNOW FROST LIGHT
+   ======================================================= */
+[data-theme="nordic-snow"] {
+    --theme-id: 'nordic-snow';
+    --theme-name: 'Nordic Snow Frost';
+
+    --bg-canvas: #f0f4f8;
+    --bg-subtle: rgba(255, 255, 255, 0.85);
+    --bg-surface: rgba(255, 255, 255, 0.95);
+    --bg-elevated: #ffffff;
+    --bg-overlay: rgba(240, 244, 248, 0.85);
+    --bg-code: #e1e8f0;
+
+    --border-default: rgba(2, 132, 199, 0.14);
+    --border-muted: rgba(2, 132, 199, 0.08);
+    --border-subtle: rgba(2, 132, 199, 0.05);
+    --border-active: #0284c7;
+
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+    --text-link: #0284c7;
+
+    --accent-primary: #0284c7;
+    --accent-hover: #0369a1;
+    --accent-secondary: #06b6d4;
+    --accent-purple: #6366f1;
+    --accent-glow: rgba(2, 132, 199, 0.25);
+    --accent-badge-bg: rgba(2, 132, 199, 0.12);
+    --accent-badge-text: #0284c7;
+}
+
+/* =======================================================
+   DARK THEME: COFFEE & MOCHA BARISTA
+   ======================================================= */
+[data-theme="coffee-mocha"] {
+    --theme-id: 'coffee-mocha';
+    --theme-name: 'Coffee & Mocha Barista';
+
+    --bg-canvas: #120e0c;
+    --bg-subtle: rgba(26, 20, 17, 0.78);
+    --bg-surface: rgba(36, 28, 24, 0.72);
+    --bg-elevated: rgba(48, 38, 32, 0.85);
+    --bg-overlay: rgba(18, 14, 12, 0.88);
+    --bg-code: #1c1512;
+
+    --border-default: #42322b;
+    --border-muted: #2d221d;
+    --border-subtle: rgba(245, 158, 11, 0.08);
+    --border-active: #f59e0b;
+
+    --text-primary: #fdf8f5;
+    --text-secondary: #e2d2c8;
+    --text-muted: #9e897e;
+    --text-dim: #705f56;
+    --text-link: #f59e0b;
+
+    --accent-primary: #d97706;
+    --accent-hover: #b45309;
+    --accent-secondary: #f59e0b;
+    --accent-purple: #a855f7;
+    --accent-glow: rgba(217, 119, 6, 0.35);
+    --accent-badge-bg: rgba(217, 119, 6, 0.18);
+    --accent-badge-text: #fbbf24;
+}
+
+/* =======================================================
+   DARK THEME: SYNTHWAVE 80S RETRO SUNSET
+   ======================================================= */
+[data-theme="synthwave-80s"] {
+    --theme-id: 'synthwave-80s';
+    --theme-name: 'Synthwave 80s Sunset';
+
+    --bg-canvas: #0f0b1e;
+    --bg-subtle: rgba(24, 17, 46, 0.8);
+    --bg-surface: rgba(35, 25, 68, 0.75);
+    --bg-elevated: rgba(50, 36, 95, 0.85);
+    --bg-overlay: rgba(15, 11, 30, 0.9);
+    --bg-code: #17112e;
+
+    --border-default: #483478;
+    --border-muted: #302254;
+    --border-subtle: rgba(255, 42, 133, 0.12);
+    --border-active: #ff2a85;
+
+    --text-primary: #fdfaff;
+    --text-secondary: #dcd0f2;
+    --text-muted: #9b89bf;
+    --text-dim: #726294;
+    --text-link: #00f0ff;
+
+    --accent-primary: #ff2a85;
+    --accent-hover: #e0176f;
+    --accent-secondary: #00f0ff;
+    --accent-purple: #b026ff;
+    --accent-glow: rgba(255, 42, 133, 0.4);
+    --accent-badge-bg: rgba(255, 42, 133, 0.18);
+    --accent-badge-text: #ff66aa;
+}
+
+/* =======================================================
+   COMPREHENSIVE LIGHT THEME SYSTEM OVERRIDES
+   Ensures text contrast, card clarity & input legibility
+   ======================================================= */
+[data-theme="ios-light-glass"] #app-topbar,
+[data-theme="sakura-light"] #app-topbar,
+[data-theme="nordic-snow"] #app-topbar {
+    background: rgba(255, 255, 255, 0.85) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="ios-light-glass"] #app-sidebar,
+[data-theme="sakura-light"] #app-sidebar,
+[data-theme="nordic-snow"] #app-sidebar {
+    background: rgba(255, 255, 255, 0.88) !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="ios-light-glass"] .topbar-search-btn,
+[data-theme="sakura-light"] .topbar-search-btn,
+[data-theme="nordic-snow"] .topbar-search-btn {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="ios-light-glass"] .topbar-stat-chip,
+[data-theme="sakura-light"] .topbar-stat-chip,
+[data-theme="nordic-snow"] .topbar-stat-chip,
+[data-theme="ios-light-glass"] .topbar-theme-btn,
+[data-theme="sakura-light"] .topbar-theme-btn,
+[data-theme="nordic-snow"] .topbar-theme-btn,
+[data-theme="ios-light-glass"] .topbar-profile-btn,
+[data-theme="sakura-light"] .topbar-profile-btn,
+[data-theme="nordic-snow"] .topbar-profile-btn {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="ios-light-glass"] .exam-hero-card,
+[data-theme="sakura-light"] .exam-hero-card,
+[data-theme="nordic-snow"] .exam-hero-card,
+[data-theme="ios-light-glass"] .quiz-card,
+[data-theme="sakura-light"] .quiz-card,
+[data-theme="nordic-snow"] .quiz-card,
+[data-theme="ios-light-glass"] .dict-card,
+[data-theme="sakura-light"] .dict-card,
+[data-theme="nordic-snow"] .dict-card,
+[data-theme="ios-light-glass"] .char-card,
+[data-theme="sakura-light"] .char-card,
+[data-theme="nordic-snow"] .char-card,
+[data-theme="ios-light-glass"] .repo-readme-card,
+[data-theme="sakura-light"] .repo-readme-card,
+[data-theme="nordic-snow"] .repo-readme-card {
+    background: rgba(255, 255, 255, 0.88) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="ios-light-glass"] .modal-dialog,
+[data-theme="sakura-light"] .modal-dialog,
+[data-theme="nordic-snow"] .modal-dialog,
+[data-theme="ios-light-glass"] .auth-card,
+[data-theme="sakura-light"] .auth-card,
+[data-theme="nordic-snow"] .auth-card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12) !important;
+}
+
+[data-theme="ios-light-glass"] input[type="text"],
+[data-theme="sakura-light"] input[type="text"],
+[data-theme="nordic-snow"] input[type="text"],
+[data-theme="ios-light-glass"] input[type="email"],
+[data-theme="sakura-light"] input[type="email"],
+[data-theme="nordic-snow"] input[type="email"],
+[data-theme="ios-light-glass"] input[type="password"],
+[data-theme="sakura-light"] input[type="password"],
+[data-theme="nordic-snow"] input[type="password"] {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.18) !important;
+    color: #1c1c1e !important;
+}
+
+[data-theme="ios-light-glass"] .quiz-option-btn,
+[data-theme="sakura-light"] .quiz-option-btn,
+[data-theme="nordic-snow"] .quiz-option-btn {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    color: var(--text-primary) !important;
 }

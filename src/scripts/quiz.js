@@ -45,20 +45,23 @@ function renderQuizSetup(container, defaultType = 'exam') {
         <div class="page-header">
             <div class="page-header-text">
                 <h1><span class="header-icon">${icon('target', 24)}</span> Pusat Simulasi Ujian JLPT & Latihan</h1>
-                <div class="header-subtitle">Uji kemampuan bahasa Jepang Anda dengan Simulasi Resmi Berstandar JLPT (N5 • N4 • N3) atau Latihan Fleksibel</div>
+                <div class="header-subtitle">Uji kemampuan bahasa Jepang Anda dengan Simulasi Resmi Berstandar JLPT (N5 • N4 • N3), Latihan Fleksibel, atau Boss Battle Hardcore!</div>
             </div>
         </div>
 
-        <div class="gh-segmented-group" style="margin-bottom:20px;max-width:440px">
+        <div class="gh-segmented-group" style="margin-bottom:20px;max-width:640px;flex-wrap:wrap">
             <button class="gh-pill ${defaultType === 'exam' ? 'active' : ''}" id="mode-exam-btn" onclick="renderQuizSetup(document.getElementById('content'), 'exam')">
-                ${icon('checkCircle', 14)} Simulasi Resmi JLPT (Lockdown)
+                ${icon('checkCircle', 14)} Simulasi Resmi JLPT
             </button>
-            <button class="gh-pill ${defaultType !== 'exam' ? 'active' : ''}" id="mode-practice-btn" onclick="renderQuizSetup(document.getElementById('content'), 'practice')">
-                ${icon('play', 14)} Latihan Cepat Huruf/Kanji
+            <button class="gh-pill ${defaultType === 'practice' ? 'active' : ''}" id="mode-practice-btn" onclick="renderQuizSetup(document.getElementById('content'), 'practice')">
+                ${icon('play', 14)} Latihan Cepat
+            </button>
+            <button class="gh-pill ${defaultType === 'hardcore' ? 'active' : ''}" id="mode-hardcore-btn" onclick="renderQuizSetup(document.getElementById('content'), 'hardcore')" style="${defaultType === 'hardcore' ? 'background:rgba(255,69,58,0.25);color:#ff453a;border-color:rgba(255,69,58,0.4);' : ''}">
+                ${icon('skull', 14)} Mode Hardcore (Boss Battle)
             </button>
         </div>
 
-        ${defaultType === 'exam' ? renderOfficialExamSetup() : renderPracticeSetup()}
+        ${defaultType === 'exam' ? renderOfficialExamSetup() : (defaultType === 'hardcore' ? renderHardcoreSetup() : renderPracticeSetup())}
     `;
 }
 
@@ -2217,7 +2220,7 @@ function finishOfficialExam() {
                                     </div>
                                 ` : ''}
                                 <div style="font-size:12px;color:var(--text-secondary);background:var(--bg-subtle);padding:8px 12px;border-radius:var(--radius-xs);margin-top:6px">
-                                    💡 <em>Penjelasan:</em> ${res.q.exp}
+                                    ${icon('info', 13)} <em>Penjelasan:</em> ${res.q.exp}
                                 </div>
                             </div>
                         `;
@@ -2383,3 +2386,354 @@ function escapeAttr(str) {
     if (!str) return '';
     return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
 }
+
+
+// =======================================================
+// 8. HARDCORE BOSS BATTLE QUIZ MODE (SUDDEN DEATH • 死線)
+// Kurikulum Gabungan JLPT N5 • N4 • N3
+// 1 Kesalahan = Game Over & Skor Reset ke 0!
+// Data dimuat dari src/data/hardcore_questions.js
+// =======================================================
+
+let hardcoreState = {
+    questions: [],
+    currentIndex: 0,
+    currentStreak: 0,
+    highScore: 0,
+    answered: false
+};
+
+function getHardcoreHighScore() {
+    return parseInt(localStorage.getItem('kamui_hardcore_highscore') || '0', 10);
+}
+
+function setHardcoreHighScore(score) {
+    localStorage.setItem('kamui_hardcore_highscore', score.toString());
+}
+
+function renderHardcoreSetup() {
+    const highScore = getHardcoreHighScore();
+    const totalBank = (window.HARDCORE_QUESTIONS_DATA && window.HARDCORE_QUESTIONS_DATA.length) || 95;
+
+    return `
+        <div class="exam-hero-card" style="border-color: rgba(248, 81, 73, 0.4); background: linear-gradient(135deg, rgba(248, 81, 73, 0.08), rgba(0, 0, 0, 0.4));">
+            <div class="exam-hero-header">
+                <div>
+                    <span class="gh-tab-badge" style="background:#da3633;color:#fff;margin-bottom:8px">
+                        ${icon('skull', 12)} SUDDEN DEATH • 死線モード
+                    </span>
+                    <h2 style="font-size:22px;margin-bottom:6px;color:var(--text-primary)">Tantangan Boss Hardcore (Sudden Death)</h2>
+                    <p style="color:var(--text-secondary);font-size:13.5px;max-width:650px;line-height:1.6">
+                        Ujian ketahanan mental paling ekstrem! Soal acak tanpa henti menguji seluruh materi <strong>JLPT N5, N4, dan N3</strong>. 
+                        <strong>Satu kesalahan saja membuat Anda langsung gugur dan skor kembali ke 0.</strong>
+                    </p>
+                </div>
+                <div class="exam-badge-icon" style="background:rgba(248,81,73,0.15);color:#ff7b72;border-color:rgba(248,81,73,0.3)">
+                    ${icon('swords', 42)}
+                </div>
+            </div>
+
+            <div class="hardcore-stats-bar" style="display:flex;gap:16px;margin:20px 0;flex-wrap:wrap">
+                <div class="exam-info-card" style="flex:1;min-width:180px">
+                    <span class="info-label">${icon('award', 14)} Rekor Tertinggi Anda</span>
+                    <span class="info-val" style="color:#f1e05a;font-size:24px;font-weight:800">${highScore} <small style="font-size:13px;font-weight:400;color:var(--text-muted)">Soal Beruntun</small></span>
+                </div>
+                <div class="exam-info-card" style="flex:1;min-width:180px">
+                    <span class="info-label">${icon('database', 14)} Bank Soal Tersedia</span>
+                    <span class="info-val" style="color:var(--accent-secondary);font-size:24px;font-weight:800">${totalBank} <small style="font-size:13px;font-weight:400;color:var(--text-muted)">Soal di Folder Data</small></span>
+                </div>
+                <div class="exam-info-card" style="flex:1;min-width:180px">
+                    <span class="info-label">${icon('alertTriangle', 14)} Batas Toleransi</span>
+                    <span class="info-val" style="color:#ff7b72;font-size:24px;font-weight:800">0 Kesalahan <small style="font-size:13px;font-weight:400;color:var(--text-muted)">(1 Salah = Kalah)</small></span>
+                </div>
+            </div>
+
+            <div class="exam-rules-list">
+                <div class="rule-item">
+                    <span class="rule-num">1</span>
+                    <div>
+                        <strong>Format Permainan Terbuka & Tanpa Ampun</strong>
+                        <p>Setiap jawaban benar bernilai +1 skor streak dan +25 XP. Rekor skor tertinggi Anda dicatat secara otomatis.</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-num">2</span>
+                    <div>
+                        <strong>Bank Soal Mandiri & Dinamis</strong>
+                        <p>Soal dimuat dari <code>src/data/hardcore_questions.js</code>. Anda dapat menambahkan soal baru kapan saja.</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-num">3</span>
+                    <div>
+                        <strong>Tingkat Kesulitan Beragam (N5, N4, N3)</strong>
+                        <p>Kombinasi acak kosakata kerja, kanji kompleks, partikel jebakan, dan pola tata bahasa.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top:24px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+                <button class="btn-primary" style="background:#da3633;border-color:#f85149;padding:12px 24px;font-size:15px;font-weight:700" onclick="startHardcoreMode()">
+                    ${icon('swords', 16)} Mulai Tantangan Boss Hardcore
+                </button>
+                <button class="btn-secondary" onclick="renderQuizSetup(document.getElementById('content'), 'exam')">
+                    ${icon('arrowLeft', 14)} Kembali ke Simulasi Biasa
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function startHardcoreMode() {
+    const rawBank = window.HARDCORE_QUESTIONS_DATA || [];
+    if (!rawBank || rawBank.length === 0) {
+        showToast('Bank soal hardcore belum siap atau file data tidak ditemukan.', 'warning');
+        return;
+    }
+
+    const shuffled = [...rawBank].sort(() => Math.random() - 0.5);
+
+    hardcoreState = {
+        questions: shuffled,
+        currentIndex: 0,
+        currentStreak: 0,
+        highScore: getHardcoreHighScore(),
+        answered: false
+    };
+
+    renderHardcoreQuestion();
+}
+
+function renderHardcoreQuestion() {
+    const container = document.getElementById('content');
+    if (!container) return;
+
+    if (hardcoreState.currentIndex >= hardcoreState.questions.length) {
+        renderHardcoreVictory();
+        return;
+    }
+
+    const q = hardcoreState.questions[hardcoreState.currentIndex];
+    const streak = hardcoreState.currentStreak;
+    const highScore = hardcoreState.highScore;
+
+    container.innerHTML = `
+        <div class="page-header" style="border-bottom-color:rgba(248,81,73,0.3)">
+            <div class="page-header-text">
+                <h1>
+                    <span class="header-icon" style="background:rgba(248,81,73,0.2);color:#ff7b72">${icon('skull', 22)}</span> 
+                    Mode Hardcore: Boss Battle (死線)
+                </h1>
+                <div class="header-subtitle">
+                    Streak Saat Ini: <strong style="color:#f1e05a;font-size:15px">${streak}</strong> | 
+                    Rekor Tertinggi: <strong style="color:var(--accent-secondary);font-size:15px">${highScore}</strong> | 
+                    Tingkat: <span class="gh-tab-badge" style="background:#da3633;color:#fff">${q.level || 'N5-N3'}</span>
+                </div>
+            </div>
+            <div class="page-header-actions">
+                <button class="btn-secondary" onclick="renderQuizSetup(document.getElementById('content'), 'hardcore')" title="Menyerah & Keluar">
+                    ${icon('x', 14)} Keluar
+                </button>
+            </div>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-card" style="border:1px solid rgba(248,81,73,0.35);box-shadow: 0 8px 32px rgba(248,81,73,0.15)">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+                    <span class="gh-tab-badge" style="background:rgba(248,81,73,0.2);color:#ff7b72;border:1px solid rgba(248,81,73,0.4)">
+                        ${icon('target', 12)} Kategori: ${q.category || 'Materi JLPT'}
+                    </span>
+                    <span style="font-size:12px;color:var(--text-muted);font-weight:600">
+                        Tantangan #${hardcoreState.currentIndex + 1}
+                    </span>
+                </div>
+
+                <div class="quiz-prompt-type" style="font-size:16px;color:var(--text-primary);font-weight:600;margin-bottom:12px">
+                    ${q.question}
+                </div>
+
+                ${q.display ? `
+                    <div class="quiz-prompt" style="font-size:36px;color:var(--text-primary);padding:18px;margin-bottom:20px;letter-spacing:1px;font-family:'Noto Sans JP', sans-serif">
+                        ${q.display}
+                    </div>
+                ` : ''}
+
+                ${(() => {
+                    if (!q._shuffled) {
+                        const correctText = q.options[q.correct];
+                        const opts = [...q.options].sort(() => Math.random() - 0.5);
+                        q._shuffled = {
+                            options: opts,
+                            correctIndex: opts.indexOf(correctText)
+                        };
+                    }
+                    return '';
+                })()}
+                <div class="quiz-options-grid">
+                    ${q._shuffled.options.map((opt, idx) => `
+                        <button class="quiz-option-btn" onclick="selectHardcoreAnswer(${idx}, this)">
+                            <span style="opacity:0.6;margin-right:8px;font-weight:700">${['A', 'B', 'C', 'D'][idx]}.</span> ${opt}
+                        </button>
+                    `).join('')}
+                </div>
+
+                <div id="hardcore-feedback" class="quiz-feedback" style="display:none"></div>
+            </div>
+        </div>
+    `;
+
+    hardcoreState.answered = false;
+}
+
+function selectHardcoreAnswer(selectedIdx, btn) {
+    if (hardcoreState.answered) return;
+    hardcoreState.answered = true;
+
+    const q = hardcoreState.questions[hardcoreState.currentIndex];
+    const correctIdx = q._shuffled ? q._shuffled.correctIndex : q.correct;
+    const isCorrect = selectedIdx === correctIdx;
+
+    const allBtns = document.querySelectorAll('.quiz-option-btn');
+    allBtns.forEach(b => b.disabled = true);
+
+    const feedback = document.getElementById('hardcore-feedback');
+
+    if (isCorrect) {
+        btn.classList.add('correct');
+        hardcoreState.currentStreak++;
+        if (typeof addXP === 'function') addXP(25);
+        if (typeof playSuccessSound === 'function') playSuccessSound();
+
+        if (hardcoreState.currentStreak > hardcoreState.highScore) {
+            hardcoreState.highScore = hardcoreState.currentStreak;
+            setHardcoreHighScore(hardcoreState.highScore);
+        }
+
+        if (feedback) {
+            feedback.className = 'quiz-feedback correct';
+            feedback.innerHTML = `
+                <div style="display:flex;align-items:center;gap:8px">
+                    ${icon('checkCircle', 18)}
+                    <div>
+                        <strong>Tepat Sekali! (+25 XP)</strong>
+                        <div style="font-size:12.5px;margin-top:2px;opacity:0.9">${q.exp || 'Jawaban Anda benar.'}</div>
+                    </div>
+                </div>
+            `;
+            feedback.style.display = 'block';
+        }
+
+        setTimeout(() => {
+            hardcoreState.currentIndex++;
+            renderHardcoreQuestion();
+        }, 1200);
+
+    } else {
+        btn.classList.add('incorrect');
+        if (allBtns[correctIdx]) {
+            allBtns[correctIdx].classList.add('correct');
+        }
+
+        if (typeof playErrorSound === 'function') playErrorSound();
+
+        if (feedback) {
+            feedback.className = 'quiz-feedback incorrect';
+            feedback.innerHTML = `
+                <div style="display:flex;align-items:center;gap:8px">
+                    ${icon('alertTriangle', 18)}
+                    <div>
+                        <strong>Jawaban Salah! Game Over!</strong>
+                        <div style="font-size:12.5px;margin-top:2px;opacity:0.9">${q.exp || ('Jawaban benar: ' + q.options[q.correct])}</div>
+                    </div>
+                </div>
+            `;
+            feedback.style.display = 'block';
+        }
+
+        setTimeout(() => {
+            renderHardcoreGameOver(hardcoreState.currentStreak, q);
+        }, 1500);
+    }
+}
+
+function renderHardcoreGameOver(finalStreak, failedQuestion) {
+    const container = document.getElementById('content');
+    if (!container) return;
+
+    const isNewRecord = finalStreak > 0 && finalStreak >= hardcoreState.highScore;
+
+    container.innerHTML = `
+        <div class="quiz-scorecard" style="border: 1px solid rgba(248,81,73,0.4); background: linear-gradient(135deg, rgba(248,81,73,0.12), rgba(13,17,23,0.95));">
+            <div style="font-size:48px;color:#ff7b72;margin-bottom:10px">
+                ${icon('skull', 56)}
+            </div>
+            <h2 style="font-size:26px;color:#ff7b72;margin-bottom:6px">GAME OVER! (死線終結)</h2>
+            <p style="color:var(--text-secondary);font-size:14px;max-width:540px;margin:0 auto 20px;line-height:1.6">
+                Satu langkah salah mengakhiri perjuangan Anda. Skor telah direset kembali ke 0.
+            </p>
+
+            ${isNewRecord ? `
+                <div style="display:inline-block;padding:6px 14px;background:#f1e05a;color:#000;border-radius:20px;font-weight:800;font-size:13px;margin-bottom:16px">
+                    ${icon('award', 14)} REKOR TERTINGGI BARU!
+                </div>
+            ` : ''}
+
+            <div class="score-display" style="border-color:rgba(248,81,73,0.3)">
+                <div class="score-number" style="color:#ff7b72">${finalStreak}</div>
+                <div class="score-percent">Soal Berhasil Dijawab Beruntun</div>
+            </div>
+
+            <div style="margin:20px 0;padding:14px;background:rgba(255,255,255,0.04);border-radius:8px;border:1px solid var(--border-subtle);max-width:500px;margin-left:auto;margin-right:auto;text-align:left">
+                <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Pertanyaan Terakhir Yang Gagal:</div>
+                <div style="font-size:13px;color:var(--text-primary);font-weight:600">${failedQuestion.question}</div>
+                <div style="font-size:12px;color:var(--accent-hover);margin-top:4px">Kunci: ${failedQuestion._shuffled ? failedQuestion._shuffled.options[failedQuestion._shuffled.correctIndex] : failedQuestion.options[failedQuestion.correct]}</div>
+            </div>
+
+            <p style="font-style:italic;color:var(--text-muted);font-size:13px;margin:16px 0">
+                「七転び八起き」(Nana korobi ya oki) — Jatuh tujuh kali, bangkit delapan kali!
+            </p>
+
+            <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+                <button class="btn-primary" style="background:#da3633;border-color:#f85149;padding:12px 22px" onclick="startHardcoreMode()">
+                    ${icon('refreshCw', 15)} Coba Lagi Dari Awal
+                </button>
+                <button class="btn-secondary" onclick="renderQuizSetup(document.getElementById('content'), 'hardcore')">
+                    ${icon('arrowLeft', 15)} Kembali ke Menu Hardcore
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function renderHardcoreVictory() {
+    const container = document.getElementById('content');
+    if (!container) return;
+
+    container.innerHTML = `
+        <div class="quiz-scorecard" style="border: 1px solid rgba(56, 139, 253, 0.4); background: linear-gradient(135deg, rgba(56, 139, 253, 0.12), rgba(13,17,23,0.95));">
+            <div style="font-size:48px;color:#f1e05a;margin-bottom:10px">
+                ${icon('award', 56)}
+            </div>
+            <h2 style="font-size:26px;color:#f1e05a;margin-bottom:6px">PENAKLUK SEJATI! (完全制覇)</h2>
+            <p style="color:var(--text-secondary);font-size:14px;max-width:540px;margin:0 auto 20px;line-height:1.6">
+                Luar biasa! Anda berhasil menuntaskan seluruh ${hardcoreState.questions.length} soal dalam bank data Hardcore tanpa ada satupun kesalahan!
+            </p>
+            <div class="score-display">
+                <div class="score-number">${hardcoreState.currentStreak}</div>
+                <div class="score-percent">Skor Sempurna Tanpa Pernah Gugur</div>
+            </div>
+            <div style="margin-top:24px;display:flex;gap:12px;justify-content:center">
+                <button class="btn-primary" onclick="startHardcoreMode()">
+                    ${icon('refreshCw', 15)} Tantang Sekali Lagi
+                </button>
+                <button class="btn-secondary" onclick="renderQuizSetup(document.getElementById('content'), 'exam')">
+                    ${icon('arrowLeft', 15)} Ke Menu Utama
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+window.renderHardcoreSetup = renderHardcoreSetup;
+window.startHardcoreMode = startHardcoreMode;
+window.selectHardcoreAnswer = selectHardcoreAnswer;
