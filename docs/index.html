@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamui NihonGo — 神威日本語 | Belajar Bahasa Jepang</title>
+
+    <!-- SEO & Social -->
+    <meta name="description" content="Kamui NihonGo — aplikasi desktop native Rust & Tauri 2.0 untuk belajar Bahasa Jepang. JLPT N5 N4 N3, Stroke Lab, Hardcore Mode, Kamus 500+ kata. Gratis & Offline.">
+    <meta name="author" content="Ludang Prasetyo Nugroho (nugra21)">
+    <meta property="og:title" content="Kamui NihonGo (神威日本語)">
+    <meta property="og:description" content="Kuasai Bahasa Jepang dengan simulasi JLPT resmi, Hardcore Boss Battle, Stroke Lab, dan kamus 500+ kosakata offline.">
+    <meta property="og:url" content="https://nugraa21.github.io/kamui-nihongo/">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23c0392b'>神</text></svg>">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ====== BACKGROUND DECORATIONS ====== -->
+<div class="bg-washi" aria-hidden="true">
+    <div class="washi-grain"></div>
+    <div class="washi-kanji wk-1">語</div>
+    <div class="washi-kanji wk-2">学</div>
+    <div class="washi-kanji wk-3">道</div>
+    <div class="washi-kanji wk-4">心</div>
+    <div class="sakura-container" id="sakuraContainer"></div>
+</div>
+
+<!-- ====== NAVBAR ====== -->
+<header class="site-header" id="siteHeader">
+    <div class="container nav-wrap">
+        <a href="#" class="nav-brand">
+            <span class="brand-kanji">神</span>
+            <div class="brand-info">
+                <span class="brand-name">Kamui NihonGo</span>
+                <span class="brand-sub">神威日本語</span>
+            </div>
+        </a>
+
+        <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav class="nav-menu" id="navMenu">
+            <a href="#fitur" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Fitur
+            </a>
+            <a href="#pratinjau" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                Pratinjau
+            </a>
+            <a href="#kurikulum" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                Kurikulum
+            </a>
+            <a href="#statistik" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                Spesifikasi
+            </a>
+            <a href="#pengembang" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Pembuat
+            </a>
+        </nav>
+
+        <div class="nav-cta">
+            <a href="https://github.com/Nugraa21/kamui-nihongo" target="_blank" rel="noopener" class="btn-ghost">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+            </a>
+            <a href="https://github.com/Nugraa21/kamui-nihongo/releases" target="_blank" rel="noopener" class="btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Unduh Gratis
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- ====== HERO ====== -->
+<section class="hero" id="hero">
+    <div class="container hero-wrap">
+        <div class="hero-content reveal">
+            <div class="hero-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                Rust + Tauri 2.0 · v1.0.0 Rilis Resmi
+            </div>
+
+            <h1 class="hero-title">
+                <span class="title-jp">神威日本語</span>
+                <span class="title-break">Kuasai Bahasa Jepang</span>
+                <span class="title-accent">Tanpa Batas</span>
+            </h1>
+
+            <p class="hero-desc">
+                Aplikasi desktop native yang dibangun dengan presisi tinggi untuk pembelajaran Bahasa Jepang serius.
+                Dari hiragana pertama hingga ujian JLPT N3 — semua dalam satu aplikasi ringan, cepat, dan offline.
+            </p>
+
+            <div class="hero-stats-row">
+                <div class="stat-pill">
+                    <span class="stat-num">500+</span>
+                    <span class="stat-lbl">Kosakata</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-pill">
+                    <span class="stat-num">95+</span>
+                    <span class="stat-lbl">Soal Hardcore</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-pill">
+                    <span class="stat-num">101</span>
+                    <span class="stat-lbl">Karakter Stroke</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-pill">
+                    <span class="stat-num">13</span>
+                    <span class="stat-lbl">Tema Visual</span>
+                </div>
+            </div>
+
+            <div class="hero-actions">
+                <a href="https://github.com/Nugraa21/kamui-nihongo/releases" target="_blank" rel="noopener" class="btn-hero-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Unduh untuk Windows
+                    <span class="btn-sub">Gratis · ~10MB · x64</span>
+                </a>
+                <a href="#pratinjau" class="btn-hero-ghost">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    Lihat Pratinjau
+                </a>
+            </div>
+
+            <p class="hero-compat">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                Windows 10/11 · 64-bit · Tidak Butuh Internet
+            </p>
+        </div>
+
+        <div class="hero-mockup reveal reveal-delay-1">
+            <div class="mockup-frame">
+                <div class="mockup-topbar">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="mockup-title">Kamui NihonGo</span>
+                </div>
+                <div class="mockup-screen">
+                    <img src="assets/images/screenshots/screenshot-1.png" alt="Kamui NihonGo - Tampilan Utama" loading="eager">
+                </div>
+            </div>
+            <div class="mockup-shadow"></div>
+        </div>
+    </div>
+
+    <!-- Ink brush divider -->
+    <div class="ink-divider" aria-hidden="true">
+        <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path d="M0 24 Q180 48 360 24 Q540 0 720 24 Q900 48 1080 24 Q1260 0 1440 24" stroke="rgba(192,57,43,0.15)" stroke-width="2" fill="none"/>
+            <path d="M0 32 Q200 16 400 32 Q600 48 800 32 Q1000 16 1200 32 Q1340 44 1440 32" stroke="rgba(192,57,43,0.08)" stroke-width="1.5" fill="none"/>
+        </svg>
+    </div>
+</section>
+
+<!-- ====== FITUR UTAMA ====== -->
+<section class="section-features" id="fitur">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-eyebrow">機能</span>
+            <h2 class="section-title">Fitur yang Dirancang<br>untuk Belajar Serius</h2>
+            <p class="section-desc">Setiap fitur dirancang dengan cermat untuk memaksimalkan proses belajar Anda, dari pemula hingga level lanjut.</p>
+        </div>
+
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feat-card feat-large reveal">
+                <div class="feat-icon-wrap icon-vermilion">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
+                </div>
+                <div class="feat-label">Mode Hardcore</div>
+                <h3 class="feat-title">Sudden Death Boss Battle</h3>
+                <p class="feat-desc">Satu soal salah — skor kembali ke nol. Ratusan soal campuran N5+N4+N3 tanpa batas. Mode untuk yang benar-benar siap diuji.</p>
+                <div class="feat-tag">JLPT N5·N4·N3</div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feat-card reveal reveal-delay-1">
+                <div class="feat-icon-wrap icon-indigo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                </div>
+                <h3 class="feat-title">JLPT Exam Lockdown</h3>
+                <p class="feat-desc">Simulasi ujian JLPT resmi dengan timer dan lockdown mode. Latih kondisi ujian sebenarnya.</p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feat-card reveal reveal-delay-2">
+                <div class="feat-icon-wrap icon-sakura">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                </div>
+                <h3 class="feat-title">Stroke Lab</h3>
+                <p class="feat-desc">101 karakter dengan panduan urutan coretan yang benar. Dari hiragana, katakana, hingga kanji dasar.</p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feat-card reveal">
+                <div class="feat-icon-wrap icon-gold">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <h3 class="feat-title">Memory Match</h3>
+                <p class="feat-desc">Cocokkan kartu hiragana/katakana dengan romajinya secepat mungkin. Melatih memori visual dengan cara menyenangkan.</p>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="feat-card reveal reveal-delay-1">
+                <div class="feat-icon-wrap icon-sage">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </div>
+                <h3 class="feat-title">Kotoba Arena</h3>
+                <p class="feat-desc">Tantangan kosakata dengan sistem poin kompetitif. Uji penguasaan kata bahasa Jepang Anda secara dinamis.</p>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="feat-card feat-wide reveal reveal-delay-2">
+                <div class="feat-icon-wrap icon-indigo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <h3 class="feat-title">Kamus Lengkap 500+ Kata</h3>
+                <p class="feat-desc">Kamus offline dengan 500+ entri terstruktur. Cari kosakata, kanji, dan frasa — tanpa koneksi internet. Selalu tersedia kapan pun dibutuhkan.</p>
+                <div class="feat-tag">Offline · Cepat · Lengkap</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== PRATINJAU ====== -->
+<section class="section-preview" id="pratinjau">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-eyebrow">プレビュー</span>
+            <h2 class="section-title">Lihat Langsung<br>Tampilannya</h2>
+            <p class="section-desc">13 pilihan tema visual — 3 light, 10 dark. Sesuaikan tampilan dengan selera Anda.</p>
+        </div>
+
+        <!-- Gallery tabs -->
+        <div class="gallery-tabs reveal">
+            <button class="gallery-tab active" data-tab="exam">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                Ujian JLPT
+            </button>
+            <button class="gallery-tab" data-tab="hardcore">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                Hardcore
+            </button>
+            <button class="gallery-tab" data-tab="stroke">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                Stroke Lab
+            </button>
+            <button class="gallery-tab" data-tab="kamus">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                Kamus
+            </button>
+            <button class="gallery-tab" data-tab="tema">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                Tema
+            </button>
+            <button class="gallery-tab" data-tab="games">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><polygon points="17 8 20 12 17 16"/><circle cx="12" cy="12" r="10"/></svg>
+                Mini Game
+            </button>
+        </div>
+
+        <div class="gallery-stage reveal reveal-delay-1">
+            <div class="gallery-frame">
+                <div class="gallery-topbar">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="gallery-wintitle" id="galleryTitle">Mode Ujian JLPT — Simulasi Resmi</span>
+                </div>
+                <div class="gallery-screen">
+                    <img src="assets/images/screenshots/screenshot-1.png" alt="Pratinjau" id="galleryImg" loading="lazy">
+                </div>
+            </div>
+        </div>
+
+        <!-- Theme comparison strip -->
+        <div class="theme-compare reveal">
+            <div class="compare-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                13 Tema Tersedia
+            </div>
+            <div class="compare-strip">
+                <div class="compare-group">
+                    <span class="compare-group-label">Light (3)</span>
+                    <div class="compare-imgs">
+                        <img src="assets/images/screenshots/screenshot-5.png" alt="Tema Light 1" loading="lazy">
+                        <img src="assets/images/screenshots/screenshot-7.png" alt="Tema Light 2" loading="lazy">
+                        <img src="assets/images/screenshots/screenshot-9.png" alt="Tema Light 3" loading="lazy">
+                    </div>
+                </div>
+                <div class="compare-vs">VS</div>
+                <div class="compare-group">
+                    <span class="compare-group-label">Dark (10)</span>
+                    <div class="compare-imgs">
+                        <img src="assets/images/screenshots/screenshot-2.png" alt="Tema Dark 1" loading="lazy">
+                        <img src="assets/images/screenshots/screenshot-3.png" alt="Tema Dark 2" loading="lazy">
+                        <img src="assets/images/screenshots/screenshot-10.png" alt="Tema Dark 3" loading="lazy">
+                        <img src="assets/images/screenshots/screenshot-11.png" alt="Tema Dark 4" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== KURIKULUM ====== -->
+<section class="section-curriculum" id="kurikulum">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-eyebrow">カリキュラム</span>
+            <h2 class="section-title">Jalur Belajar Terstruktur<br>Standar JLPT Resmi</h2>
+            <p class="section-desc">Dari nol hingga siap ujian N3 — kurikulum bertahap yang mengikuti standar JLPT dan Minna no Nihongo.</p>
+        </div>
+
+        <div class="curriculum-path">
+            <div class="curr-step reveal">
+                <div class="curr-badge n5">N5</div>
+                <div class="curr-content">
+                    <h3>JLPT N5 — Pemula</h3>
+                    <p>Hiragana, Katakana, 100 Kanji, 800 kosakata dasar, tata bahasa percakapan sederhana.</p>
+                    <div class="curr-tags">
+                        <span>Hiragana</span><span>Katakana</span><span>Kanji 100</span><span>Kosakata Dasar</span>
+                    </div>
+                </div>
+            </div>
+            <div class="curr-connector"></div>
+            <div class="curr-step reveal reveal-delay-1">
+                <div class="curr-badge n4">N4</div>
+                <div class="curr-content">
+                    <h3>JLPT N4 — Dasar-Lanjut</h3>
+                    <p>300 Kanji, 1500 kosakata, tata bahasa percakapan formal, pola kalimat majemuk.</p>
+                    <div class="curr-tags">
+                        <span>Kanji 300</span><span>Pola Kalimat</span><span>Formal Speech</span>
+                    </div>
+                </div>
+            </div>
+            <div class="curr-connector"></div>
+            <div class="curr-step reveal reveal-delay-2">
+                <div class="curr-badge n3">N3</div>
+                <div class="curr-content">
+                    <h3>JLPT N3 — Menengah</h3>
+                    <p>650 Kanji, 3700 kosakata, membaca teks panjang, pemahaman percakapan kompleks.</p>
+                    <div class="curr-tags">
+                        <span>Kanji 650</span><span>Teks Kompleks</span><span>Siap Ujian</span>
+                    </div>
+                </div>
+            </div>
+            <div class="curr-connector boss"></div>
+            <div class="curr-step curr-boss reveal reveal-delay-3">
+                <div class="curr-badge boss">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <div class="curr-content">
+                    <h3>Mode HARDCORE — Boss Final</h3>
+                    <p>Campuran N5+N4+N3. Satu salah, skor nol. Soal acak tak terbatas. Tantangan sesungguhnya.</p>
+                    <div class="curr-tags">
+                        <span class="tag-boss">Sudden Death</span><span class="tag-boss">Random Infinite</span><span class="tag-boss">Boss Battle</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== STATISTIK / SPESIFIKASI ====== -->
+<section class="section-stats" id="statistik">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-eyebrow">パフォーマンス</span>
+            <h2 class="section-title">Ringan. Cepat.<br>Tidak Butuh Internet.</h2>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card reveal">
+                <div class="stat-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <div class="stat-value">&lt;0.2s</div>
+                <div class="stat-name">Waktu Buka</div>
+                <div class="stat-note">Native Rust binary</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-1">
+                <div class="stat-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                </div>
+                <div class="stat-value">~10MB</div>
+                <div class="stat-name">Ukuran Installer</div>
+                <div class="stat-note">Tanpa bloat</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-2">
+                <div class="stat-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div class="stat-value">&lt;45MB</div>
+                <div class="stat-name">Penggunaan RAM</div>
+                <div class="stat-note">Efisiensi tinggi</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-3">
+                <div class="stat-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div class="stat-value">100%</div>
+                <div class="stat-name">Offline</div>
+                <div class="stat-note">Data tidak dikirim</div>
+            </div>
+        </div>
+
+        <div class="tech-stack reveal">
+            <span class="tech-label">Dibangun dengan:</span>
+            <div class="tech-badges">
+                <div class="tech-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+                    Rust 1.80+
+                </div>
+                <div class="tech-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    Tauri 2.0
+                </div>
+                <div class="tech-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    HTML/CSS/JS
+                </div>
+                <div class="tech-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                    Open Source
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== DOWNLOAD CTA ====== -->
+<section class="section-download" id="unduh">
+    <div class="container">
+        <div class="download-wrap reveal">
+            <div class="dl-deco-left" aria-hidden="true">
+                <span class="deco-k">無</span><span class="deco-k">料</span>
+            </div>
+            <div class="dl-content">
+                <span class="section-eyebrow" style="color:inherit;opacity:0.7">無料ダウンロード</span>
+                <h2 class="dl-title">Mulai Belajar<br>Sekarang — Gratis</h2>
+                <p class="dl-desc">Tidak ada berlangganan, tidak ada iklan, tidak butuh internet. Unduh sekali, belajar selamanya.</p>
+                <div class="dl-actions">
+                    <a href="https://github.com/Nugraa21/kamui-nihongo/releases" target="_blank" rel="noopener" class="btn-dl-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Unduh untuk Windows
+                    </a>
+                    <a href="https://github.com/Nugraa21/kamui-nihongo" target="_blank" rel="noopener" class="btn-dl-ghost">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                        Lihat Source Code
+                    </a>
+                </div>
+                <p class="dl-compat">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    Windows 10/11 · 64-bit · ~10MB
+                </p>
+            </div>
+            <div class="dl-deco-right" aria-hidden="true">
+                <span class="deco-k">学</span><span class="deco-k">習</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== PEMBUAT ====== -->
+<section class="section-dev" id="pengembang">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-eyebrow">開発者</span>
+            <h2 class="section-title">Tentang Pembuat</h2>
+        </div>
+
+        <div class="dev-card reveal">
+            <div class="dev-avatar">
+                <span class="dev-initial">L</span>
+                <div class="dev-status">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                </div>
+            </div>
+            <div class="dev-info">
+                <h3 class="dev-name">Ludang Prasetyo Nugroho</h3>
+                <p class="dev-handle">@nugra21 · nugra21.web.app</p>
+                <p class="dev-bio">Pengembang indie yang membangun Kamui NihonGo sebagai alat belajar Bahasa Jepang pribadi yang akhirnya dibagikan ke publik. Dibuat dengan Rust, penuh semangat.</p>
+                <div class="dev-links">
+                    <a href="https://github.com/Nugraa21" target="_blank" rel="noopener" class="dev-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                    <a href="https://nugra21.web.app" target="_blank" rel="noopener" class="dev-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        Website
+                    </a>
+                    <a href="https://github.com/Nugraa21/kamui-nihongo" target="_blank" rel="noopener" class="dev-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        Repositori
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer class="site-footer">
+    <div class="container footer-wrap">
+        <div class="footer-brand">
+            <span class="brand-kanji-sm">神</span>
+            <div>
+                <div class="footer-name">Kamui NihonGo</div>
+                <div class="footer-sub">神威日本語</div>
+            </div>
+        </div>
+
+        <div class="footer-links">
+            <a href="https://github.com/Nugraa21/kamui-nihongo" target="_blank" rel="noopener">Repositori</a>
+            <a href="https://github.com/Nugraa21/kamui-nihongo/releases" target="_blank" rel="noopener">Unduhan</a>
+            <a href="https://github.com/Nugraa21/kamui-nihongo/issues" target="_blank" rel="noopener">Laporkan Bug</a>
+            <a href="https://nugra21.web.app" target="_blank" rel="noopener">Pembuat</a>
+        </div>
+
+        <div class="footer-copy">
+            <p>&copy; 2026 Ludang Prasetyo Nugroho (nugra21). MIT License.</p>
+            <p class="footer-disclaimer">Konten pembelajaran merujuk pada materi JLPT oleh JEES dan Minna no Nihongo oleh 3A Corporation. Tidak berafiliasi resmi.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- JS -->
+<script src="assets/js/main.js"></script>
+</body>
+</html>
