@@ -1,0 +1,321 @@
+use crate::models::Vocabulary;
+
+pub fn get_vocabulary(level: &str, category: &str) -> Vec<Vocabulary> {
+    let all = get_all_vocabulary();
+    all.into_iter()
+        .filter(|v| level == "all" || v.jlpt_level == level)
+        .filter(|v| category == "all" || v.category == category)
+        .collect()
+}
+
+pub fn get_categories() -> Vec<String> {
+    vec![
+        "greetings".into(),
+        "daily".into(),
+        "numbers".into(),
+        "time".into(),
+        "family".into(),
+        "food".into(),
+        "travel".into(),
+        "work".into(),
+        "shopping".into(),
+        "health".into(),
+        "feelings".into(),
+        "animals".into(),
+        "colors".into(),
+        "society".into(),
+    ]
+}
+
+fn voc(word: &str, reading: &str, meaning: &str, category: &str, level: &str, ex_jp: &str, ex_id: &str) -> Vocabulary {
+    Vocabulary {
+        word: word.into(),
+        reading: reading.into(),
+        meaning: meaning.into(),
+        category: category.into(),
+        jlpt_level: level.into(),
+        example_sentence: if ex_jp.is_empty() { None } else { Some(ex_jp.into()) },
+        example_translation: if ex_id.is_empty() { None } else { Some(ex_id.into()) },
+    }
+}
+
+fn get_all_vocabulary() -> Vec<Vocabulary> {
+    vec![
+        // ==================== SALAM & ETIKA (GREETINGS) ====================
+        voc("こんにちは", "konnichiwa", "Halo / Selamat siang", "greetings", "N5", "こんにちは、お元気ですか。", "Halo, apa kabar?"),
+        voc("おはようございます", "ohayou gozaimasu", "Selamat pagi (sopan)", "greetings", "N5", "先生、おはようございます。", "Selamat pagi, Guru."),
+        voc("こんばんは", "konbanwa", "Selamat malam", "greetings", "N5", "こんばんは、寒いですね。", "Selamat malam, dingin ya."),
+        voc("ありがとうございます", "arigatou gozaimasu", "Terima kasih banyak", "greetings", "N5", "手伝ってくれてありがとうございます。", "Terima kasih banyak telah membantu saya."),
+        voc("すみません", "sumimasen", "Permisi / Mohon maaf / Maaf merepotkan", "greetings", "N5", "すみません、駅はどこですか。", "Permisi, stasiun ada di mana?"),
+        voc("ごめんなさい", "gomennasai", "Mohon maaf (santai)", "greetings", "N5", "遅れてごめんなさい。", "Maaf saya terlambat."),
+        voc("はじめまして", "hajimemashite", "Senang berkenalan dengan Anda (pertama kali)", "greetings", "N5", "はじめまして、田中です。", "Senang berkenalan, saya Tanaka."),
+        voc("どうぞよろしく", "douzo yoroshiku", "Mohon bimbingan dan bantuannya", "greetings", "N5", "これからどうぞよろしくお願いします。", "Mulai sekarang mohon bantuannya."),
+        voc("さようなら", "sayounara", "Selamat tinggal", "greetings", "N5", "先生、さようなら。", "Guru, selamat tinggal."),
+        voc("じゃあ、また", "jaa, mata", "Sampai jumpa lagi nanti", "greetings", "N5", "じゃあ、またあした！", "Sampai jumpa besok!"),
+        voc("おやすみなさい", "oyasuminasai", "Selamat beristirahat / Selamat tidur", "greetings", "N5", "もう遅いので、おやすみなさい。", "Sudah larut, selamat tidur."),
+        voc("いただきます", "itadakimasu", "Selamat makan (ucapan syukur sebelum makan)", "greetings", "N5", "温かいうちに、いただきます。", "Mumpung hangat, selamat makan."),
+        voc("ごちそうさまでした", "gochisousama deshita", "Terima kasih atas hidangannya (setelah makan)", "greetings", "N5", "おいしかったです。ごちそうさまでした。", "Sangat lezat. Terima kasih atas makanannya."),
+        voc("いってきます", "ittekimasu", "Saya berangkat dulu ya", "greetings", "N5", "学校へいってきます！", "Saya berangkat ke sekolah!"),
+        voc("いってらっしゃい", "itterasshai", "Hati-hati di jalan ya", "greetings", "N5", "気をつけて、いってらっしゃい。", "Hati-hati ya di jalan."),
+        voc("ただいま", "tadaima", "Saya sudah pulang / kembali", "greetings", "N5", "ただいま、お腹が空いたよ。", "Saya pulang, lapar nih."),
+        voc("おかえりなさい", "okaerinasai", "Selamat datang kembali di rumah", "greetings", "N5", "今日もお疲れ様、おかえりなさい。", "Terima kasih atas kerja keras hari ini, selamat datang kembali."),
+        voc("お邪魔します", "ojamashimasu", "Permisi (ketika bertamu ke rumah orang)", "greetings", "N4", "お邪魔します、失礼いたします。", "Permisi, saya masuk."),
+        voc("お邪魔しました", "ojamashimashita", "Terima kasih telah menerima bertamu", "greetings", "N4", "今日は楽しい時間をありがとうございました。お邪魔しました。", "Terima kasih banyak untuk waktu yang menyenangkan hari ini."),
+        voc("お久しぶりです", "ohisashiburi desu", "Lama tidak berjumpa ya", "greetings", "N4", "お久しぶりです！お変わりありませんか。", "Lama tidak berjumpa! Apakah sehat-sehat saja?"),
+        voc("お世話になっております", "osewa ni natte orimasu", "Terima kasih atas kerja samanya (bisnis)", "greetings", "N3", "いつも大変お世話になっております。", "Terima kasih banyak atas kerja sama yang selalu terjalin."),
+        voc("よろしくお伝えください", "yoroshiku otsutae kudasai", "Tolong sampaikan salam saya kepadanya", "greetings", "N3", "ご両親によろしくお伝えください。", "Tolong sampaikan salam hangat saya kepada orang tua Anda."),
+
+        // ==================== PERCAKAPAN SEHARI-HARI (DAILY) ====================
+        voc("はい", "hai", "Ya / Baik", "daily", "N5", "はい、わかりました。", "Ya, saya mengerti."),
+        voc("いいえ", "iie", "Tidak / Bukan", "daily", "N5", "いいえ、そうじゃありません。", "Tidak, bukan seperti itu."),
+        voc("大丈夫", "daijoubu", "Tidak apa-apa / Baik-baik saja", "daily", "N5", "大丈夫ですか。手伝いましょうか。", "Apakah Anda baik-baik saja? Perlu saya bantu?"),
+        voc("本当", "hontou", "Sungguh / Benar-benar", "daily", "N5", "それは本当ですか。", "Apakah hal itu benar?"),
+        voc("誰", "dare", "Siapa", "daily", "N5", "あの方は誰ですか。", "Orang di sebelah sana itu siapa?"),
+        voc("何", "nani / nan", "Apa", "daily", "N5", "これは何ですか。", "Ini apa?"),
+        voc("どこ", "doko", "Di mana", "daily", "N5", "トイレはどこにありますか。", "Toilet ada di mana?"),
+        voc("いつ", "itsu", "Kapan", "daily", "N5", "試験はいつですか。", "Ujiannya kapan?"),
+        voc("どうして", "doushite", "Kenapa / Mengapa", "daily", "N5", "どうして遅れたのですか。", "Kenapa kamu terlambat?"),
+        voc("どう", "dou", "Bagaimana", "daily", "N5", "日本の生活はどうですか。", "Bagaimana kehidupan di Jepang?"),
+        voc("いくら", "ikura", "Berapa harganya", "daily", "N5", "このリンゴはいくらですか。", "Apel ini berapa harganya?"),
+        voc("少し", "sukoshi", "Sedikit", "daily", "N5", "日本語が少し話せます。", "Saya bisa berbicara bahasa Jepang sedikit."),
+        voc("たくさん", "takusan", "Banyak", "daily", "N5", "友達がたくさんいます。", "Saya mempunyai banyak teman."),
+        voc("とても", "totemo", "Sangat", "daily", "N5", "この本はとてもおもしろいです。", "Buku ini sangat menarik."),
+        voc("たぶん", "tabun", "Mungkin / Barangkali", "daily", "N4", "あしたはたぶん雨でしょう。", "Besok mungkin hujan."),
+        voc("ぜひ", "zehi", "Pastikan / Sungguh-sungguh ingin", "daily", "N4", "ぜひ遊びに来てください。", "Pastikan datang bermain ke tempat saya ya."),
+        voc("もちろん", "mochiron", "Tentu saja", "daily", "N4", "もちろん手伝いますよ。", "Tentu saja saya akan membantu."),
+        voc("なるほど", "naruhodo", "Oh begitu rupanya / Masuk akal", "daily", "N4", "なるほど、そういうことですね。", "Oh begitu rupanya, begitu maksudnya ya."),
+        voc("やっぱり", "yappari", "Ternyata benar / Sudah kuduga", "daily", "N4", "やっぱり日本料理が一番です。", "Sudah kuduga masakan Jepang memang nomor satu."),
+        voc("実は", "jitsu wa", "Sebenarnya / Sejujurnya", "daily", "N3", "実は、来月転職することになりました。", "Sebenarnya, bulan depan saya memutuskan pindah kerja."),
+        voc("とにかく", "tonikaku", "Bagaimanapun juga / Pokoknya", "daily", "N3", "とにかくやってみましょう。", "Pokoknya mari kita coba terlebih dahulu."),
+        voc("たしかに", "tashika ni", "Memang benar demikian", "daily", "N3", "たしかに彼の言う通りです。", "Memang benar persis seperti apa yang dia katakan."),
+
+        // ==================== WAKTU & TANGGAL (TIME) ====================
+        voc("今", "ima", "Sekarang", "time", "N5", "いま午前１０時です。", "Sekarang jam 10 pagi."),
+        voc("今日", "kyou", "Hari ini", "time", "N5", "今日はいい天気ですね。", "Hari ini cuacanya bagus ya."),
+        voc("明日", "ashita", "Besok", "time", "N5", "あした東京へ行きます。", "Besok saya pergi ke Tokyo."),
+        voc("昨日", "kinou", "Kemarin", "time", "N5", "きのう映画を見ました。", "Kemarin saya menonton film."),
+        voc("毎日", "mainichi", "Setiap hari", "time", "N5", "毎日漢字を勉強します。", "Setiap hari saya belajar kanji."),
+        voc("朝", "asa", "Pagi hari", "time", "N5", "朝６時に起きます。", "Saya bangun jam 6 pagi."),
+        voc("昼", "hiru", "Siang hari", "time", "N5", "昼休みに散歩します。", "Jalan-jalan saat istirahat siang."),
+        voc("晩", "ban", "Malam hari", "time", "N5", "晩ごはんを食べましょう。", "Ayo makan malam."),
+        voc("先週", "senshuu", "Minggu lalu", "time", "N5", "先週京都に行きました。", "Minggu lalu saya pergi ke Kyoto."),
+        voc("今週", "konshuu", "Minggu ini", "time", "N5", "今週はとても忙しいです。", "Minggu ini sangat sibuk."),
+        voc("来週", "raishuu", "Minggu depan", "time", "N5", "来週テストがあります。", "Minggu depan ada ujian."),
+        voc("去年", "kyonen", "Tahun lalu", "time", "N5", "去年日本に来ました。", "Tahun lalu saya datang ke Jepang."),
+        voc("今年", "kotoshi", "Tahun ini", "time", "N5", "今年はJLPTに合格したいです。", "Tahun ini saya ingin lulus JLPT."),
+        voc("来年", "rainen", "Tahun depan", "time", "N5", "来年大学を卒業します。", "Tahun depan saya lulus universitas."),
+        voc("週末", "shuumatsu", "Akhir pekan", "time", "N4", "週末は何をしますか。", "Akhir pekan mau melakukan apa?"),
+        voc("最近", "saikin", "Akhir-akhir ini", "time", "N4", "最近忙しくて寝不足です。", "Akhir-akhir ini sibuk dan kurang tidur."),
+        voc("将来", "shourai", "Masa depan", "time", "N4", "将来の夢は何ですか。", "Apa cita-cita masa depanmu?"),
+        voc("普段", "fudan", "Biasanya / Sehari-hari", "time", "N3", "普段はあまりお酒を飲みません。", "Biasanya saya jarang minum minuman keras."),
+        voc("当時", "touji", "Pada masa itu", "time", "N3", "当時の日本は活気がありました。", "Pada masa itu Jepang sangat bersemangat."),
+
+        // ==================== KELUARGA (FAMILY) ====================
+        voc("家族", "kazoku", "Keluarga", "family", "N5", "家族は４人です。", "Keluarga saya ada 4 orang."),
+        voc("父", "chichi", "Ayah (saya)", "family", "N5", "父は会社員です。", "Ayah saya seorang karyawan."),
+        voc("母", "haha", "Ibu (saya)", "family", "N5", "母は料理が得意です。", "Ibu saya pandai memasak."),
+        voc("両親", "ryoushin", "Kedua orang tua", "family", "N5", "両親は元気です。", "Orang tua saya sehat-sehat saja."),
+        voc("兄", "ani", "Kakak laki-laki (saya)", "family", "N5", "兄は医者です。", "Kakak laki-laki saya seorang dokter."),
+        voc("姉", "ane", "Kakak perempuan (saya)", "family", "N5", "姉は銀行で働いています。", "Kakak perempuan saya bekerja di bank."),
+        voc("弟", "otouto", "Adik laki-laki", "family", "N5", "弟は高校生です。", "Adik laki-laki saya siswa SMA."),
+        voc("妹", "imouto", "Adik perempuan", "family", "N5", "妹はピアノを習っています。", "Adik perempuan saya sedang les piano."),
+        voc("お父さん", "otousan", "Ayah (orang lain)", "family", "N5", "お父さんはお元気ですか。", "Apakah ayah Anda sehat?"),
+        voc("お母さん", "okaasan", "Ibu (orang lain)", "family", "N5", "お母さんに花を贈りました。", "Memberikan bunga kepada ibu."),
+        voc("子供", "kodomo", "Anak-anak", "family", "N5", "公園で子供たちが遊んでいます。", "Anak-anak sedang bermain di taman."),
+        voc("祖父", "sofu", "Kakek (saya)", "family", "N4", "祖父は毎朝散歩します。", "Kakek saya berjalan-jalan setiap pagi."),
+        voc("祖母", "sobo", "Nenek (saya)", "family", "N4", "祖母はとても優しいです。", "Nenek saya sangat penyayang."),
+        voc("親戚", "shinseki", "Kerabat / Sanak famili", "family", "N3", "正月には親戚が集まります。", "Pada tahun baru sanak saudara berkumpul."),
+
+        // ==================== MAKANAN & MINUMAN (FOOD) ====================
+        voc("ご飯", "gohan", "Nasi / Makanan", "food", "N5", "朝ご飯を食べましたか。", "Apakah sudah makan pagi?"),
+        voc("パン", "pan", "Roti", "food", "N5", "毎朝パンと牛乳を食べます。", "Setiap pagi saya makan roti dan susu."),
+        voc("水", "mizu", "Air putih", "food", "N5", "冷たい水をください。", "Tolong beri saya air dingin."),
+        voc("お茶", "ocha", "Teh hijau Jepang", "food", "N5", "熱いお茶を飲みます。", "Minum teh hijau hangat."),
+        voc("肉", "niku", "Daging", "food", "N5", "牛丼は牛肉の料理です。", "Gyudon adalah masakan daging sapi."),
+        voc("魚", "sakana", "Ikan", "food", "N5", "新鮮な魚を買いました。", "Membeli ikan yang segar."),
+        voc("野菜", "yasai", "Sayuran", "food", "N5", "野菜をたくさん食べましょう。", "Ayo makan banyak sayur."),
+        voc("果物", "kudamono", "Buah-buahan", "food", "N5", "季節の果物はおいしいです。", "Buah-buahan musiman sangat lezat."),
+        voc("卵", "tamago", "Telur", "food", "N5", "卵焼きを作りました。", "Membuat telur dadar gulung."),
+        voc("料理", "ryouri", "Masakan", "food", "N5", "日本料理が好きです。", "Saya menyukai masakan Jepang."),
+        voc("食堂", "shokudou", "Kantin / Tempat makan", "food", "N5", "大学の食堂で昼ご飯を食べます。", "Makan siang di kantin kampus."),
+        voc("味", "aji", "Rasa", "food", "N4", "このスープはとてもいい味です。", "Sup ini rasanya sangat enak."),
+        voc("甘い", "amai", "Manis", "food", "N5", "このケーキは甘いです。", "Kue ini manis."),
+        voc("辛い", "karai", "Pedas / Asin tajam", "food", "N5", "このカレーはとても辛いです。", "Kari ini sangat pedas."),
+        voc("苦い", "nigai", "Pahit", "food", "N4", "良薬は口に苦い。", "Obat mujarab terasa pahit di lidah."),
+        voc("すっぱい", "suppai", "Asam / Masam", "food", "N4", "レモンはすっぱいです。", "Lemon rasanya asam."),
+        voc("栄養", "eiyou", "Nutrisi / Gizi", "food", "N3", "バランスの良い栄養を摂りましょう。", "Mari penuhi asupan gizi yang seimbang."),
+
+        // ==================== KANTOR & PEKERJAAN (WORK) ====================
+        voc("会社", "kaisha", "Perusahaan / Kantor", "work", "N5", "日本の会社で働いています。", "Bekerja di perusahaan Jepang."),
+        voc("仕事", "shigoto", "Pekerjaan", "work", "N5", "仕事は何時からですか。", "Pekerjaan dimulai dari jam berapa?"),
+        voc("先生", "sensei", "Guru / Dosen / Dokter", "work", "N5", "日本語の先生に質問しました。", "Bertanya kepada guru bahasa Jepang."),
+        voc("学生", "gakusei", "Siswa / Mahasiswa", "work", "N5", "わたしは大学の学生です。", "Saya adalah seorang mahasiswa universitas."),
+        voc("医者", "isha", "Dokter", "work", "N5", "具合が悪いので医者に行きます。", "Karena kurang sehat saya pergi ke dokter."),
+        voc("会議", "kaigi", "Rapat / Pertemuan", "work", "N4", "午後２時から企画の会議があります。", "Jam 2 siang ada rapat perencanaan."),
+        voc("書類", "shorui", "Dokumen / Berkas", "work", "N4", "この書類にサインをしてください。", "Tolong tanda tangani dokumen ini."),
+        voc("残業", "zangyou", "Lembur kerja", "work", "N4", "今日は残業しなければなりません。", "Hari ini saya harus kerja lembur."),
+        voc("給料", "kyuuryou", "Gaji / Upah", "work", "N4", "毎月２５日が給料日です。", "Tanggal 25 setiap bulan adalah hari gajian."),
+        voc("出張", "shucchou", "Perjalanan dinas luar kota", "work", "N4", "来週大阪へ出張します。", "Minggu depan dinas ke Osaka."),
+        voc("面接", "mensetsu", "Wawancara kerja", "work", "N3", "採用面接で自己アピールをしました。", "Melakukan pengenalan diri saat wawancara kerja."),
+        voc("締め切り", "shimekiri", "Tenggat waktu (deadline)", "work", "N3", "レポートの締め切りは明日です。", "Tenggat waktu laporan adalah besok."),
+        voc("担当", "tantou", "Penanggung jawab (PIC)", "work", "N3", "このプロジェクトの担当者です。", "Saya adalah penanggung jawab proyek ini."),
+
+        // ==================== TRANSPORTASI & PERJALANAN (TRAVEL) ====================
+        voc("駅", "eki", "Stasiun kereta", "travel", "N5", "駅の前で待ち合わせしましょう。", "Mari janjian bertemu di depan stasiun."),
+        voc("電車", "densha", "Kereta api listrik", "travel", "N5", "電車に乗って通勤します。", "Naik kereta untuk berangkat kerja."),
+        voc("新幹線", "shinkansen", "Kereta cepat Shinkansen", "travel", "N5", "新幹線はとても速いです。", "Shinkansen sangat cepat."),
+        voc("飛行機", "hikouki", "Pesawat terbang", "travel", "N5", "飛行機のチケットを予約しました。", "Memesan tiket pesawat terbang."),
+        voc("バス", "basu", "Bus", "travel", "N5", "空港行きのバスに乗ります。", "Naik bus jurusan bandara."),
+        voc("車", "kuruma", "Mobil", "travel", "N5", "車を運転することができます。", "Saya bisa mengemudikan mobil."),
+        voc("道", "michi", "Jalan", "travel", "N5", "この道をまっすぐ進んでください。", "Tolong jalan lurus di jalan ini."),
+        voc("空港", "kuukou", "Bandara", "travel", "N4", "成田空港に到着しました。", "Tiba di Bandara Narita."),
+        voc("切符", "kippu", "Tiket", "travel", "N4", "自動券売機で切符を買います。", "Membeli tiket di mesin penjual tiket otomatis."),
+        voc("乗り換え", "norikae", "Transit / Ganti kereta", "travel", "N4", "次の駅で地下鉄に乗り換えます。", "Ganti ke kereta bawah tanah di stasiun berikutnya."),
+        voc("予約", "yoyaku", "Reservasi / Pemesanan", "travel", "N4", "ホテルの部屋を予約しました。", "Memesan kamar hotel."),
+        voc("観光", "kankou", "Pariwisata / Tamasya", "travel", "N3", "京都の名所を観光しました。", "Bertamasya keliling tempat wisata terkenal di Kyoto."),
+        voc("宿泊", "shukuhaku", "Menginap", "travel", "N3", "温泉旅館に宿泊する予定です。", "Berencana menginap di penginapan onsen ryokan."),
+
+        // ==================== BELANJA & TOKO (SHOPPING) ====================
+        voc("店", "mise", "Toko / Kedai", "shopping", "N5", "あの店はいつも混んでいます。", "Toko itu selalu ramai pelanggan."),
+        voc("買い物", "kaimono", "Belanja", "shopping", "N5", "デパートへ買い物に行きます。", "Pergi ke mall untuk berbelanja."),
+        voc("お金", "okane", "Uang", "shopping", "N5", "現金で払います。", "Membayar dengan uang tunai."),
+        voc("財布", "saifu", "Dompet", "shopping", "N5", "財布を忘れてしまいました。", "Saya lupa membawa dompet."),
+        voc("安い", "yasui", "Murah", "shopping", "N5", "このシャツはとても安いです。", "Kemeja ini sangat murah."),
+        voc("高い", "takai", "Mahal / Tinggi", "shopping", "N5", "品質は良いですが高いです。", "Kualitasnya bagus tetapi mahal."),
+        voc("靴", "kutsu", "Sepatu", "shopping", "N5", "新しい靴を履いて出かけます。", "Memakai sepatu baru lalu bepergian."),
+        voc("服", "fuku", "Pakaian / Baju", "shopping", "N5", "暖かい服を着てください。", "Tolong pakai baju yang hangat."),
+        voc("割引", "waribiki", "Diskon / Potongan harga", "shopping", "N4", "２割引きのシールが貼ってあります。", "Ditempeli stiker diskon 20%."),
+        voc("おつり", "otsuri", "Uang kembalian", "shopping", "N4", "おつりとレシートを受け取ります。", "Menerima uang kembalian dan struk."),
+        voc("領収書", "ryoushuusho", "Kuitansi resmi", "shopping", "N3", "領収書をいただけますか。", "Bolehkah saya meminta kuitansi resmi?"),
+
+        // ==================== KESEHATAN & TUBUH (HEALTH) ====================
+        voc("体", "karada", "Tubuh / Badan", "health", "N5", "体に気をつけてください。", "Tolong jaga kesehatan tubuh Anda."),
+        voc("目", "me", "Mata", "health", "N5", "目が疲れて痛いです。", "Mata lelah dan perih."),
+        voc("手", "te", "Tangan", "health", "N5", "食事の前に手を洗います。", "Mencuci tangan sebelum makan."),
+        voc("頭", "atama", "Kepala", "health", "N5", "頭が痛いので薬を飲みます。", "Kepala sakit sehingga saya minum obat."),
+        voc("病院", "byouin", "Rumah sakit", "health", "N5", "病院で診察を受けます。", "Menerima pemeriksaan medis di rumah sakit."),
+        voc("薬", "kusuri", "Obat", "health", "N5", "食後にこの薬を飲んでください。", "Tolong minum obat ini sesudah makan."),
+        voc("熱", "netsu", "Demam / Panas tubuh", "health", "N4", "３８度の熱があります。", "Saya demam 38 derajat celcius."),
+        voc("風邪", "kaze", "Masuk angin / Flu", "health", "N4", "風邪を引いてしまいました。", "Saya terkena flu."),
+        voc("元気", "genki", "Sehat / Bugar / Bersemangat", "health", "N5", "お元気ですか。はい、元気です。", "Apa kabar? Ya, sehat."),
+        voc("症状", "shoujou", "Gejala penyakit", "health", "N3", "どのような症状がありますか。", "Gejala apa yang Anda rasakan?"),
+
+        // ==================== PERASAAN & KARAKTER (FEELINGS) ====================
+        voc("嬉しい", "ureshii", "Senang / Gembira", "feelings", "N4", "合格してとても嬉しいです！", "Lulus ujian dan saya sangat senang!"),
+        voc("悲しい", "kanashii", "Sedih", "feelings", "N4", "別れはいつも悲しいです。", "Perpisahan selalu menyedihkan."),
+        voc("楽しい", "tanoshii", "Menyenangkan", "feelings", "N5", "旅行はとても楽しかったです。", "Perjalanan wisatanya sangat menyenangkan."),
+        voc("面白い", "omoshiroi", "Menarik / Lucu", "feelings", "N5", "このアニメはおもしろいです。", "Anime ini sangat menarik."),
+        voc("優しい", "yasashii", "Baik hati / Lemah lembut", "feelings", "N5", "先生はとても優しいです。", "Gurunya sangat ramah dan baik hati."),
+        voc("心配", "shinpai", "Khawatir / Cemas", "feelings", "N4", "心配しないでください、大丈夫です。", "Jangan khawatir, semuanya baik-baik saja."),
+        voc("安心", "anshin", "Lega / Tenang", "feelings", "N4", "無事について安心しました。", "Saya merasa lega sudah tiba dengan selamat."),
+        voc("感動", "kandou", "Terharu / Tersentuh", "feelings", "N3", "映画を見て深く感動しました。", "Menonton film dan merasa sangat terharu."),
+        voc("悔しい", "kuyashii", "Menyesal / Kesal tidak terima kegagalan", "feelings", "N3", "試合に負けて悔しいです。", "Kalah pertandingan dan merasa sangat kesal/menyesal."),
+
+        // ==================== MASYARAKAT & BUDAYA (SOCIETY) ====================
+        voc("社会", "shakai", "Masyarakat", "society", "N4", "情報社会の中で暮らしています。", "Hidup di tengah masyarakat informasi."),
+        voc("世界", "sekai", "Dunia", "society", "N4", "世界平和を願っています。", "Mengharapkan perdamaian dunia."),
+        voc("習慣", "shuukan", "Kebiasaan / Adat tradisi", "society", "N4", "日本の文化や習慣を学びます。", "Mempelajari kebudayaan dan adat istiadat Jepang."),
+        voc("環境", "kankyou", "Lingkungan hidup", "society", "N3", "自然環境を守る活動をします。", "Melakukan kegiatan melindungi kelestarian lingkungan alam."),
+        voc("経済", "keizai", "Ekonomi", "society", "N3", "世界経済の動向を注視します。", "Memperhatikan tren ekonomi dunia."),
+        voc("法律", "houritsu", "Hukum / Undang-undang", "society", "N3", "法律を守らなければなりません。", "Harus menaati hukum yang berlaku."),
+
+        // ==================== TAMBAHAN KOSAKATA HARIAN & KOMUNIKASI ====================
+        voc("もしもし", "moshimoshi", "Halo (saat mengangkat telepon)", "greetings", "N5", "もしもし、田中です。", "Halo, dengan Tanaka."),
+        voc("お邪魔します", "ojamashimasu", "Permisi (ketika memasuki rumah orang lain)", "greetings", "N5", "お邪魔します、お邪魔いたします。", "Permisi, saya bertamu."),
+        voc("失礼します", "shitsurei shimasu", "Permisi / Mohon maaf mengganggu", "greetings", "N5", "先生の部屋に入るとき、失礼しますと言います。", "Mengucapkan permisi saat masuk ruangan guru."),
+        voc("どういたしまして", "douitashimashite", "Sama-sama / Terima kasih kembali", "greetings", "N5", "いいえ、どういたしまして。", "Tidak masalah, sama-sama."),
+        voc("お久しぶりです", "ohisashiburi desu", "Lama tidak berjumpa", "greetings", "N4", "お久しぶりですね、お元気でしたか。", "Lama tidak bersua ya, apakah kamu sehat?"),
+        voc("おかげさまで", "okagesamade", "Berkat doa Anda (keadaan baik)", "greetings", "N4", "おかげさまで元気にしております。", "Berkat doa Anda saya dalam keadaan sehat."),
+        voc("ご無沙汰しております", "gobusata shite orimasu", "Sudah lama tidak saling berkabar (hormat)", "greetings", "N3", "大変ご無沙汰しております。", "Sudah lama sekali tidak bersua."),
+        voc("よろしくお願いいたします", "yoroshiku onegai itashimasu", "Mohon kerja sama dan bantuannya (formal)", "greetings", "N3", "今後ともよろしくお願いいたします。", "Ke depannya pun kami mohon bimbingannya."),
+
+        // ==================== KESEHARIAN (DAILY LIFE) ====================
+        voc("家", "いえ", "Rumah / Tempat tinggal", "daily", "N5", "私の家は駅の近くにあります。", "Rumah saya berada di dekat stasiun."),
+        voc("部屋", "へや", "Kamar / Ruangan", "daily", "N5", "自分の部屋を掃除します。", "Membersihkan kamar sendiri."),
+        voc("鍵", "かぎ", "Kunci", "daily", "N5", "鍵をポケットに入れます。", "Memasukkan kunci ke dalam saku."),
+        voc("机", "つくえ", "Meja belajar / Meja kerja", "daily", "N5", "机の上にパソコンを置きます。", "Menaruh komputer di atas meja."),
+        voc("椅子", "いす", "Kursi", "daily", "N5", "椅子に座ってください。", "Silakan duduk di kursi."),
+        voc("窓", "まど", "Jendela", "daily", "N5", "暑いので窓を開けましょう。", "Karena panas mari buka jendela."),
+        voc("ドア", "ドア", "Pintu", "daily", "N5", "ドアを閉めてください。", "Tolong tutup pintunya."),
+        voc("冷蔵庫", "れいぞうこ", "Kulkas / Lemari pendingin", "daily", "N4", "冷蔵庫に牛乳を入れます。", "Menaruh susu ke dalam kulkas."),
+        voc("洗濯機", "せんたくき", "Mesin cuci", "daily", "N4", "洗濯機で服を洗います。", "Mencuci baju dengan mesin cuci."),
+        voc("掃除機", "そうじき", "Penyedot debu (vacuum cleaner)", "daily", "N4", "掃除機で部屋を綺麗にします。", "Membersihkan kamar dengan penyedot debu."),
+        voc("ゴミ", "ゴミ", "Sampah", "daily", "N5", "ゴミはゴミ箱に捨ててください。", "Buanglah sampah pada tempat sampah."),
+        voc("エアコン", "エアコン", "Pendingin ruangan (AC)", "daily", "N4", "エアコンをつけて涼しくします。", "Menyalakan AC agar menjadi sejuk."),
+
+        // ==================== WAKTU & JADWAL (TIME) ====================
+        voc("午前", "ごぜん", "Pagi hari (a.m.)", "time", "N5", "午前の授業に出席します。", "Menghadiri kuliah pagi."),
+        voc("午後", "ごご", "Sore hari / Siang lewat (p.m.)", "time", "N5", "午後は図書館で勉強します。", "Siang-sore hari belajar di perpustakaan."),
+        voc("朝", "あさ", "Pagi", "time", "N5", "毎朝ジョギングをします。", "Joging setiap pagi."),
+        voc("昼", "ひる", "Siang hari", "time", "N5", "昼休みに散歩をします。", "Jalan-jalan saat istirahat siang."),
+        voc("夜", "よる", "Malam hari", "time", "N5", "夜は静かに本を読みます。", "Malam hari membaca buku dengan tenang."),
+        voc("今週", "こんしゅう", "Minggu ini", "time", "N5", "今週は忙しいです。", "Minggu ini sangat sibuk."),
+        voc("来週", "らいしゅう", "Minggu depan", "time", "N5", "来週テストがあります。", "Minggu depan ada ujian."),
+        voc("先週", "せんしゅう", "Minggu lalu", "time", "N5", "先週京都へ行きました。", "Minggu lalu saya pergi ke Kyoto."),
+        voc("今月", "こんげつ", "Bulan ini", "time", "N5", "今月は出費が多いです。", "Bulan ini pengeluarannya banyak."),
+        voc("来月", "らいげつ", "Bulan depan", "time", "N5", "来月帰国します。", "Bulan depan akan kembali ke tanah air."),
+        voc("先月", "せんげつ", "Bulan lalu", "time", "N5", "先月引っ越しました。", "Bulan lalu saya pindah rumah."),
+        voc("予定", "よてい", "Rencana / Jadwal", "time", "N4", "来月の予定をカレンダーに書きます。", "Menuliskan jadwal bulan depan pada kalender."),
+        voc("締め切り", "しめきり", "Tenggat waktu / Deadline", "time", "N3", "レポートの締め切りは金曜日です。", "Tenggat waktu laporan adalah hari Jumat."),
+
+        // ==================== MAKANAN & MINUMAN (FOOD) ====================
+        voc("ご飯", "ごはん", "Nasi / Makanan", "food", "N5", "美味しいご飯を炊きます。", "Memasak nasi yang pulen dan lezat."),
+        voc("パン", "パン", "Roti", "food", "N5", "朝はパンを食べます。", "Pagi hari saya makan roti."),
+        voc("肉", "にく", "Daging", "food", "N5", "牛肉が好きです。", "Saya suka daging sapi."),
+        voc("魚", "さかな", "Ikan", "food", "N5", "新鮮な魚を焼きます。", "Memanggang ikan segar."),
+        voc("野菜", "やさい", "Sayur-sayuran", "food", "N5", "野菜をたくさん食べましょう。", "Mari makan sayur-sayuran yang banyak."),
+        voc("果物", "くだもの", "Buah-buahan", "food", "N5", "季節の果物を買います。", "Membeli buah-buahan musim ini."),
+        voc("卵", "たまご", "Telur", "food", "N5", "卵焼きを作ります。", "Membuat telur dadar gulung."),
+        voc("牛乳", "ぎゅうにゅう", "Susu sapi", "food", "N5", "毎朝牛乳を一杯飲みます。", "Setiap pagi minum segelas susu."),
+        voc("お菓子", "おかし", "Camilan / Makanan ringan", "food", "N5", "日本のお菓子をお土産にします。", "Menjadikan camilan Jepang sebagai oleh-oleh."),
+        voc("定食", "ていしょく", "Paket makanan lengkap (set menu)", "food", "N4", "日替わり定食を注文します。", "Memesan paket menu harian."),
+        voc("味付け", "あじつけ", "Pembumbuan / Rasa masakan", "food", "N3", "優しい味付けの料理です。", "Masakan dengan cita rasa bumbu yang lembut."),
+
+        // ==================== PEKERJAAN & KANTOR (WORK) ====================
+        voc("会社員", "かいしゃいん", "Karyawan swasta", "work", "N5", "私はIT企業の会社員です。", "Saya karyawan perusahaan IT."),
+        voc("公務員", "こうむいん", "Pegawai negeri (PNS)", "work", "N4", "父は公務員として働いています。", "Ayah bekerja sebagai pegawai negeri."),
+        voc("残業", "ざんぎょう", "Lembur kerja", "work", "N4", "今日は残業をしないで帰ります。", "Hari ini pulang tanpa lembur."),
+        voc("出張", "しゅっちょう", "Perjalanan dinas luar kota", "work", "N4", "来週大阪へ出張します。", "Minggu depan dinas ke Osaka."),
+        voc("給料", "きゅうりょう", "Gaji / Upah kerja", "work", "N4", "毎月25日は給料日です。", "Setiap tanggal 25 adalah hari gajian."),
+        voc("面接", "めんせつ", "Wawancara (kerja/masuk)", "work", "N4", "明日の採用面接に緊張しています。", "Gugup menghadapi wawancara penerimaan besok."),
+        voc("書類", "しょるい", "Dokumen / Berkas", "work", "N4", "大切な書類を提出します。", "Mengumpulkan berkas dokumen penting."),
+        voc("契約", "けいやく", "Kontrak / Perjanjian bisnis", "work", "N3", "新規プロジェクトの契約を結びます。", "Menandatangani kontrak proyek baru."),
+        voc("交渉", "こうしょう", "Negosiasi", "work", "N3", "取引先と条件を交渉します。", "Menegosiasikan syarat dengan mitra bisnis."),
+        voc("担当", "たんとう", "Penanggung jawab / Bagian tugas", "work", "N3", "このプロジェクトの担当者です。", "Penanggung jawab proyek ini."),
+
+        // ==================== BELANJA & KEUANGAN (SHOPPING) ====================
+        voc("店員", "てんいん", "Pelayan toko / Pramuniaga", "shopping", "N5", "店員さんにサイズを聞きます。", "Menanyakan ukuran baju ke pramuniaga."),
+        voc("値段", "ねだん", "Harga", "shopping", "N5", "値段札を確認します。", "Memeriksa label harga."),
+        voc("割引", "わりびき", "Diskon / Potongan harga", "shopping", "N4", "20パーセント割引のセールです。", "Obral dengan diskon 20 persen."),
+        voc("お釣り", "おつり", "Uang kembalian", "shopping", "N5", "お釣りを忘れずに取ってください。", "Jangan lupa mengambil uang kembalian."),
+        voc("レシート", "レシート", "Struk belanja / Bon", "shopping", "N5", "レシートをもらいます。", "Menerima struk belanja."),
+        voc("クレジットカード", "クレジットカード", "Kartu kredit", "shopping", "N4", "支払いはクレジットカードでお願いします。", "Pembayaran dengan kartu kredit ya."),
+        voc("税込み", "ぜいこみ", "Termasuk pajak (pajak terhitung)", "shopping", "N4", "表示価格は税込みです。", "Harga yang tertera sudah termasuk pajak."),
+
+        // ==================== KESEHATAN & MEDIS (HEALTH) ====================
+        voc("病院", "びょういん", "Rumah sakit", "health", "N5", "具合が悪いので病院に行きます。", "Pergi ke rumah sakit karena badan kurang enak."),
+        voc("風邪", "かぜ", "Masuk angin / Flu", "health", "N5", "風邪をひいて熱が出ました。", "Kena flu dan badannya demam."),
+        voc("熱", "ねつ", "Demam / Suhu tubuh panas", "health", "N5", "体温計で熱を測ります。", "Mengukur suhu tubuh dengan termometer."),
+        voc("薬", "くすり", "Obat", "health", "N5", "食後に薬を飲んでください。", "Tolong minum obat sesudah makan."),
+        voc("頭痛", "ずつう", "Sakit kepala", "health", "N4", "ひどい頭痛がします。", "Kepala saya terasa sangat sakit."),
+        voc("怪我", "けが", "Luka / Cedera", "health", "N4", "運動中に足を怪我しました。", "Mengalami cedera kaki saat berolahraga."),
+        voc("健康", "けんこう", "Kesehatan", "health", "N4", "健康のために野菜を食べます。", "Makan sayur demi menjaga kesehatan."),
+
+        // ==================== PERASAAN & EMOSI (FEELINGS) ====================
+        voc("嬉しい", "うれしい", "Senang / Gembira", "feelings", "N5", "合格してとても嬉しいです。", "Sangat bahagia karena berhasil lulus."),
+        voc("悲しい", "かなしい", "Sedih", "feelings", "N5", "悲しいニュースを聞きました。", "Mendengar kabar berita yang menyedihkan."),
+        voc("安心", "あんしん", "Lega / Tenang di hati", "feelings", "N4", "無事に着いて安心しました。", "Merasa lega karena telah tiba dengan selamat."),
+        voc("心配", "しんぱい", "Khawatir / Cemas", "feelings", "N5", "息子の帰りが遅くて心配です。", "Khawatir karena kepulangan anak saya terlambat."),
+        voc("緊張", "きんちょう", "Gugup / Tegang", "feelings", "N4", "発表の前にとても緊張しました。", "Sangat tegang sebelum presentasi."),
+        voc("怒り", "いかり", "Kemarahan", "feelings", "N3", "不当な扱いに怒りを感じます。", "Merasa marah terhadap perlakuan tidak adil."),
+        voc("後悔", "こうかい", "Penyesalan", "feelings", "N3", "後悔のないように全力を尽くします。", "Mengerahkan segenap kemampuan agar tiada penyesalan."),
+
+        // ==================== SOSIAL & MASYARAKAT (SOCIETY) ====================
+        voc("ルール", "ルール", "Aturan / Tata tertib", "society", "N5", "交通ルールを守りましょう。", "Mari patuhi tata tertib lalu lintas."),
+        voc("法律", "ほうりつ", "Hukum / Undang-undang", "society", "N4", "法律に従って行動します。", "Bertindak sesuai dengan hukum yang berlaku."),
+        voc("平和", "へいわ", "Perdamaian", "society", "N4", "世界の平和を願っています。", "Berdoa bagi perdamaian dunia."),
+        voc("ボランティア", "ボランティア", "Relawan / Sukarelawan", "society", "N4", "休日にボランティア活動をします。", "Melakukan kegiatan relawan di hari libur."),
+        voc("伝統", "でんとう", "Tradisi / Adat turun-temurun", "society", "N3", "何百年も続く伝統行事です。", "Acara tradisi yang terus lestari ratusan tahun."),
+        voc("国際", "こくさい", "Internasional", "society", "N3", "国際交流フェスティバルに参加します。", "Mengikuti festival pertukaran budaya internasional."),
+    ]
+}

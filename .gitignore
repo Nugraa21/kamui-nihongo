@@ -1,0 +1,41 @@
+# ========================================================
+# Git Ignore for Kamui NihonGo (Rust + Tauri 2.0 Desktop)
+# Created for: Ludang Prasetyo Nugroho (nugra21)
+# ========================================================
+
+# Rust build artifacts (Wajib di-ignore agar tidak berukuran gigabytes)
+target/
+**/target/
+src-tauri/target/
+**/*.rs.bk
+
+# Node & Package Managers
+node_modules/
+**/node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Tauri temp & cache
+src-tauri/.tauri/
+src-tauri/gen/
+**/.tauri/
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# IDE, OS & System files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.log

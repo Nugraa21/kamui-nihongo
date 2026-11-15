@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/tauri-apps/tauri/dev/crates/tauri-config-schema/schema.json",
+  "productName": "NihonGo",
+  "version": "0.1.0",
+  "identifier": "com.nihongo.learnjapanese",
+  "build": {
+    "frontendDist": "../src"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "title": "🎌 NihonGo! — 日本語を学ぼう",
+        "width": 1280,
+        "height": 820,
+        "minWidth": 960,
+        "minHeight": 640,
+        "center": true,
+        "decorations": false,
+        "resizable": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,196 @@
+KAMUI NIHONGO PROPRIETARY LICENSE
+Versi 1.1 — Berlaku sejak 15 November 2026
+
+Hak Cipta (c) 2026 Ludang Prasetyo Nugroho
+Semua hak dilindungi. All rights reserved.
+
+Pemegang Hak Cipta Tunggal (Aplikasi & Perangkat Lunak):
+  Nama Lengkap : Ludang Prasetyo Nugroho
+  Alias / GitHub: nugra21
+  Website Resmi : https://nugra21.web.app
+  GitHub         : https://github.com/nugra21
+
+═══════════════════════════════════════════════════════════════════
+              BAGIAN I — RUANG LINGKUP KEPEMILIKAN
+═══════════════════════════════════════════════════════════════════
+
+Lisensi ini mencakup dan melindungi secara eksklusif seluruh
+komponen yang dirancang, dibuat, dan dimiliki oleh Ludang Prasetyo
+Nugroho, yang meliputi:
+
+  • Seluruh kode sumber aplikasi (Rust, JavaScript, HTML, CSS)
+  • Arsitektur dan desain sistem perangkat lunak
+  • Desain antarmuka pengguna (UI/UX) bertema GitHub/GitLab Dark
+  • Sistem simulasi ujian JLPT (Exam Lockdown) dan logikanya
+  • Sistem autentikasi pengguna, profil, dan manajemen data
+  • Kamus kosakata (Kamus Kosakata & Kamus Bahasa Jepang) beserta
+    entri yang dikurasi dan disusun oleh penulis
+  • Engine Web Audio API (synthesizer efek suara UI)
+  • Stroke Lab (panduan urutan goresan aksara)
+  • Kotoba Arena / Mini-game susun kata
+  • Memory Arena dan sistem permainan lainnya
+  • Sistem XP, streak, dan gamifikasi
+  • Bank soal JLPT (N5 • N4 • N3) yang dikurasi penulis
+  • Semua konten dan aset orisinal lainnya dalam repositori ini
+
+─────────────────────────────────────────────────────────────────
+1. HAK YANG DIBERIKAN
+─────────────────────────────────────────────────────────────────
+
+Izin HANYA diberikan kepada pihak-pihak yang telah mendapatkan
+persetujuan tertulis secara eksplisit dari pemilik hak cipta
+(Ludang Prasetyo Nugroho) untuk:
+
+  a. Melihat dan mempelajari kode sumber semata-mata untuk
+     keperluan referensi dan edukasi pribadi.
+
+Selain yang disebutkan di atas, TIDAK ADA hak lain yang diberikan
+kepada siapa pun tanpa izin tertulis eksplisit dari pemilik.
+
+─────────────────────────────────────────────────────────────────
+2. LARANGAN TEGAS (DILARANG KERAS)
+─────────────────────────────────────────────────────────────────
+
+Tanpa izin tertulis dari Ludang Prasetyo Nugroho, siapa pun
+DILARANG KERAS untuk:
+
+  a. Menyalin, menduplikasi, atau mereproduksi seluruh maupun
+     sebagian dari Perangkat Lunak ini dalam bentuk apa pun.
+
+  b. Mendistribusikan, membagikan, mengunggah ulang, atau
+     menyebarluaskan Perangkat Lunak ini kepada pihak ketiga
+     melalui media apa pun (digital, cetak, dll.).
+
+  c. Memodifikasi, mengubah, mengadaptasi, menerjemahkan, atau
+     membuat karya turunan (derivative works) berdasarkan
+     Perangkat Lunak ini.
+
+  d. Menggunakan Perangkat Lunak ini atau bagian mana pun
+     darinya untuk keperluan komersial, baik secara langsung
+     maupun tidak langsung, tanpa perjanjian lisensi komersial
+     terpisah dari pemilik.
+
+  e. Menjual, menyewakan, meminjamkan, atau melisensikan kembali
+     (sublicense) Perangkat Lunak ini kepada pihak lain.
+
+  f. Menghapus, mengaburkan, atau memodifikasi notasi hak cipta,
+     atribusi penulis, atau pernyataan lisensi ini dari
+     Perangkat Lunak.
+
+  g. Melakukan rekayasa balik (reverse engineering), decompile,
+     atau disassemble terhadap versi binary/compiled dari
+     Perangkat Lunak ini.
+
+═══════════════════════════════════════════════════════════════════
+            BAGIAN II — PENGECUALIAN HAK PIHAK KETIGA
+              (THIRD-PARTY CONTENT DISCLAIMER & CREDITS)
+═══════════════════════════════════════════════════════════════════
+
+Perangkat lunak ini mengintegrasikan materi referensi dari
+sumber-sumber pihak ketiga yang dilindungi hak cipta tersendiri.
+Hak cipta atas konten pihak ketiga tersebut TETAP SEPENUHNYA
+menjadi milik pemilik aslinya masing-masing. Penulis perangkat
+lunak (Ludang Prasetyo Nugroho) TIDAK mengklaim kepemilikan
+atas konten pihak ketiga yang dimaksud.
+
+─────────────────────────────────────────────────────────────────
+A. MINNA NO NIHONGO (みんなの日本語)
+─────────────────────────────────────────────────────────────────
+
+  Nama Karya   : Minna no Nihongo (みんなの日本語)
+                 Shokyuu I & II (初級 I・II)
+  Penerbit      : 3A Corporation (スリーエーネットワーク)
+  Negara Asal   : Jepang
+  Website       : https://www.3anet.co.jp/
+  Hak Cipta     : (c) 3A Corporation. All rights reserved.
+
+  Keterangan    : Konten pembelajaran yang merujuk pada kurikulum,
+                  pola kalimat, kosakata, dan struktur bab dari
+                  buku "Minna no Nihongo" digunakan SEMATA-MATA
+                  untuk keperluan REFERENSI EDUKASI NON-KOMERSIAL
+                  dalam perangkat lunak ini. Konten tersebut adalah
+                  milik eksklusif 3A Corporation dan tidak
+                  direproduksi secara verbatim (kata per kata).
+
+─────────────────────────────────────────────────────────────────
+B. STANDAR UJIAN JLPT (日本語能力試験)
+─────────────────────────────────────────────────────────────────
+
+  Nama Lembaga : Japan Foundation & Japan Educational Exchanges
+                 and Services (JEES)
+  Website      : https://www.jlpt.jp/
+  Hak Cipta    : (c) Japan Foundation & JEES. All rights reserved.
+
+  Keterangan   : Format, tingkatan (N5-N3), dan struktur bagian
+                 ujian (Moji-Goi, Bunpou, Dokkai) merujuk pada
+                 standar resmi JLPT. Soal-soal dalam aplikasi ini
+                 adalah karya orisinal penulis yang terinspirasi
+                 dari format tersebut, bukan soal ujian asli JLPT.
+
+─────────────────────────────────────────────────────────────────
+C. RUST & TAURI FRAMEWORK
+─────────────────────────────────────────────────────────────────
+
+  Rust          : (c) The Rust Project Developers — MIT / Apache 2.0
+                  https://www.rust-lang.org/
+  Tauri         : (c) Tauri Contributors — MIT License
+                  https://tauri.app/
+
+─────────────────────────────────────────────────────────────────
+D. WEB SPEECH SYNTHESIS API
+─────────────────────────────────────────────────────────────────
+
+  Teknologi    : Web Speech API (SpeechSynthesis)
+  Standar      : W3C Web Platform — https://www.w3.org/
+  Implementasi : Disediakan oleh WebView2 / Chromium Engine
+
+─────────────────────────────────────────────────────────────────
+3. ATRIBUSI WAJIB
+─────────────────────────────────────────────────────────────────
+
+Jika pemilik hak cipta memberikan izin tertulis untuk penggunaan
+tertentu, penerima izin WAJIB mencantumkan atribusi berikut
+secara jelas dan terlihat:
+
+  "Kamui NihonGo (神威日本語) — Dibuat oleh Ludang Prasetyo
+   Nugroho (nugra21) | https://nugra21.web.app"
+
+─────────────────────────────────────────────────────────────────
+4. PEMISAHAN KETENTUAN
+─────────────────────────────────────────────────────────────────
+
+Jika salah satu ketentuan dalam lisensi ini dinyatakan tidak
+berlaku atau tidak dapat ditegakkan oleh pengadilan yang
+berwenang, ketentuan-ketentuan lainnya tetap berlaku sepenuhnya.
+
+─────────────────────────────────────────────────────────────────
+5. PENAFIAN JAMINAN (DISCLAIMER OF WARRANTIES)
+─────────────────────────────────────────────────────────────────
+
+PERANGKAT LUNAK INI DISEDIAKAN "SEBAGAIMANA ADANYA" (AS IS)
+TANPA JAMINAN APA PUN, BAIK TERSURAT MAUPUN TERSIRAT, TERMASUK
+NAMUN TIDAK TERBATAS PADA JAMINAN KELAYAKAN JUAL, KESESUAIAN
+UNTUK TUJUAN TERTENTU, DAN NON-PELANGGARAN.
+
+DALAM KEADAAN APA PUN, PEMILIK HAK CIPTA TIDAK BERTANGGUNG JAWAB
+ATAS KLAIM, KERUSAKAN, ATAU KEWAJIBAN LAIN YANG TIMBUL DARI
+PENGGUNAAN ATAU KETIDAKMAMPUAN MENGGUNAKAN PERANGKAT LUNAK INI.
+HAL INI BERLAKU JUGA TERKAIT KONTEN PIHAK KETIGA YANG DIRUJUK.
+
+─────────────────────────────────────────────────────────────────
+6. HUBUNGI PEMILIK
+─────────────────────────────────────────────────────────────────
+
+Untuk pertanyaan, permintaan lisensi komersial, atau izin
+penggunaan khusus, silakan hubungi pemilik melalui:
+
+  Website : https://nugra21.web.app
+  GitHub  : https://github.com/nugra21
+
+═══════════════════════════════════════════════════════════════════
+Hak Cipta (c) 2026 Ludang Prasetyo Nugroho (nugra21)
+Seluruh hak dilindungi undang-undang. All rights reserved.
+
+Konten Minna no Nihongo (c) 3A Corporation. All rights reserved.
+Standar JLPT (c) Japan Foundation & JEES. All rights reserved.
+═══════════════════════════════════════════════════════════════════

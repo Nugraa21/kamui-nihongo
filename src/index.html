@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamui NihonGo (神威日本語) — Pro Japanese Mastery Suite (N5 • N4 • N3)</title>
+    <link rel="stylesheet" href="styles/theme.css">
+    <link rel="stylesheet" href="styles/components.css">
+</head>
+<body>
+    <div id="app">
+        <!-- ===== 0. CUSTOM GITHUB DESKTOP WINDOW TITLEBAR ===== -->
+        <div id="custom-titlebar" data-tauri-drag-region>
+            <div class="titlebar-drag-region" data-tauri-drag-region>
+                <div class="titlebar-logo-icon" data-tauri-drag-region>神</div>
+                <span class="titlebar-title" data-tauri-drag-region>Kamui NihonGo — 神威 (Mastery Suite)</span>
+                <span class="titlebar-branch" data-tauri-drag-region>⑂ main: JLPT N5 • N4 • N3</span>
+            </div>
+            <div class="titlebar-controls">
+                <button class="titlebar-btn" id="win-min-btn" onclick="windowMinimize()" title="Minimize">
+                    <span id="win-min-icon"></span>
+                </button>
+                <button class="titlebar-btn" id="win-max-btn" onclick="windowToggleMaximize()" title="Maximize / Restore">
+                    <span id="win-max-icon"></span>
+                </button>
+                <button class="titlebar-btn close" id="win-close-btn" onclick="windowClose()" title="Close">
+                    <span id="win-close-icon"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== 1. GITHUB / GITLAB TOP APP HEADER ===== -->
+        <header id="gh-header">
+            <!-- Left: Repo Breadcrumbs & Branch -->
+            <div class="gh-header-left">
+                <div class="gh-repo-brand" onclick="navigateTo('home')" title="Kembali ke Beranda">
+                    <div class="gh-repo-logo">神</div>
+                    <div class="gh-repo-path">
+                        <span class="owner">nugra</span>
+                        <span class="sep">/</span>
+                        <span class="name">kamui-nihongo</span>
+                    </div>
+                </div>
+
+                <div class="gh-branch-pill" title="Standar Kurikulum JLPT">
+                    <span class="icon" id="branch-icon-placeholder"></span>
+                    <span>main: JLPT N5 • N4 • N3</span>
+                </div>
+
+                <span class="gh-release-tag">v2.1.0-pro</span>
+            </div>
+
+            <!-- Center: Fast Command Search Box -->
+            <div class="gh-header-center">
+                <button class="gh-search-btn" onclick="openSearchModal()" title="Cari Huruf, Kanji, Kosakata, atau Aturan Goresan">
+                    <div class="gh-search-btn-left">
+                        <span class="search-icon" id="search-icon-placeholder"></span>
+                        <span>Cari Kanji, Kana, Vocab (tekan /)...</span>
+                    </div>
+                    <kbd>/</kbd>
+                </button>
+            </div>
+
+            <!-- Right: Streak, XP, Theme Picker & Author Profile -->
+            <div class="gh-header-right">
+                <div class="gh-metric-chip streak" title="Streak Belajar Harian Berturut-turut">
+                    <span class="flame-icon" id="flame-icon-placeholder"></span>
+                    <span id="top-streak-count">0 Hari</span>
+                </div>
+
+                <div class="gh-metric-chip xp" title="Level & Total XP Kamu">
+                    <span class="zap-icon" id="zap-icon-placeholder"></span>
+                    <span id="top-xp-count">Lv.1 • 0 XP</span>
+                </div>
+
+                <button class="gh-header-btn" onclick="openThemeModal()" title="Pilih Gaya & Warna Tema">
+                    <span class="palette-icon" id="palette-icon-placeholder"></span>
+                    <span>Tema</span>
+                </button>
+
+                <button class="gh-user-badge" id="top-profile-btn" onclick="openProfileModal()" title="Profil & Pengaturan Akun">
+                    <span class="user-avatar-badge" id="top-user-avatar">N</span>
+                    <span id="top-profile-name">nugra</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ===== 2. GITHUB REPOSITORY SUBNAV TABS ===== -->
+        <nav id="gh-nav-tabs">
+            <button class="gh-tab-btn active" data-page="home" title="Ringkasan & Beranda Belajar">
+                <span class="tab-icon" id="tab-home-icon"></span>
+                <span>Overview</span>
+            </button>
+
+            <button class="gh-tab-btn" data-page="grammar" title="Tata Bahasa Lengkap Buku Minna no Nihongo">
+                <span class="tab-icon" id="tab-grammar-icon"></span>
+                <span>Minna no Nihongo</span>
+                <span class="gh-tab-badge">Bab 1-25</span>
+            </button>
+
+            <button class="gh-tab-btn" data-page="particles" title="Panduan Lengkap Partikel Bahasa Jepang (Joshi)">
+                <span class="tab-icon" id="tab-particle-icon"></span>
+                <span>Partikel (助詞)</span>
+                <span class="gh-tab-badge">12 Partikel</span>
+            </button>
+
+            <button class="gh-tab-btn" data-page="hiragana" title="Huruf Hiragana & Katakana">
+                <span class="tab-icon" id="tab-kana-icon"></span>
+                <span>Kana</span>
+                <span class="gh-tab-badge">142</span>
+            </button>
+
+            <button class="gh-tab-btn" data-page="katakana" title="Huruf Katakana Khusus Serapan">
+                <span class="tab-icon" id="tab-kata-icon"></span>
+                <span>Katakana</span>
+            </button>
+
+            <button class="gh-tab-btn" data-page="kanji" title="Database Kanji N5, N4, N3">
+                <span class="tab-icon" id="tab-kanji-icon"></span>
+                <span>Kanji</span>
+                <span class="gh-tab-badge">N5-N3</span>
+            </button>
+
+            <button class="gh-tab-btn" data-page="vocabulary" title="Kamus Kosakata Esensial">
+                <span class="tab-icon" id="tab-vocab-icon"></span>
+                <span>Vocabulary</span>
+                <span class="gh-tab-badge">120+</span>
+            </button>
+
+            <button class="gh-tab-btn" data-page="dictionary" title="Kamus Lengkap Bahasa Jepang Indonesia N5-N3">
+                <span class="tab-icon" id="tab-dict-icon"></span>
+                <span>Kamus Lengkap</span>
+                <span class="gh-tab-badge">N5-N3</span>
+            </button>
+
+            <button class="gh-tab-btn" data-page="duolingo" title="Tantangan Susun Kata & Kalimat (言葉並べ)">
+                <span class="tab-icon" id="tab-duo-icon"></span>
+                <span>Kotoba Arena</span>
+                <span class="gh-tab-badge">Susun Kata</span>
+            </button>
+
+            <button class="gh-tab-btn" data-page="strokes" title="Tata Cara Penulisan & Papan Kaligrafi">
+                <span class="tab-icon" id="tab-stroke-icon"></span>
+                <span>Stroke Lab</span>
+                <span class="gh-tab-badge">8 Aturan</span>
+            </button>
+
+            <button class="gh-tab-btn" data-page="quiz" title="Simulasi Ujian & Kuis JLPT">
+                <span class="tab-icon" id="tab-quiz-icon"></span>
+                <span>Exam & Quiz</span>
+                <span class="gh-tab-badge">JLPT</span>
+            </button>
+
+            <button class="gh-tab-btn" data-page="minigame" title="Mini-game Memory Match Arena">
+                <span class="tab-icon" id="tab-game-icon"></span>
+                <span>Memory Arena</span>
+            </button>
+
+            <button class="gh-tab-btn" data-page="progress" title="Kemajuan Belajar & Heatmap Commit">
+                <span class="tab-icon" id="tab-progress-icon"></span>
+                <span>Insights</span>
+                <span class="gh-tab-badge">Heatmap</span>
+            </button>
+
+            <button class="gh-tab-btn" data-page="settings" title="Pengaturan & Profil Pengembang">
+                <span class="tab-icon" id="tab-settings-icon"></span>
+                <span>Settings</span>
+            </button>
+        </nav>
+
+        <!-- ===== 3. MAIN WORKSPACE CONTENT AREA ===== -->
+        <main id="content">
+            <!-- Dynamic view rendered by app.js -->
+        </main>
+    </div>
+
+    <!-- ===== 4. AUTH OVERLAY (REGISTER / LOGIN) ===== -->
+    <div id="auth-overlay" class="auth-overlay" style="display:none">
+        <!-- Rendered dynamically by auth.js -->
+    </div>
+
+    <!-- ===== 5. USER PROFILE & SYSTEM SETTINGS MODAL ===== -->
+    <div class="modal-backdrop" id="profile-modal" style="display:none" onclick="closeProfileModalOnBackdrop(event)">
+        <div class="modal-dialog profile-modal-dialog">
+            <div class="modal-header">
+                <h3>
+                    <span id="modal-profile-icon"></span>
+                    <span>Profil Pengguna & Setelan Sistem</span>
+                </h3>
+                <button class="modal-close-btn" onclick="closeProfileModal()" title="Tutup (ESC)">
+                    <span id="modal-profile-close-icon"></span>
+                </button>
+            </div>
+            <div class="modal-body" id="profile-modal-body" style="padding:0">
+                <!-- Populated dynamically by auth.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 6. CENTERED CONFIRMATION MODAL (REPLACES NATIVE ALERT) ===== -->
+    <div class="modal-backdrop" id="confirm-modal" style="display:none" onclick="closeConfirmModalOnBackdrop(event)">
+        <div class="confirm-dialog">
+            <div id="confirm-modal-icon" class="confirm-icon-center"></div>
+            <h3 id="confirm-modal-title" class="confirm-title">Konfirmasi Tindakan</h3>
+            <p id="confirm-modal-message" class="confirm-message">Apakah Anda yakin ingin melanjutkan?</p>
+            <div class="confirm-btn-row">
+                <button class="btn-secondary" id="confirm-modal-btn-cancel" onclick="handleConfirmCancel()">Batal</button>
+                <button class="btn-primary" id="confirm-modal-btn-ok" onclick="handleConfirmOk()">Lanjutkan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 7. PASSWORD PROMPT MODAL (FOR FACTORY RESET) ===== -->
+    <div class="modal-backdrop" id="password-prompt-modal" style="display:none" onclick="closePasswordPromptModalOnBackdrop(event)">
+        <div class="confirm-dialog">
+            <div class="confirm-icon-wrapper danger" id="pw-prompt-icon" style="margin:0 auto 14px"></div>
+            <h3 id="pw-prompt-title" class="confirm-title">Konfirmasi Sandi Akun</h3>
+            <p id="pw-prompt-message" class="confirm-message" style="margin-bottom:14px">Masukkan kata sandi Anda untuk verifikasi:</p>
+            <form onsubmit="handlePasswordPromptOk(event)">
+                <input type="password" id="pw-prompt-input" class="auth-single-input" placeholder="Masukkan kata sandi saat ini" required autocomplete="current-password">
+                <div class="confirm-btn-row" style="margin-top:16px">
+                    <button type="button" class="btn-secondary" onclick="handlePasswordPromptCancel()">Batal</button>
+                    <button type="submit" class="btn-danger">Verifikasi & Lanjutkan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== 8. THEME PICKER MODAL ===== -->
+    <div class="modal-backdrop" id="theme-modal" onclick="closeThemeModalOnBackdrop(event)">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3>
+                    <span id="modal-theme-icon"></span>
+                    <span>Pilih Tema & Skema Warna Software</span>
+                </h3>
+                <button class="modal-close-btn" onclick="closeThemeModal()" title="Tutup (ESC)">
+                    <span id="modal-theme-close-icon"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="theme-picker-grid" id="theme-grid">
+                    <!-- Populated dynamically by app.js -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 9. QUICK SEARCH COMMAND PALETTE MODAL ===== -->
+    <div class="modal-backdrop" id="search-modal" onclick="closeSearchModalOnBackdrop(event)">
+        <div class="search-palette">
+            <div class="search-palette-header">
+                <span id="palette-search-icon"></span>
+                <input type="text" id="palette-search-input" placeholder="Cari Hiragana, Katakana, Kanji, atau Kosakata..." autocomplete="off">
+                <kbd>ESC</kbd>
+            </div>
+            <div class="search-results-list" id="palette-results">
+                <!-- Search results injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 10. TOAST NOTIFICATIONS ===== -->
+    <div id="toast-container"></div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="scripts/icons.js"></script>
+    <script src="scripts/stroke.js"></script>
+    <script src="scripts/duolingo.js"></script>
+    <script src="scripts/dictionary.js"></script>
+    <script src="scripts/progress.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/quiz.js"></script>
+    <script src="scripts/minigame.js"></script>
+    <script src="scripts/auth.js"></script>
+</body>
+</html>

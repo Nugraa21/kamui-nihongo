@@ -1,0 +1,1025 @@
+/* =======================================================
+   NihonGo! — GitHub & GitLab Developer Theme System
+   Professional Desktop Architecture • Multi-Palette Engine
+   Zero Emojis • Vector Octicons • Pure Developer UX
+   Credit: nugra21.web.app
+   ======================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+:root {
+    /* =======================================================
+       DEFAULT PALETTE: GITHUB DARK (PRIMER)
+       ======================================================= */
+    --theme-id: 'github-dark';
+    --theme-name: 'GitHub Dark';
+
+    /* Canvas & Backgrounds */
+    --bg-canvas: #0d1117;
+    --bg-subtle: #161b22;
+    --bg-surface: #1b2028;
+    --bg-elevated: #21262d;
+    --bg-overlay: rgba(13, 17, 23, 0.88);
+    --bg-code: #0b0e14;
+
+    /* Crisp Developer Borders */
+    --border-default: #30363d;
+    --border-muted: #21262d;
+    --border-subtle: rgba(240, 246, 252, 0.1);
+    --border-active: #58a6ff;
+
+    /* Typography */
+    --text-primary: #f0f6fc;
+    --text-secondary: #c9d1d9;
+    --text-muted: #8b949e;
+    --text-dim: #6e7681;
+    --text-link: #58a6ff;
+
+    /* Accents & Brand */
+    --accent-primary: #238636;
+    --accent-hover: #2ea043;
+    --accent-secondary: #58a6ff;
+    --accent-purple: #8957e5;
+    --accent-glow: rgba(35, 134, 54, 0.3);
+    --accent-badge-bg: rgba(56, 139, 253, 0.15);
+    --accent-badge-text: #58a6ff;
+
+    /* JLPT Level Indicators */
+    --level-n5: #3fb950;
+    --level-n5-bg: rgba(63, 185, 80, 0.15);
+    --level-n5-border: rgba(63, 185, 80, 0.35);
+
+    --level-n4: #58a6ff;
+    --level-n4-bg: rgba(88, 166, 255, 0.15);
+    --level-n4-border: rgba(88, 166, 255, 0.35);
+
+    --level-n3: #d29922;
+    --level-n3-bg: rgba(210, 153, 34, 0.15);
+    --level-n3-border: rgba(210, 153, 34, 0.35);
+
+    /* Activity Heatmap */
+    --contrib-0: #161b22;
+    --contrib-1: #0e4429;
+    --contrib-2: #006d32;
+    --contrib-3: #26a641;
+    --contrib-4: #39d353;
+
+    /* Radii & Shadows */
+    --radius-xs: 4px;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-pill: 9999px;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 8px 28px rgba(0, 0, 0, 0.65);
+
+    /* Fonts */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+    --font-jp: 'Noto Sans JP', 'Yu Gothic', sans-serif;
+}
+
+/* =======================================================
+   THEME VARIATION: GITLAB DARK TANUKI
+   ======================================================= */
+[data-theme="gitlab-dark"] {
+    --theme-id: 'gitlab-dark';
+    --theme-name: 'GitLab Tanuki Dark';
+
+    --bg-canvas: #18191c;
+    --bg-subtle: #222428;
+    --bg-surface: #272a30;
+    --bg-elevated: #2e3138;
+    --bg-overlay: rgba(24, 25, 28, 0.92);
+    --bg-code: #131416;
+
+    --border-default: #3b3e45;
+    --border-muted: #2d3036;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-active: #7b58c3;
+
+    --text-primary: #ecebef;
+    --text-secondary: #c2c1c7;
+    --text-muted: #89888d;
+    --text-dim: #66656a;
+    --text-link: #7b58c3;
+
+    --accent-primary: #7b58c3;
+    --accent-hover: #906ee2;
+    --accent-secondary: #fc6d26;
+    --accent-purple: #906ee2;
+    --accent-glow: rgba(123, 88, 195, 0.35);
+    --accent-badge-bg: rgba(123, 88, 195, 0.18);
+    --accent-badge-text: #b69df8;
+
+    --contrib-0: #222428;
+    --contrib-1: #3b2a59;
+    --contrib-2: #5c3f8f;
+    --contrib-3: #7b58c3;
+    --contrib-4: #9f7aea;
+}
+
+/* =======================================================
+   THEME VARIATION: GITHUB DIMMED
+   ======================================================= */
+[data-theme="github-dimmed"] {
+    --theme-id: 'github-dimmed';
+    --theme-name: 'GitHub Dimmed';
+
+    --bg-canvas: #22272e;
+    --bg-subtle: #2d333b;
+    --bg-surface: #323942;
+    --bg-elevated: #373e47;
+    --bg-overlay: rgba(34, 39, 46, 0.92);
+    --bg-code: #1c2128;
+
+    --border-default: #444c56;
+    --border-muted: #373e47;
+    --border-subtle: rgba(205, 217, 229, 0.1);
+    --border-active: #539bf5;
+
+    --text-primary: #adbac7;
+    --text-secondary: #909dab;
+    --text-muted: #768390;
+    --text-dim: #545d68;
+    --text-link: #539bf5;
+
+    --accent-primary: #347d39;
+    --accent-hover: #46954a;
+    --accent-secondary: #539bf5;
+    --accent-purple: #6cb6ff;
+    --accent-glow: rgba(52, 125, 57, 0.3);
+    --accent-badge-bg: rgba(83, 155, 245, 0.15);
+    --accent-badge-text: #6cb6ff;
+
+    --contrib-0: #2d333b;
+    --contrib-1: #1e4b27;
+    --contrib-2: #276735;
+    --contrib-3: #347d39;
+    --contrib-4: #46954a;
+}
+
+/* =======================================================
+   THEME VARIATION: TOKYO NIGHT
+   ======================================================= */
+[data-theme="tokyo-night"] {
+    --theme-id: 'tokyo-night';
+    --theme-name: 'Tokyo Night';
+
+    --bg-canvas: #1a1b26;
+    --bg-subtle: #24283b;
+    --bg-surface: #292e42;
+    --bg-elevated: #343b58;
+    --bg-overlay: rgba(26, 27, 38, 0.94);
+    --bg-code: #16161e;
+
+    --border-default: #343b58;
+    --border-muted: #24283b;
+    --border-subtle: rgba(192, 202, 245, 0.08);
+    --border-active: #7aa2f7;
+
+    --text-primary: #c0caf5;
+    --text-secondary: #a9b1d6;
+    --text-muted: #787c99;
+    --text-dim: #565f89;
+    --text-link: #7aa2f7;
+
+    --accent-primary: #7aa2f7;
+    --accent-hover: #89b4fa;
+    --accent-secondary: #bb9af7;
+    --accent-purple: #bb9af7;
+    --accent-glow: rgba(122, 162, 247, 0.35);
+    --accent-badge-bg: rgba(122, 162, 247, 0.16);
+    --accent-badge-text: #7aa2f7;
+
+    --contrib-0: #24283b;
+    --contrib-1: #2d3f66;
+    --contrib-2: #3d59a1;
+    --contrib-3: #7aa2f7;
+    --contrib-4: #bb9af7;
+}
+
+/* =======================================================
+   THEME VARIATION: SUNSET TANGERINE (WARM ORANGE)
+   ======================================================= */
+[data-theme="sunset-tangerine"] {
+    --theme-id: 'sunset-tangerine';
+    --theme-name: 'Sunset Tangerine';
+
+    --bg-canvas: #131418;
+    --bg-subtle: #1c1e24;
+    --bg-surface: #242730;
+    --bg-elevated: #2c303c;
+    --bg-overlay: rgba(19, 20, 24, 0.94);
+    --bg-code: #0f1013;
+
+    --border-default: #333845;
+    --border-muted: #242730;
+    --border-subtle: rgba(255, 149, 0, 0.1);
+    --border-active: #ff7849;
+
+    --text-primary: #f8f9fa;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --text-dim: #6b7280;
+    --text-link: #ff7849;
+
+    --accent-primary: #ff7849;
+    --accent-hover: #ff9500;
+    --accent-secondary: #ffa940;
+    --accent-purple: #ff5252;
+    --accent-glow: rgba(255, 120, 73, 0.35);
+    --accent-badge-bg: rgba(255, 120, 73, 0.18);
+    --accent-badge-text: #ff9500;
+
+    --contrib-0: #1c1e24;
+    --contrib-1: #4d2616;
+    --contrib-2: #803d21;
+    --contrib-3: #c2592d;
+    --contrib-4: #ff7849;
+}
+
+/* =======================================================
+   THEME VARIATION: CYBERPUNK NEON
+   ======================================================= */
+[data-theme="cyberpunk-neon"] {
+    --theme-id: 'cyberpunk-neon';
+    --theme-name: 'Cyberpunk Neon';
+
+    --bg-canvas: #0c0d14;
+    --bg-subtle: #141724;
+    --bg-surface: #1b2033;
+    --bg-elevated: #242a42;
+    --bg-overlay: rgba(12, 13, 20, 0.94);
+    --bg-code: #08090d;
+
+    --border-default: #2d3552;
+    --border-muted: #1d2235;
+    --border-subtle: rgba(5, 217, 232, 0.15);
+    --border-active: #ff2a6d;
+
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --text-link: #05d9e8;
+
+    --accent-primary: #ff2a6d;
+    --accent-hover: #ff5e91;
+    --accent-secondary: #05d9e8;
+    --accent-purple: #d300c5;
+    --accent-glow: rgba(255, 42, 109, 0.4);
+    --accent-badge-bg: rgba(5, 217, 232, 0.16);
+    --accent-badge-text: #05d9e8;
+
+    --contrib-0: #141724;
+    --contrib-1: #3b102c;
+    --contrib-2: #73154e;
+    --contrib-3: #ba1e74;
+    --contrib-4: #ff2a6d;
+}
+
+/* =======================================================
+   THEME VARIATION: DRACULA PRO
+   ======================================================= */
+[data-theme="dracula"] {
+    --theme-id: 'dracula';
+    --theme-name: 'Dracula Pro';
+
+    --bg-canvas: #282a36;
+    --bg-subtle: #343746;
+    --bg-surface: #3a3d4e;
+    --bg-elevated: #44475a;
+    --bg-overlay: rgba(40, 42, 54, 0.94);
+    --bg-code: #21222c;
+
+    --border-default: #4d5166;
+    --border-muted: #3a3d4e;
+    --border-subtle: rgba(189, 147, 249, 0.1);
+    --border-active: #bd93f9;
+
+    --text-primary: #f8f8f2;
+    --text-secondary: #e2e2dc;
+    --text-muted: #9aa0b8;
+    --text-dim: #6272a4;
+    --text-link: #8be9fd;
+
+    --accent-primary: #bd93f9;
+    --accent-hover: #caa8fa;
+    --accent-secondary: #ff79c6;
+    --accent-purple: #bd93f9;
+    --accent-glow: rgba(189, 147, 249, 0.35);
+    --accent-badge-bg: rgba(189, 147, 249, 0.18);
+    --accent-badge-text: #d4bbfa;
+
+    --contrib-0: #343746;
+    --contrib-1: #3d3557;
+    --contrib-2: #624b87;
+    --contrib-3: #926ecc;
+    --contrib-4: #bd93f9;
+}
+
+/* =======================================================
+   THEME VARIATION: EMERALD MATRIX
+   ======================================================= */
+[data-theme="emerald-matrix"] {
+    --theme-id: 'emerald-matrix';
+    --theme-name: 'Emerald Matrix';
+
+    --bg-canvas: #0a0f0d;
+    --bg-subtle: #111a15;
+    --bg-surface: #17241d;
+    --bg-elevated: #1e3027;
+    --bg-overlay: rgba(10, 15, 13, 0.94);
+    --bg-code: #070a08;
+
+    --border-default: #253d30;
+    --border-muted: #17241d;
+    --border-subtle: rgba(0, 255, 135, 0.1);
+    --border-active: #00ff87;
+
+    --text-primary: #f0fdf4;
+    --text-secondary: #bbf7d0;
+    --text-muted: #86efac;
+    --text-dim: #4ade80;
+    --text-link: #00ff87;
+
+    --accent-primary: #00ff87;
+    --accent-hover: #33ffa0;
+    --accent-secondary: #60efff;
+    --accent-purple: #00b4d8;
+    --accent-glow: rgba(0, 255, 135, 0.35);
+    --accent-badge-bg: rgba(0, 255, 135, 0.15);
+    --accent-badge-text: #00ff87;
+
+    --contrib-0: #111a15;
+    --contrib-1: #0f3d26;
+    --contrib-2: #146c43;
+    --contrib-3: #18a867;
+    --contrib-4: #00ff87;
+}
+
+/* =======================================================
+   BASE APP RESET & TYPOGRAPHY
+   ======================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    user-select: none;
+}
+
+/* Subtle Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-default);
+    border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-dim);
+}
+
+/* =======================================================
+   MAIN DESKTOP LAYOUT (FULL SCREEN)
+   ======================================================= */
+#app {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-canvas);
+    position: relative;
+    overflow: hidden;
+}
+
+/* =======================================================
+   1. GITHUB / GITLAB TOP HEADER (#gh-header)
+   ======================================================= */
+#gh-header {
+    height: 52px;
+    min-height: 52px;
+    background: var(--bg-subtle);
+    border-bottom: 1px solid var(--border-default);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    gap: 16px;
+    z-index: 100;
+}
+
+.gh-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+/* Repository Brand Breadcrumb */
+.gh-repo-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+.gh-repo-logo {
+    width: 28px;
+    height: 28px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-primary);
+    font-weight: 800;
+    font-family: var(--font-jp);
+    font-size: 15px;
+    box-shadow: var(--shadow-sm);
+}
+.gh-repo-path {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.gh-repo-path .owner {
+    color: var(--text-muted);
+}
+.gh-repo-path .owner:hover {
+    color: var(--text-link);
+    text-decoration: underline;
+}
+.gh-repo-path .sep {
+    color: var(--border-default);
+}
+.gh-repo-path .name {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+/* Branch Pill */
+.gh-branch-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    padding: 2px 10px;
+    border-radius: var(--radius-pill);
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+}
+.gh-branch-pill .icon {
+    color: var(--accent-secondary);
+}
+
+/* Release Version Badge */
+.gh-release-tag {
+    display: inline-flex;
+    align-items: center;
+    background: var(--accent-badge-bg);
+    border: 1px solid var(--border-subtle);
+    color: var(--accent-badge-text);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+}
+
+/* Quick Search Box (GitHub Style) */
+.gh-header-center {
+    flex: 1;
+    max-width: 440px;
+}
+.gh-search-btn {
+    width: 100%;
+    height: 32px;
+    background: var(--bg-canvas);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    color: var(--text-muted);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.gh-search-btn:hover {
+    border-color: var(--border-active);
+    color: var(--text-secondary);
+    background: var(--bg-surface);
+}
+.gh-search-btn-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.gh-search-btn kbd {
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-xs);
+    padding: 1px 6px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+}
+
+/* Header Right Actions */
+.gh-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.gh-metric-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+.gh-metric-chip.streak {
+    color: #ff9500;
+}
+.gh-metric-chip.xp {
+    color: var(--accent-secondary);
+}
+
+.gh-header-btn {
+    height: 32px;
+    padding: 0 10px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+}
+.gh-header-btn:hover {
+    background: var(--bg-elevated);
+    border-color: var(--border-active);
+    color: var(--text-primary);
+}
+
+.gh-user-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-pill);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+.gh-user-badge:hover {
+    border-color: var(--accent-primary);
+    background: var(--bg-elevated);
+}
+
+/* =======================================================
+   2. GITHUB REPOSITORY SUBNAV TABS (#gh-nav-tabs)
+   ======================================================= */
+#gh-nav-tabs {
+    height: 48px;
+    min-height: 48px;
+    background: var(--bg-subtle);
+    border-bottom: 1px solid var(--border-default);
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    gap: 6px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    z-index: 90;
+}
+
+#gh-nav-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.gh-tab-btn {
+    height: 47px;
+    padding: 0 14px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-muted);
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+}
+
+.gh-tab-btn:hover {
+    color: var(--text-primary);
+    border-bottom-color: var(--border-default);
+}
+
+.gh-tab-btn.active {
+    color: var(--text-primary);
+    font-weight: 700;
+    border-bottom-color: var(--accent-primary);
+}
+
+.gh-tab-badge {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: var(--radius-pill);
+    min-width: 20px;
+    text-align: center;
+}
+
+.gh-tab-btn.active .gh-tab-badge {
+    background: var(--accent-badge-bg);
+    color: var(--accent-badge-text);
+    border-color: var(--border-subtle);
+}
+
+/* =======================================================
+   3. MAIN CONTENT WORKSPACE (#content)
+   ======================================================= */
+#content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 24px 32px;
+    background: var(--bg-canvas);
+    position: relative;
+    z-index: 10;
+}
+
+/* =======================================================
+   4. DEVELOPER BOTTOM STATUS BAR (#vscode-status-bar)
+   ======================================================= */
+#vscode-status-bar {
+    height: 28px;
+    min-height: 28px;
+    background: var(--bg-subtle);
+    border-top: 1px solid var(--border-default);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    font-size: 11.5px;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    z-index: 100;
+    user-select: none;
+}
+
+.status-bar-section {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.status-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: var(--radius-xs);
+    transition: background 0.1s ease;
+}
+.status-item:hover {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #3fb950;
+    display: inline-block;
+}
+
+.status-link {
+    color: var(--text-link);
+    text-decoration: none;
+}
+.status-link:hover {
+    text-decoration: underline;
+}
+
+/* =======================================================
+   5. TOAST NOTIFICATIONS
+   ======================================================= */
+#toast-container {
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+}
+
+.toast {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
+    color: var(--text-primary);
+    padding: 10px 18px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    pointer-events: auto;
+    animation: toastSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1), toastFadeOut 0.2s ease 2.7s forwards;
+}
+.toast.success { border-left: 4px solid var(--level-n5); }
+.toast.error { border-left: 4px solid #f85149; }
+.toast.info { border-left: 4px solid var(--accent-secondary); }
+
+@keyframes toastSlideIn {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes toastFadeOut {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateY(10px); }
+}
+
+/* =======================================================
+   6. THEME PICKER MODAL (#theme-modal)
+   ======================================================= */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.modal-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-dialog {
+    width: 90%;
+    max-width: 680px;
+    max-height: 85vh;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.95);
+    transition: transform 0.2s ease;
+}
+
+.modal-backdrop.open .modal-dialog {
+    transform: scale(1);
+}
+
+.modal-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-default);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.modal-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-primary);
+}
+.modal-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: var(--radius-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-close-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-surface);
+}
+
+.modal-body {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Theme Swatch Grid */
+.theme-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+}
+
+.theme-card {
+    background: var(--bg-surface);
+    border: 2px solid var(--border-default);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.theme-card:hover {
+    border-color: var(--border-active);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+.theme-card.active {
+    border-color: var(--accent-primary);
+    background: var(--bg-elevated);
+}
+
+.theme-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.theme-card-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.theme-active-indicator {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--accent-primary);
+    font-weight: 700;
+    display: none;
+}
+.theme-card.active .theme-active-indicator {
+    display: inline-block;
+}
+
+.theme-swatches {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.theme-swatch-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.theme-card-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* =======================================================
+   7. QUICK SEARCH COMMAND PALETTE MODAL (#search-modal)
+   ======================================================= */
+.search-palette {
+    width: 90%;
+    max-width: 600px;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+}
+.search-palette-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border-default);
+    gap: 10px;
+    background: var(--bg-canvas);
+}
+.search-palette-header input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-size: 15px;
+    font-family: var(--font-sans);
+}
+.search-results-list {
+    padding: 10px;
+    overflow-y: auto;
+    max-height: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.search-result-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.1s ease;
+}
+.search-result-item:hover, .search-result-item.highlighted {
+    background: var(--bg-elevated);
+}
+.search-result-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.search-result-char {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: var(--font-jp);
+    width: 32px;
+    text-align: center;
+    color: var(--text-primary);
+}
+.search-result-details h4 {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.search-result-details span {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+.search-result-tag {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    padding: 2px 8px;
+    border-radius: var(--radius-xs);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
+}
